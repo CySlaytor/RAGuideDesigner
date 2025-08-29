@@ -1,0 +1,937 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://cyslaytor.github.io/RaGuideDesigner/">
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>RA Guide Designer – The Complete Tutorial</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="styles/extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ra-guide-designer-the-complete-tutorial" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="RA Guide Designer – The Complete Tutorial" class="md-header__button md-logo" aria-label="RA Guide Designer – The Complete Tutorial" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RA Guide Designer – The Complete Tutorial
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="RA Guide Designer – The Complete Tutorial" class="md-nav__button md-logo" aria-label="RA Guide Designer – The Complete Tutorial" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RA Guide Designer – The Complete Tutorial
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Getting Started
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Getting Started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-main-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Main Interface
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-new-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating a New Project
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-importing-your-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Importing Your Data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Importing Your Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#importing-from-an-ra-json-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importing from an RA JSON File
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importing-from-an-existing-markdown-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importing from an Existing Markdown Guide
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-navigating-and-managing-your-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Navigating and Managing Your Guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Navigating and Managing Your Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-guide-structure-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Guide Structure Tree
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-deleting-and-duplicating-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding, Deleting, and Duplicating Items
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reordering-with-drag-drop-and-shortcuts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reordering with Drag &amp; Drop and Shortcuts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-the-editors" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. The Editors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. The Editors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#header-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Header Editor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#walkthroughs-resources-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Walkthroughs &amp; Resources Editor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Walkthroughs &amp; Resources Editor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-add-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Add Links
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#category-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Category Editor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Category Editor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-additional-notes-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Additional Notes Editor
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#standard-achievement-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Standard Achievement Editor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Standard Achievement Editor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#writing-effective-guidance-creating-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Writing Effective Guidance: Creating References
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collectible-achievement-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collectible Achievement Editor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leaderboard-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leaderboard Editor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#credits-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credits Editor
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-advanced-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Advanced Features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Advanced Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rich-text-formatting-shortcuts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rich Text Formatting &amp; Shortcuts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#undo-redo-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Undo &amp; Redo System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spell-checking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Spell Checking
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-saving-and-exporting" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Saving and Exporting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Saving and Exporting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#saving-your-project-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Saving Your Project File
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exporting-the-final-markdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exporting the Final Markdown
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ra-guide-designer-the-complete-tutorial">RA Guide Designer - The Complete Tutorial<a class="headerlink" href="#ra-guide-designer-the-complete-tutorial" title="Permanent link">&para;</a></h1>
+<p>Welcome to the official guide for the RA Guide Designer! This tool was built to streamline the creation of high-quality, standardized wiki guides for the RetroAchievements community. This tutorial will walk you through every feature, from starting your first project to exporting the final Markdown, using a real-world example from the <em>Project: Snowblind</em> (PS2) set.</p>
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#1-getting-started"><strong>Getting Started</strong></a><ul>
+<li><a href="#the-main-interface">The Main Interface</a></li>
+<li><a href="#creating-a-new-project">Creating a New Project</a></li>
+</ul>
+</li>
+<li><a href="#2-importing-your-data"><strong>Importing Your Data</strong></a><ul>
+<li><a href="#importing-from-an-ra-json-file">Importing from an RA JSON File (Recommended Start)</a></li>
+<li><a href="#importing-from-an-existing-markdown-guide">Importing from an Existing Markdown Guide</a></li>
+</ul>
+</li>
+<li><a href="#3-navigating-and-managing-your-guide"><strong>Navigating and Managing Your Guide</strong></a><ul>
+<li><a href="#the-guide-structure-tree">The Guide Structure Tree</a></li>
+<li><a href="#adding-deleting-and-duplicating-items">Adding, Deleting, and Duplicating Items</a></li>
+<li><a href="#reordering-with-drag--drop-and-shortcuts">Reordering with Drag &amp; Drop and Shortcuts</a></li>
+</ul>
+</li>
+<li><a href="#4-the-editors"><strong>The Editors</strong></a><ul>
+<li><a href="#header-editor">Header Editor</a></li>
+<li><a href="#walkthroughs--resources-editor">Walkthroughs &amp; Resources Editor</a></li>
+<li><a href="#category-editor">Category Editor</a><ul>
+<li><a href="#the-additional-notes-editor">The Additional Notes Editor</a></li>
+</ul>
+</li>
+<li><a href="#standard-achievement-editor">Standard Achievement Editor</a></li>
+<li><a href="#collectible-achievement-editor">Collectible Achievement Editor</a></li>
+<li><a href="#leaderboard-editor">Leaderboard Editor</a></li>
+<li><a href="#credits-editor">Credits Editor</a></li>
+</ul>
+</li>
+<li><a href="#5-advanced-features"><strong>Advanced Features</strong></a><ul>
+<li><a href="#rich-text-formatting--shortcuts">Rich Text Formatting &amp; Shortcuts</a></li>
+<li><a href="#undo--redo-system">Undo &amp; Redo System</a></li>
+<li><a href="#spell-checking">Spell Checking</a></li>
+</ul>
+</li>
+<li><a href="#6-saving-and-exporting"><strong>Saving and Exporting</strong></a><ul>
+<li><a href="#saving-your-project-file">Saving Your Project File</a></li>
+<li><a href="#exporting-the-final-markdown">Exporting the Final Markdown</a></li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="1-getting-started">1. Getting Started<a class="headerlink" href="#1-getting-started" title="Permanent link">&para;</a></h2>
+<h3 id="the-main-interface">The Main Interface<a class="headerlink" href="#the-main-interface" title="Permanent link">&para;</a></h3>
+<p>When you first launch the application, you're greeted with a simple two-panel layout.</p>
+<ul>
+<li><strong>Left Panel (Guide Structure Tree):</strong> This <code>TreeView</code> is your roadmap. It shows the entire hierarchy of your guide, from the game title down to individual achievements and credits. You'll use this to navigate between different sections.</li>
+<li><strong>Right Panel (Editor Panel):</strong> This is your workspace. When you select an item in the tree, the corresponding editor will appear here, allowing you to modify its content.</li>
+</ul>
+<p><img width="1264" height="711" alt="Attach01" src="https://i.ibb.co/m5wKy89c/Attach01.png" /></p>
+<p><em>The main interface with the Guide Structure Tree on the left and the placeholder text in the Editor Panel on the right.</em></p>
+<h3 id="creating-a-new-project">Creating a New Project<a class="headerlink" href="#creating-a-new-project" title="Permanent link">&para;</a></h3>
+<p>To start from scratch, go to <code>File &gt; New Guide</code> or press <code>Ctrl+N</code>. This loads a built-in template that contains all the standard sections and placeholder text, giving you a perfect foundation to build upon.</p>
+<h2 id="2-importing-your-data">2. Importing Your Data<a class="headerlink" href="#2-importing-your-data" title="Permanent link">&para;</a></h2>
+<p>Most users will start by importing data from an existing source. The tool supports two primary methods.</p>
+<h3 id="importing-from-an-ra-json-file">Importing from an RA JSON File<a class="headerlink" href="#importing-from-an-ra-json-file" title="Permanent link">&para;</a></h3>
+<p>This is the recommended way to begin a new guide.</p>
+<ol>
+<li>First, you need a refreshed JSON file from the server, the best way to get it is to launch the game through <a href="https://docs.retroachievements.org/developer-docs/emulator-setup-for-developers.html">RA_Integration.dll</a>.</li>
+<li>Once the game is loaded, close the emulator. Then within your emulator folder, find and go to this directory <code>RACache\Data</code>, you should be able to find the <em>.JSON files. Look for the game ID (e.g. for </em>Project: Snowblind*, it's <code>21058.json</code>) and you should be good to go.</li>
+<li>In the RA Guide Designer, go to <code>File &gt; Import JSON File...</code> or press <code>Ctrl+I</code>.</li>
+<li>Select the JSON file you want.</li>
+</ol>
+<p>The application will automatically parse the file and:
+*   Set the Game Title and Mastery Icon URL.
+*   Create an entry for every achievement, populating its ID, Title, Description, Badge URL, and Points.
+*   Intelligently sort achievements into "Progression" and "Challenges" categories based on their official type.
+*   Populate the Leaderboards section.</p>
+<p><img width="1264" height="711" alt="Attach02" src="https://i.ibb.co/ZzcJqfBr/Attach02.gif" /></p>
+<p><em>Showcase of the File &gt; Import JSON File... menu option.</em></p>
+<p><strong>Example: <em>Project: Snowblind</em></strong>
+Importing the JSON would automatically create the "Progression" and "Challenges" categories and fill them with achievements like "First Impact" and "One Gun, One Chopper," correctly assigning their points and badge images.</p>
+<h3 id="importing-from-an-existing-markdown-guide">Importing from an Existing Markdown Guide<a class="headerlink" href="#importing-from-an-existing-markdown-guide" title="Permanent link">&para;</a></h3>
+<p>If you have an older guide that you want to edit or reformat, you can import it directly.</p>
+<ol>
+<li>Go to <code>File &gt; Import Existing Markdown...</code> or press <code>Ctrl+Alt+I</code>.</li>
+<li>Select your <code>.txt</code> file containing the guide.</li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> The Markdown importer expects a format that closely matches the one generated by this tool. It may struggle with heavily customized or non-standard layouts.</p>
+</blockquote>
+<h2 id="3-navigating-and-managing-your-guide">3. Navigating and Managing Your Guide<a class="headerlink" href="#3-navigating-and-managing-your-guide" title="Permanent link">&para;</a></h2>
+<h3 id="the-guide-structure-tree">The Guide Structure Tree<a class="headerlink" href="#the-guide-structure-tree" title="Permanent link">&para;</a></h3>
+<p>The tree is your primary navigation tool. Clicking any item will instantly load its editor on the right.</p>
+<p><img width="1264" height="711" alt="Attach03" src="https://i.ibb.co/DHKrP5xK/Attach03.png" /></p>
+<p><em>The Guide Structure Tree populated with the </em>Project: Snowblind<em> guide, highlighting the "Challenges" category.</em></p>
+<ul>
+<li><strong>📜 Game Title:</strong> The root node. Expanding it shows the main sections.</li>
+<li><strong>📄 Header &amp; Intro:</strong> Edits the main game details, banner, and intro text.</li>
+<li><strong>💎 Achievement Guide:</strong> The parent node for all achievement-related content.</li>
+<li><strong>🥇 Leaderboard Guide:</strong> The parent node for leaderboards.</li>
+<li><strong>📜 Credits:</strong> The parent node for the credits section.</li>
+</ul>
+<h3 id="adding-deleting-and-duplicating-items">Adding, Deleting, and Duplicating Items<a class="headerlink" href="#adding-deleting-and-duplicating-items" title="Permanent link">&para;</a></h3>
+<p>Right-click on any item in the tree to open a context menu with powerful actions.</p>
+<ul>
+<li><strong>Add:</strong> You can add a new <code>Achievement Category</code>, <code>Achievement</code> (within a category), <code>Leaderboard</code>, or <code>Credit</code>.</li>
+<li><strong>Delete (<code>Del</code> key):</strong> Removes the selected item(s). You will be asked for confirmation.</li>
+<li><strong>Duplicate:</strong> Creates a copy of the selected item(s). This is fantastic for achievements that share a similar structure. Duplicated achievements have their ID set to 0.</li>
+</ul>
+<p><img width="1264" height="711" alt="Attach04" src="https://i.ibb.co/TB0YSwvq/Attach04.gif" /></p>
+<p><em>Showcase of the right-click context menu over an Achievement Category, showing options like "Add Achievement", "Duplicate", and "Delete".</em></p>
+<h3 id="reordering-with-drag-drop-and-shortcuts">Reordering with Drag &amp; Drop and Shortcuts<a class="headerlink" href="#reordering-with-drag-drop-and-shortcuts" title="Permanent link">&para;</a></h3>
+<p>You can easily reorder items within the same category.</p>
+<ul>
+<li><strong>Drag &amp; Drop:</strong> Click and drag an achievement or category to a new position. A line will indicate where it will be dropped. You can even drag achievements between different categories.</li>
+<li><strong>Keyboard Shortcuts:</strong> Select an item and use <code>Alt+Up</code> and <code>Alt+Down</code> to move it within its list. This is often faster and more precise than dragging.</li>
+</ul>
+<h2 id="4-the-editors">4. The Editors<a class="headerlink" href="#4-the-editors" title="Permanent link">&para;</a></h2>
+<h3 id="header-editor">Header Editor<a class="headerlink" href="#header-editor" title="Permanent link">&para;</a></h3>
+<p><em>(Selected by clicking "📄 Header &amp; Intro")</em></p>
+<p>This is where you manage the top-level information for your guide.
+*   <strong>Game Title &amp; Platform:</strong> The main identifiers. The Platform dropdown is grouped by manufacturer for easy selection.
+*   <strong>Mastery Icon &amp; Banner Image URLs:</strong> Paste the direct URLs to the images here (600x280 is the recommended resolution). The images will preview in the editor.
+*   <strong>Introductory Text:</strong> The main text that appears right after the banner.
+*   <strong>Set Statistics:</strong> A non-editable panel that provides a live summary of your set's total achievements, points, categories, etc.
+*   <strong>Footnotes Tab:</strong> This tab allows you to edit the example text for the "Measured" and "Triggered" indicators found at the end of the guide. The <strong>"Generate Footnotes..."</strong> button is a powerful feature that scans all your achievements and automatically creates relevant examples based on common keywords, saving you some time.</p>
+<p><img width="1264" height="711" alt="Attach05" src="https://i.ibb.co/k21kQQRs/Attach05.png" /></p>
+<p><em>The Header Editor, filled with data from the Project: Snowblind guide.</em></p>
+<h3 id="walkthroughs-resources-editor">Walkthroughs &amp; Resources Editor<a class="headerlink" href="#walkthroughs-resources-editor" title="Permanent link">&para;</a></h3>
+<p><em>(Selected by clicking "📜 Walkthroughs &amp; Resources")</em></p>
+<p>This editor handles the section between the initial set summary and the first achievement category.</p>
+<p><img width="1264" height="711" alt="Attach06" src="https://i.ibb.co/4Qd6kCM/Attach06.png" /></p>
+<p><em>Walkthroughs &amp; Resources Editor, showing the grids for links and the General Advice text box.</em></p>
+<ul>
+<li><strong>Guides &amp; Playthroughs:</strong> These grids let you manage lists of helpful links.</li>
+<li><strong>Advice Section:</strong> A rich text box for writing general advice. In the <em>Project: Snowblind</em> example, this is used for the "🧠 General Advice (Before Starting a New Game)" section. You can rename that header for your taste.</li>
+<li><strong>Admonition Notes:</strong> This area lets you add global, top-level notes (like <code>[!IMPORTANT]</code> or <code>[!NOTE]</code>). In the example, this is used for crucial info or warnings about certain aspects of the set.</li>
+</ul>
+<h4 id="how-to-add-links">How to Add Links<a class="headerlink" href="#how-to-add-links" title="Permanent link">&para;</a></h4>
+<p>The grids for Guides and Playthroughs are simple and powerful.
+1.  Click on the empty row at the bottom of the grid to add a new link.
+2.  Enter the text you want the link to display in the <strong>Display Text</strong> column.
+3.  Enter the full URL in the <strong>URL</strong> column.
+4.  Click the <code>🗑️</code> button to delete a row.</p>
+<p><strong>Example:</strong> To create the GameFAQs link from the <em>Project: Snowblind</em> guide:
+*   <strong>Display Text:</strong> <code>GameFAQs – Project: Snowblind FAQs</code>
+*   <strong>URL:</strong> <code>https://gamefaqs.gamespot.com/ps2/920210-project-snowblind/faqs</code></p>
+<p>The tool will automatically format this into <code>**[Display Text](URL)**</code> in the final Markdown.</p>
+<h3 id="category-editor">Category Editor<a class="headerlink" href="#category-editor" title="Permanent link">&para;</a></h3>
+<p><em>(Selected by clicking any 🏆 Category)</em></p>
+<p>Here you define the properties of an achievement category.</p>
+<p><img width="1264" height="711" alt="Attach07" src="https://i.ibb.co/RkGGsYx4/Attach07.png" /></p>
+<p><em>The Category Editor showing the "Weapon-specific" category from the example guide.</em></p>
+<ul>
+<li><strong>Title &amp; Icon:</strong> The display name and emoji for the category.</li>
+<li><strong>Description:</strong> The introductory text that appears below the category heading.</li>
+<li><strong>Admonition Notes:</strong> Just like the Walkthroughs editor, you can add notes that are specific to this category.</li>
+<li><strong>Additional Notes... Button:</strong> This is a key feature for complex categories. Clicking it opens a dedicated pop-up editor.</li>
+</ul>
+<h4 id="the-additional-notes-editor">The Additional Notes Editor<a class="headerlink" href="#the-additional-notes-editor" title="Permanent link">&para;</a></h4>
+<p>This special editor is designed for content that requires more structure, like sub-headers or blockquotes.</p>
+<p><img width="1264" height="711" alt="Attach08" src="https://i.ibb.co/ZpMZPRR1/Attach08.png" /></p>
+<p><em>The "Additional Notes" pop-up editor, showing the formatted weapon ammo table from the example guide.</em></p>
+<ul>
+<li><strong>Formatting Toolbar:</strong> Right-click to access a context menu that lets you apply <code>## Header 2</code>, <code>### Header 3</code>, and toggle <code>&gt; Blockquote</code> formatting.</li>
+<li><strong>Live Preview:</strong> The editor shows you a formatted preview of your content, so you don't have to guess how it will look.</li>
+<li><strong>Example: <em>Project: Snowblind</em></strong> The "Weapon-specific" category uses this feature to create a detailed, formatted table explaining weapon ammo limits and tactical roles, complete with sub-headers and a blockquote.</li>
+</ul>
+<h3 id="standard-achievement-editor">Standard Achievement Editor<a class="headerlink" href="#standard-achievement-editor" title="Permanent link">&para;</a></h3>
+<p><em>(Selected by clicking any achievement NOT in a collectible-type category)</em></p>
+<p>This is the most-used editor. It's tabbed for organization.</p>
+<p><img width="1264" height="711" alt="Attach09" src="https://i.ibb.co/hRmcWL0N/Attach09.png" /></p>
+<p><em>The Standard Achievement Editor showing the "Collateral Damage" achievement from the example guide.</em></p>
+<ul>
+<li><strong>Guidance &amp; Insights Tab:</strong><ul>
+<li>The main rich text box for the achievement's guide.</li>
+<li>For <strong>Progression</strong> achievements, this tab is all you see, keeping the UI clean and simple.</li>
+<li>For other types, a "Video Walkthrough" URL box appears at the bottom.</li>
+</ul>
+</li>
+<li><strong>Fail Conditions &amp; Tracking Tab:</strong><ul>
+<li><strong>Fail Conditions:</strong> A list where you can add and remove failure conditions.</li>
+<li><strong>Achievement Tracking:</strong> Text boxes for the "Trigger Indicator" and "Measured Indicator" descriptions.</li>
+</ul>
+</li>
+<li><strong>Misc / Dev Notes Tab:</strong> Two text boxes for adding the small, subscripted notes at the bottom of a guidance cell.</li>
+</ul>
+<h4 id="writing-effective-guidance-creating-references">Writing Effective Guidance: Creating References<a class="headerlink" href="#writing-effective-guidance-creating-references" title="Permanent link">&para;</a></h4>
+<p>You'll often need to link to other achievements or external URLs within your guidance text. The tool makes this easy.</p>
+<ol>
+<li>Type your text (e.g., "See the Secondary Objective").</li>
+<li>Highlight the part you want to be a link (e.g., "Secondary Objective").</li>
+<li>Press <strong><code>Ctrl+K</code></strong> or right-click and choose <strong>"Reference..."</strong>.</li>
+<li>A dialog box will appear. Next, input the achievement ID. It will look like this <code>[Secondary Objective](#516066)</code></li>
+</ol>
+<p><img width="1264" height="711" alt="Attach10" src="https://i.ibb.co/5gGKbRGG/Attach10.png" /></p>
+<p><em>"Create Reference Link" pop-up dialog.</em></p>
+<ul>
+<li><strong>To link to another achievement:</strong> Enter just the achievement's ID (e.g., <code>516066</code>). The tool will generate <code>[Secondary Objective](#516066)</code>.</li>
+<li><strong>To link to an external URL:</strong> Paste the full URL (e.g., a YouTube or Dropbox link). The tool will generate <code>[▶️ Watch Video Walkthrough](https://...)</code>.</li>
+</ul>
+<h3 id="collectible-achievement-editor">Collectible Achievement Editor<a class="headerlink" href="#collectible-achievement-editor" title="Permanent link">&para;</a></h3>
+<p><em>(Selected when an achievement is in a category with a title containing the keywords "collectible," "upgrade," etc.)</em></p>
+<p>This is a highly specialized editor for achievements that involve finding many items. It deconstructs the complex guidance into a manageable tree structure.</p>
+<p><img width="1264" height="711" alt="Attach11" src="https://i.ibb.co/FkbFx0BH/Attach11.png" /></p>
+<p><em>The Collectible Editor showing the "Certified Superhuman" achievement, with the tree of HP Upgrades on the left and the editor panels on the right.</em></p>
+<ul>
+<li><strong>Left Panel (Collectible Tree):</strong> A dedicated <code>TreeView</code> for managing groups and items. You can add, delete, duplicate, and re-order items here.</li>
+<li><strong>Right Panel (Editors):</strong><ul>
+<li><strong>Group Editor:</strong> A simple textbox for the group's title (e.g., "HP Upgrades").</li>
+<li><strong>Item Editor:</strong> Fields for the item's description, URL, and URL text.</li>
+<li><strong>Introduction &amp; Measured Indicator:</strong> Text boxes for the text that appears before and after the list of collectibles.</li>
+</ul>
+</li>
+</ul>
+<p>When you finish editing, the tool automatically serializes this entire structure back into the complex, formatted Markdown required by the wiki template.</p>
+<h3 id="leaderboard-editor">Leaderboard Editor<a class="headerlink" href="#leaderboard-editor" title="Permanent link">&para;</a></h3>
+<p><em>(Selected by clicking any 🥇 Leaderboard)</em></p>
+<p><img width="1264" height="711" alt="Attach12" src="https://i.ibb.co/9k2XK9Cc/Attach12.png" /></p>
+<p><em>The Leaderboard Editor showing the "Time Trial" leaderboard.</em></p>
+<p>This editor provides a structured way to document leaderboards.
+*   <strong>Title:</strong> The name of the leaderboard.
+*   <strong>Description Tab:</strong> A rich text box for the main description.
+*   <strong>Conditions &amp; Scoring Tab:</strong> Four rich text boxes to detail the <code>Start</code>, <code>Cancel</code>, <code>Submit</code>, and <code>Measured Value</code> conditions. Each line in a box becomes a bullet point in the final guide.
+*   <strong>Misc / Dev Notes Tab:</strong> For any additional notes.</p>
+<h3 id="credits-editor">Credits Editor<a class="headerlink" href="#credits-editor" title="Permanent link">&para;</a></h3>
+<p><em>(Selected by clicking any 👤 Credit)</em></p>
+<p>This editor makes managing the credits section easy and consistent.</p>
+<p><img width="1264" height="711" alt="Attach13" src="https://i.ibb.co/Y75mCW24/Attach13.png" /></p>
+<p><em>Credits Editor showing ASolidSnack's entry, with the Contributor role selected and the RA-Guide Design sub-role checked.</em></p>
+<ul>
+<li><strong>User Details:</strong> Fields for the username and avatar URL. The avatar will preview on the left.</li>
+<li><strong>Contribution:</strong><ul>
+<li><strong>Role:</strong> A dropdown for the main role (e.g., "Achievement Set Developer," "Contributor").</li>
+<li><strong>Sub-Roles:</strong> A checklist of optional sub-roles appears based on your main role selection. Checking them automatically appends them to the role string in the final Markdown (e.g., <code>*Contributor* | *Tester*</code>).</li>
+<li><strong>Contribution Details:</strong> A rich text box for a bulleted list of their specific contributions.</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-advanced-features">5. Advanced Features<a class="headerlink" href="#5-advanced-features" title="Permanent link">&para;</a></h2>
+<h3 id="rich-text-formatting-shortcuts">Rich Text Formatting &amp; Shortcuts<a class="headerlink" href="#rich-text-formatting-shortcuts" title="Permanent link">&para;</a></h3>
+<p>All rich text boxes support basic formatting shortcuts to speed up your workflow:
+*   <strong><code>Ctrl+B</code></strong>: Toggle Bold
+*   <strong><code>Ctrl+I</code></strong>: Toggle Italic
+*   <strong><code>Ctrl+K</code></strong>: Insert Link/Reference
+*   <strong><code>Ctrl+X</code> / <code>C</code> / <code>V</code></strong>: Cut / Copy / Paste
+*   <strong><code>Ctrl+Z</code> / <code>Ctrl+Shift+Z</code></strong>: Undo / Redo (within the textbox)</p>
+<h3 id="undo-redo-system">Undo &amp; Redo System<a class="headerlink" href="#undo-redo-system" title="Permanent link">&para;</a></h3>
+<p>The application has a global undo/redo system. Almost every action—from editing text and adding an item to moving a category—is recorded.
+*   <strong><code>Edit &gt; Undo</code> (<code>Ctrl+Z</code>)</strong>: Reverts the last action.
+*   <strong><code>Edit &gt; Redo</code> (<code>Ctrl+Shift+Z</code>)</strong>: Re-applies the last undone action.</p>
+<blockquote>
+<p><strong>Dev Note</strong>: As of writing this wiki, the Undo/Redo system is still buggy, and it's currently being addressed. <br />
+The global undo is separate from the individual textbox undo. If you are typing, <code>Ctrl+Z</code> will undo your typing. If you click outside the textbox first, <code>Ctrl+Z</code> will undo the last major action (like deleting an achievement).</p>
+</blockquote>
+<h3 id="spell-checking">Spell Checking<a class="headerlink" href="#spell-checking" title="Permanent link">&para;</a></h3>
+<p>The tool includes a built-in spell checker (for English) to help catch typos.
+*   <strong>Enable/Disable:</strong> Go to <code>Edit &gt; Enable Spell Check</code>. A restart is required for the change to take full effect.
+*   <strong>Usage:</strong> Misspelled words will be underlined in red. Right-click on a misspelled word to see suggestions at the top of the context menu.</p>
+<h2 id="6-saving-and-exporting">6. Saving and Exporting<a class="headerlink" href="#6-saving-and-exporting" title="Permanent link">&para;</a></h2>
+<h3 id="saving-your-project-file">Saving Your Project File<a class="headerlink" href="#saving-your-project-file" title="Permanent link">&para;</a></h3>
+<p>To save your work-in-progress, you should save the project file.
+*   <strong><code>File &gt; Save Project</code> (<code>Ctrl+S</code>)</strong>: Saves the current state to a <code>.raguide</code> file.
+*   <strong><code>File &gt; Save Project As...</code></strong>: Saves the project to a new location.</p>
+<p>Saving the project file allows you to close the application and pick up right where you left off, with all your structured data intact.</p>
+<h3 id="exporting-the-final-markdown">Exporting the Final Markdown<a class="headerlink" href="#exporting-the-final-markdown" title="Permanent link">&para;</a></h3>
+<p>When your guide is complete, it's time to generate the final output for the wiki.
+1.  Go to <code>File &gt; Export Markdown...</code> (<code>Ctrl+E</code>).
+2.  Choose a name and location for your <code>.txt</code> file.</p>
+<p>The application will handle all the heacy lifting. It will take your entire structured project and generate a single, perfectly formatted Markdown file, ready to be copied and pasted into the RetroAchievements wiki.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.sections", "navigation.tabs", "toc.integrate"], "search": "assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
