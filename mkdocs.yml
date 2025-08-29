@@ -1,0 +1,18 @@
+site_name: RA Guide Designer – The Complete Tutorial
+site_url: https://cyslaytor.github.io/RaGuideDesigner
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.tabs
+    - toc.integrate
+extra_css:
+  - styles/extra.css
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md

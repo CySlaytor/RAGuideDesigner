@@ -1,0 +1,6 @@
+/* Hide the right Table of Contents sidebar */
+.md-sidebar--secondary { display: none !important; }
+
+/* Let content breathe; widen the reading column */
+.md-grid { max-width: 100% !important; }
+.md-content, .md-content__inner { max-width: 1200px !important; }

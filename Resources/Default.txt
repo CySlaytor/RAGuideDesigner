@@ -1,0 +1,121 @@
+# **Retro Achievements Guide** <br> 🔶 ***Untitled Game*** <sub><sup> (PS1) </sup></sub>
+
+<p align="center">
+  <img width="600" height="280" src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/70/header.jpg?t=1745368462"
+</p>
+
+---
+
+This guide provides comprehensive details on how to unlock each achievement within the base set, offering clear steps and strategies to ensure your success. Additionally, it includes useful information on the leaderboards for those interested in tracking their progress and competing at higher levels.
+
+<h3 id=ToC> 📑 Table of Contents</h3>
+
+- 💎 **[Achievement Guide](#AchievementGuide)**
+    - 🏆 *[Progression](#Progression)*
+    - 🏆 *[Challenges](#Challenges)*
+- 🥇 **[Leaderboard Guide](#LeaderboardGuide)**
+- 📜 **[Credits](#Credits)**
+- ✏️ **[Footnotes](#Footnotes)**
+
+<h1 id=AchievementGuide>
+    💎 Achievement Guide
+</h1>
+
+<img align="left" width="96" height="96" src="https://media.retroachievements.org/Images/067457.png" alt="_GAME_TITLE_HERE_ - RetroAchievements Mastery Icon">
+
+```
+Set consists of 2 achievements worth 3 points
+
+Set released on DD MMMM YYYY
+```
+
+<h3 id=WalkthroughsResources>
+    📜 Walkthroughs & Resources
+</h3>
+
+#### 📚 Guides & Walkthroughs
+- **[Half-Life – Guide and Walkthrough](https://gamefaqs.gamespot.com/pc/43362-half-life/faqs/15740)**
+
+#### 🎮 Playthroughs & Longplays
+- **[Half-Life - Full Game Walkthrough Gameplay No Commentary](https://www.youtube.com/watch?v=Atz_IGbNaAY)**
+
+### 🧠 General Advice (Before Starting a New Game)
+
+Half-Life isn’t just about shooting but also about problem-solving and exploration. Conserve ammo by aiming carefully and using the crowbar whenever possible, since resources can be scarce. Listen to NPC dialogue and environmental cues, as they often hint at where to go or what to do next. Keep moving and use cover during fights instead of tanking damage, and don’t forget to save often; you never know what’s waiting around the corner.
+
+> [!IMPORTANT]
+> When running Half-Life on PCSX2, make sure you’re using the latest **stable** build for stability and better compatibility; set the renderer to Direct3D11/12 (Hardware) for smooth visuals, but switch to Software mode if you notice missing textures.
+
+---
+
+<h1 id=Progression>
+    🏆 Progression <i><sub><sup>(1 achievements - 1 points)</sup></sub></i>
+</h1>
+
+Half-Life is very linear, but it rewards careful observation; each chapter flows naturally, with environmental cues and scripted events guiding you forward, so pay close attention to where NPCs move, noises you hear, or doors that suddenly unlock.
+
+### Progression Achievement List
+
+| Title | Guidance & Insights |
+|:---:|---|
+| <h3 id=308204>**A Red Letter Day (Sample Progression)**</h3> ![Achievement badge icon](https://media.retroachievements.org/Badge/341312.png "Achievement badge icon") | - Now arriving at: Sector C Test Labs. (Complete Black Mesa Inbound) |
+
+🔗 [Back to Table of Contents](#ToC)
+
+🔗 [Back to Top of Achievement Category](#Progression)
+
+---
+
+<h1 id=Challenges>
+    🏆 Challenges <i><sub><sup>(1 achievements - 2 points)</sup></sub></i>
+</h1>
+
+Some challenges you'll face in Half-Life include scarce resources, tough enemy encounters, and tricky navigation. Ammo and health don’t come in abundance, so you'll need to conserve bullets by aiming carefully and relying on your crowbar for weaker foes.
+
+### Challenges Achievement List
+
+| Title | Guidance & Insights |
+|:---:|---|
+| <h3 id=308155>**MiT Dropout (Sample Challenge)**</h3> ![Achievement badge icon](https://media.retroachievements.org/Badge/340897.png "Achievement badge icon") | Die while testing the Anti-Mass Spectrometer.<br><br><h4>Fail Conditions</h4>- Your fail condition here... <h4>Achievement Tracking</h4> - A [Trigger Indicator](#RA_Trigger) displayed once a mission starts <br> - A [Measured Indicator](#RA_Measured) tracks how many items are acquired during gameplay and updates once a mission starts.<br><br> <sub> **Misc note ⁃** *Your misc note here...* </sub><br> <sub> **Dev note ⁃** *Your dev note here...* </sub> |
+
+🔗 [Back to Table of Contents](#ToC)
+
+🔗 [Back to Top of Achievement Category](#Challenges)
+
+---
+
+<h1 id=LeaderboardGuide>
+    🥇 Leaderboard Guide 
+</h1>
+
+This section provides a detailed breakdown of the various leaderboards featured in the game, helping players understand how to compete, measure progress, and achieve high scores. Each leaderboard is thoroughly explained, covering its purpose, requirements, and how scores are calculated.
+
+Inside, you'll find:
+
+- **Leaderboard Overviews**: A description of what each leaderboard represents, such as mission completion challenges.
+- **Start Requirements**: Information on how to activate the leaderboard.
+- **Cancel Conditions**: Clear explanations of what actions or circumstances will deactivate or invalidate the player's leaderboard attempt.
+- **Submit Conditions**: The steps necessary to successfully submit your score to the leaderboard.
+- **Score Calculation Details**: A breakdown of how the player's score is determined, with formulas and factors like damage taken and other gameplay metrics.
+
+With this guide, the player will not only understand the mechanics behind each leaderboard but also gain insights into how to optimize performance and climb the ranks. Whether aiming to perfect a mission or striving for the top spot in specific challenges, this section equips you with everything you need to know.
+
+### Leaderboard List
+
+| Title | Guidance & Insights |
+|:---:|---|
+| <h3 id=LB_SampleLeaderboard>**Sample Leaderboard**</h3> | - You Leaderboard description here...<br><br><h4>Start Requirements</h4> - Your START description here...<br><br><h4>Cancel Conditions</h4> - Your CANCEL description here...<br><br><h4>Submit Conditions</h4> - Your SUBMIT description here...<br><br><h4>Measured Value</h4> - Your MEASURED description here...<br><br> <sub> **Misc note ⁃** *Your misc note here...* </sub><br> <sub> **Dev note ⁃** *Your dev note here...* </sub> |
+
+🔗 [Back to Table of Contents](#ToC)
+
+🔗 [Back to Top of Leaderboard Guide](#LeaderboardGuide)
+
+---
+
+<h1 id=Credits>
+    📜 Credits
+</h1>
+
+| RA-User | Role |
+|:---:|---|
+| <h4>[ASolidSnack](https://retroachievements.org/user/ASolidSnack)</h4> <img src="https://media.retroachievements.org/UserPic/ASolidSnack.png" alt="RA-User Avatar Image" width="96" height="96"> | <b> 🟉 *Contributor* \| *RA-Guide Design* </b> |
