@@ -454,6 +454,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#marking-a-category-as-collectible" class="md-nav__link">
+    <span class="md-ellipsis">
+      Marking a Category as Collectible
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -639,6 +648,7 @@
 <li><a href="#walkthroughs--resources-editor">Walkthroughs &amp; Resources Editor</a></li>
 <li><a href="#category-editor">Category Editor</a><ul>
 <li><a href="#the-additional-notes-editor">The Additional Notes Editor</a></li>
+<li><a href="#marking-a-category-as-collectible">Marking a Category as Collectible</a></li>
 </ul>
 </li>
 <li><a href="#standard-achievement-editor">Standard Achievement Editor</a></li>
@@ -721,9 +731,9 @@ Importing the JSON would automatically create the "Progression" and "Challenges"
 <p><img width="1264" height="711" alt="Attach04" src="https://i.ibb.co/TB0YSwvq/Attach04.gif" /></p>
 <p><em>Showcase of the right-click context menu over an Achievement Category, showing options like "Add Achievement", "Duplicate", and "Delete".</em></p>
 <h3 id="reordering-with-drag-drop-and-shortcuts">Reordering with Drag &amp; Drop and Shortcuts<a class="headerlink" href="#reordering-with-drag-drop-and-shortcuts" title="Permanent link">&para;</a></h3>
-<p>You can easily reorder items within the same category.</p>
+<p>You can easily reorder items like achievements, categories, and credits within their respective lists.</p>
 <ul>
-<li><strong>Drag &amp; Drop:</strong> Click and drag an achievement or category to a new position. A line will indicate where it will be dropped. You can even drag achievements between different categories.</li>
+<li><strong>Drag &amp; Drop:</strong> Click and drag an item to a new position. A line will indicate where it will be dropped. You can even drag achievements between different categories.</li>
 <li><strong>Keyboard Shortcuts:</strong> Select an item and use <code>Alt+Up</code> and <code>Alt+Down</code> to move it within its list. This is often faster and more precise than dragging.</li>
 </ul>
 <h2 id="4-the-editors">4. The Editors<a class="headerlink" href="#4-the-editors" title="Permanent link">&para;</a></h2>
@@ -777,8 +787,16 @@ Importing the JSON would automatically create the "Progression" and "Challenges"
 <li><strong>Live Preview:</strong> The editor shows you a formatted preview of your content, so you don't have to guess how it will look.</li>
 <li><strong>Example: <em>Project: Snowblind</em></strong> The "Weapon-specific" category uses this feature to create a detailed, formatted table explaining weapon ammo limits and tactical roles, complete with sub-headers and a blockquote.</li>
 </ul>
+<h4 id="marking-a-category-as-collectible">Marking a Category as Collectible<a class="headerlink" href="#marking-a-category-as-collectible" title="Permanent link">&para;</a></h4>
+<p>To enable the specialized <strong>Collectible Achievement Editor</strong> for all achievements within a category, you must manually mark it.
+1. Right-click on the desired category in the Guide Structure Tree.
+2. Select the <strong>"Mark as Collectible Category"</strong> option from the context menu. A checkmark will appear next to it.
+3. Now, when you click on any achievement within that category, it will open in the Collectible Editor.</p>
+<blockquote>
+<p><strong>Note:</strong> You can toggle this setting off by repeating the same steps. This feature cannot be enabled for the "Progression" category.</p>
+</blockquote>
 <h3 id="standard-achievement-editor">Standard Achievement Editor<a class="headerlink" href="#standard-achievement-editor" title="Permanent link">&para;</a></h3>
-<p><em>(Selected by clicking any achievement NOT in a collectible-type category)</em></p>
+<p><em>(Selected by clicking any achievement NOT in a collectible category)</em></p>
 <p>This is the most-used editor. It's tabbed for organization.</p>
 <p><img width="1264" height="711" alt="Attach09" src="https://i.ibb.co/hRmcWL0N/Attach09.png" /></p>
 <p><em>The Standard Achievement Editor showing the "Collateral Damage" achievement from the example guide.</em></p>
@@ -786,11 +804,11 @@ Importing the JSON would automatically create the "Progression" and "Challenges"
 <li><strong>Guidance &amp; Insights Tab:</strong><ul>
 <li>The main rich text box for the achievement's guide.</li>
 <li>For <strong>Progression</strong> achievements, this tab is all you see, keeping the UI clean and simple.</li>
-<li>For other types, a "Video Walkthrough" URL box appears at the bottom.</li>
+<li>For other types, an "Image URL" and "Video Walkthrough" URL box appear at the bottom.</li>
 </ul>
 </li>
 <li><strong>Fail Conditions &amp; Tracking Tab:</strong><ul>
-<li><strong>Fail Conditions:</strong> A list where you can add and remove failure conditions.</li>
+<li><strong>Fail Conditions:</strong> A list where you can add and remove failure conditions. <strong>Tip:</strong> You can also double-click an existing condition in the list to edit it directly.</li>
 <li><strong>Achievement Tracking:</strong> Text boxes for the "Trigger Indicator" and "Measured Indicator" descriptions.</li>
 </ul>
 </li>
@@ -811,7 +829,7 @@ Importing the JSON would automatically create the "Progression" and "Challenges"
 <li><strong>To link to an external URL:</strong> Paste the full URL (e.g., a YouTube or Dropbox link). The tool will generate <code>[▶️ Watch Video Walkthrough](https://...)</code>.</li>
 </ul>
 <h3 id="collectible-achievement-editor">Collectible Achievement Editor<a class="headerlink" href="#collectible-achievement-editor" title="Permanent link">&para;</a></h3>
-<p><em>(Selected when an achievement is in a category with a title containing the keywords "collectible," "upgrade," etc.)</em></p>
+<p><em>(Selected when an achievement is inside a category that has been manually marked as a "Collectible Category")</em></p>
 <p>This is a highly specialized editor for achievements that involve finding many items. It deconstructs the complex guidance into a manageable tree structure.</p>
 <p><img width="1264" height="711" alt="Attach11" src="https://i.ibb.co/FkbFx0BH/Attach11.png" /></p>
 <p><em>The Collectible Editor showing the "Certified Superhuman" achievement, with the tree of HP Upgrades on the left and the editor panels on the right.</em></p>
@@ -861,8 +879,7 @@ Importing the JSON would automatically create the "Progression" and "Challenges"
 *   <strong><code>Edit &gt; Undo</code> (<code>Ctrl+Z</code>)</strong>: Reverts the last action.
 *   <strong><code>Edit &gt; Redo</code> (<code>Ctrl+Shift+Z</code>)</strong>: Re-applies the last undone action.</p>
 <blockquote>
-<p><strong>Dev Note</strong>: As of writing this wiki, the Undo/Redo system is still buggy, and it's currently being addressed. <br />
-The global undo is separate from the individual textbox undo. If you are typing, <code>Ctrl+Z</code> will undo your typing. If you click outside the textbox first, <code>Ctrl+Z</code> will undo the last major action (like deleting an achievement).</p>
+<p><strong>Note:</strong> The global undo is separate from the individual textbox undo. If you are typing, <code>Ctrl+Z</code> will undo your typing. If you click outside the textbox first, <code>Ctrl+Z</code> will undo the last major action (like deleting an achievement).</p>
 </blockquote>
 <h3 id="spell-checking">Spell Checking<a class="headerlink" href="#spell-checking" title="Permanent link">&para;</a></h3>
 <p>The tool includes a built-in spell checker (for English) to help catch typos.
@@ -878,7 +895,7 @@ The global undo is separate from the individual textbox undo. If you are typing,
 <p>When your guide is complete, it's time to generate the final output for the wiki.
 1.  Go to <code>File &gt; Export Markdown...</code> (<code>Ctrl+E</code>).
 2.  Choose a name and location for your <code>.txt</code> file.</p>
-<p>The application will handle all the heacy lifting. It will take your entire structured project and generate a single, perfectly formatted Markdown file, ready to be copied and pasted into the RetroAchievements wiki.</p>
+<p>The application will handle all the heavy lifting. It will take your entire structured project and generate a single, perfectly formatted Markdown file, ready to be copied and pasted into the RetroAchievements wiki.</p>
 
 
 
