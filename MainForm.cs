@@ -510,11 +510,25 @@ namespace RaGuideDesigner
         private string ReadEmbeddedResource(string resourceName)
         {
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            using (Stream? stream = assembly.GetManifestResourceStream(resourceName))
+
+            // Instead of asking for a specific name, find the resource that matches.
+            // This solves issues where the compiler gives it a slightly different name than expected.
+            string? actualResourceName = assembly.GetManifestResourceNames()
+                .FirstOrDefault(name => name.EndsWith("Default.txt"));
+
+            if (string.IsNullOrEmpty(actualResourceName))
             {
+                // Add all found names to the error for easier debugging if it fails again.
+                string allNames = string.Join("\n", assembly.GetManifestResourceNames());
+                throw new FileNotFoundException($"Embedded resource ending with 'Default.txt' not found. Available resources:\n{allNames}");
+            }
+
+            using (Stream? stream = assembly.GetManifestResourceStream(actualResourceName))
+            {
+                // The original null check is still good practice.
                 if (stream == null)
                 {
-                    throw new FileNotFoundException($"Embedded resource '{resourceName}' not found. Ensure the file exists, the path is correct, and its 'Build Action' is set to 'Embedded Resource'.");
+                    throw new FileNotFoundException($"Could not load the embedded resource stream for '{actualResourceName}'.");
                 }
 
                 using (StreamReader reader = new StreamReader(stream))
