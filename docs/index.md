@@ -18,6 +18,7 @@ Welcome to the official guide for the RA Guide Designer! This tool was built to 
     *   [Walkthroughs & Resources Editor](#walkthroughs--resources-editor)
     *   [Category Editor](#category-editor)
         *   [The Additional Notes Editor](#the-additional-notes-editor)
+        *   [Marking a Category as Collectible](#marking-a-category-as-collectible)
     *   [Standard Achievement Editor](#standard-achievement-editor)
     *   [Collectible Achievement Editor](#collectible-achievement-editor)
     *   [Leaderboard Editor](#leaderboard-editor)
@@ -107,9 +108,9 @@ Right-click on any item in the tree to open a context menu with powerful actions
 *Showcase of the right-click context menu over an Achievement Category, showing options like "Add Achievement", "Duplicate", and "Delete".*
 
 ### Reordering with Drag & Drop and Shortcuts
-You can easily reorder items within the same category.
+You can easily reorder items like achievements, categories, and credits within their respective lists.
 
-*   **Drag & Drop:** Click and drag an achievement or category to a new position. A line will indicate where it will be dropped. You can even drag achievements between different categories.
+*   **Drag & Drop:** Click and drag an item to a new position. A line will indicate where it will be dropped. You can even drag achievements between different categories.
 *   **Keyboard Shortcuts:** Select an item and use `Alt+Up` and `Alt+Down` to move it within its list. This is often faster and more precise than dragging.
 
 ## 4. The Editors
@@ -179,8 +180,16 @@ This special editor is designed for content that requires more structure, like s
 *   **Live Preview:** The editor shows you a formatted preview of your content, so you don't have to guess how it will look.
 *   **Example: *Project: Snowblind*** The "Weapon-specific" category uses this feature to create a detailed, formatted table explaining weapon ammo limits and tactical roles, complete with sub-headers and a blockquote.
 
+#### Marking a Category as Collectible
+To enable the specialized **Collectible Achievement Editor** for all achievements within a category, you must manually mark it.
+1. Right-click on the desired category in the Guide Structure Tree.
+2. Select the **"Mark as Collectible Category"** option from the context menu. A checkmark will appear next to it.
+3. Now, when you click on any achievement within that category, it will open in the Collectible Editor.
+
+> **Note:** You can toggle this setting off by repeating the same steps. This feature cannot be enabled for the "Progression" category.
+
 ### Standard Achievement Editor
-*(Selected by clicking any achievement NOT in a collectible-type category)*
+*(Selected by clicking any achievement NOT in a collectible category)*
 
 This is the most-used editor. It's tabbed for organization.
 
@@ -191,9 +200,9 @@ This is the most-used editor. It's tabbed for organization.
 *   **Guidance & Insights Tab:**
     *   The main rich text box for the achievement's guide.
     *   For **Progression** achievements, this tab is all you see, keeping the UI clean and simple.
-    *   For other types, a "Video Walkthrough" URL box appears at the bottom.
+    *   For other types, an "Image URL" and "Video Walkthrough" URL box appear at the bottom.
 *   **Fail Conditions & Tracking Tab:**
-    *   **Fail Conditions:** A list where you can add and remove failure conditions.
+    *   **Fail Conditions:** A list where you can add and remove failure conditions. **Tip:** You can also double-click an existing condition in the list to edit it directly.
     *   **Achievement Tracking:** Text boxes for the "Trigger Indicator" and "Measured Indicator" descriptions.
 *   **Misc / Dev Notes Tab:** Two text boxes for adding the small, subscripted notes at the bottom of a guidance cell.
 
@@ -213,7 +222,7 @@ You'll often need to link to other achievements or external URLs within your gui
 *   **To link to an external URL:** Paste the full URL (e.g., a YouTube or Dropbox link). The tool will generate `[▶️ Watch Video Walkthrough](https://...)`.
 
 ### Collectible Achievement Editor
-*(Selected when an achievement is in a category with a title containing the keywords "collectible," "upgrade," etc.)*
+*(Selected when an achievement is inside a category that has been manually marked as a "Collectible Category")*
 
 This is a highly specialized editor for achievements that involve finding many items. It deconstructs the complex guidance into a manageable tree structure.
 
@@ -272,8 +281,7 @@ The application has a global undo/redo system. Almost every action—from editin
 *   **`Edit > Undo` (`Ctrl+Z`)**: Reverts the last action.
 *   **`Edit > Redo` (`Ctrl+Shift+Z`)**: Re-applies the last undone action.
 
-> **Dev Note**: As of writing this wiki, the Undo/Redo system is still buggy, and it's currently being addressed.   
-> The global undo is separate from the individual textbox undo. If you are typing, `Ctrl+Z` will undo your typing. If you click outside the textbox first, `Ctrl+Z` will undo the last major action (like deleting an achievement).
+> **Note:** The global undo is separate from the individual textbox undo. If you are typing, `Ctrl+Z` will undo your typing. If you click outside the textbox first, `Ctrl+Z` will undo the last major action (like deleting an achievement).
 
 ### Spell Checking
 The tool includes a built-in spell checker (for English) to help catch typos.
@@ -294,4 +302,4 @@ When your guide is complete, it's time to generate the final output for the wiki
 1.  Go to `File > Export Markdown...` (`Ctrl+E`).
 2.  Choose a name and location for your `.txt` file.
 
-The application will handle all the heacy lifting. It will take your entire structured project and generate a single, perfectly formatted Markdown file, ready to be copied and pasted into the RetroAchievements wiki.
+The application will handle all the heavy lifting. It will take your entire structured project and generate a single, perfectly formatted Markdown file, ready to be copied and pasted into the RetroAchievements wiki.
