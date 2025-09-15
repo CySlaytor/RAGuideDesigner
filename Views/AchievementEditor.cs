@@ -11,6 +11,7 @@ namespace RaGuideDesigner.Views
     public partial class AchievementEditor : BaseEditorControl
     {
         private Achievement? _currentAchievement = null;
+        private string? _failConditionToEdit = null;
 
         public AchievementEditor(UndoRedoService undoRedoService) : base(undoRedoService)
         {
@@ -21,6 +22,9 @@ namespace RaGuideDesigner.Views
             cmbAchPoints.SelectedIndexChanged += CmbAchPoints_SelectedIndexChanged;
 
             EnableSpellCheck(rtxtGuidance);
+
+            toolTip1.SetToolTip(lblImageHelp, "Provide a direct link to an image (e.g., ending in .png, .jpg, .gif).\nUpload to a service like Imgur or ImgBB, right-click the uploaded image, select 'Copy Image Address' or 'Open image in new tab' and copy the URL from the address bar.");
+            toolTip1.SetToolTip(lblVideoHelp, "Provide a direct link to a video walkthrough from YouTube or a file-sharing service like Dropbox.");
 
             WireUpEventHandlers();
         }
@@ -91,6 +95,7 @@ namespace RaGuideDesigner.Views
             LoadImage(achievement.BadgeUrl);
 
             SetRichTextContent(rtxtGuidance, achievement.GuidanceAndInsights);
+            txtImageUrl.Text = achievement.ImageUrl;
             txtVideoUrl.Text = achievement.VideoWalkthroughUrl;
 
             lstFailConditions.DataSource = new BindingSource { DataSource = achievement.FailConditions };
@@ -143,6 +148,16 @@ namespace RaGuideDesigner.Views
         // --- Event handlers for simple text fields ---
         // These follow a standard pattern: check for changes on Leave, and if there are
         // any, create and execute an undoable command.
+        private void txtImageUrl_Leave(object sender, EventArgs e)
+        {
+            if (_isProgrammaticChange || _currentAchievement == null) return;
+            var oldValue = _currentAchievement.ImageUrl;
+            var newValue = txtImageUrl.Text;
+            if (oldValue != newValue)
+            {
+                _undoRedoService.Execute(new EditPropertyCommand(_currentAchievement, nameof(Achievement.ImageUrl), oldValue, newValue));
+            }
+        }
         private void txtVideoUrl_Leave(object sender, EventArgs e)
         {
             if (_isProgrammaticChange || _currentAchievement == null) return;
@@ -159,8 +174,25 @@ namespace RaGuideDesigner.Views
             if (_currentAchievement == null || string.IsNullOrWhiteSpace(txtNewFailCondition.Text)) return;
 
             var newCondition = txtNewFailCondition.Text.Trim();
-            var command = new AddListItemCommand<string>(_currentAchievement.FailConditions, newCondition);
-            _undoRedoService.Execute(command);
+
+            // If we are in edit mode, update the existing item.
+            if (_failConditionToEdit != null)
+            {
+                int index = _currentAchievement.FailConditions.IndexOf(_failConditionToEdit);
+                if (index != -1 && _failConditionToEdit != newCondition)
+                {
+                    var removeCmd = new RemoveListItemCommand<string>(_currentAchievement.FailConditions, _failConditionToEdit);
+                    var addCmd = new AddListItemCommand<string>(_currentAchievement.FailConditions, newCondition, index);
+                    var composite = new CompositeCommand(new ICommand[] { removeCmd, addCmd });
+                    _undoRedoService.Execute(composite);
+                }
+                ResetFailConditionEditMode();
+            }
+            else // Otherwise, add a new item.
+            {
+                var command = new AddListItemCommand<string>(_currentAchievement.FailConditions, newCondition);
+                _undoRedoService.Execute(command);
+            }
 
             txtNewFailCondition.Clear();
             txtNewFailCondition.Focus();
@@ -175,6 +207,32 @@ namespace RaGuideDesigner.Views
                 var command = new RemoveListItemCommand<string>(_currentAchievement.FailConditions, selectedCondition);
                 _undoRedoService.Execute(command);
             }
+            ResetFailConditionEditMode();
+        }
+
+        private void lstFailConditions_DoubleClick(object sender, EventArgs e)
+        {
+            if (lstFailConditions.SelectedItem is string selectedCondition)
+            {
+                _failConditionToEdit = selectedCondition;
+                txtNewFailCondition.Text = selectedCondition;
+                btnAddFail.Text = "Update";
+                txtNewFailCondition.Focus();
+                txtNewFailCondition.SelectAll();
+            }
+        }
+
+        private void lstFailConditions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // If the user selects a different item, cancel the current edit mode.
+            ResetFailConditionEditMode();
+        }
+
+        private void ResetFailConditionEditMode()
+        {
+            _failConditionToEdit = null;
+            btnAddFail.Text = "Add";
+            // Do not clear the text box, in case the user wants to copy/paste from it.
         }
 
         private void txtTriggerIndicator_Leave(object sender, EventArgs e)

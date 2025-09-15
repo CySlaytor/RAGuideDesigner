@@ -27,14 +27,6 @@ namespace RaGuideDesigner.Views
             WireUpEventHandlers();
         }
 
-        public void ClearCaches()
-        {
-            rtxtGeneralAdvice.Clear();
-            rtxtGeneralAdvice.ClearUndo();
-            rtxtNoteContent.Clear();
-            rtxtNoteContent.ClearUndo();
-        }
-
         public void SetData(WikiGuide? guide)
         {
             _isProgrammaticChange = true;

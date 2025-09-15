@@ -468,7 +468,7 @@
             this.lblCreditsValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tlpStats.SetColumnSpan(this.lblCreditsValue, 1);
             this.tlpStats.SetRowSpan(this.lblCreditsValue, 1);
-            this.lblCreditsValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tlpStats.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCreditsValue.Location = new System.Drawing.Point(115, 88);
             this.lblCreditsValue.Name = "lblCreditsValue";
             this.tlpStats.Size = new System.Drawing.Size(224, 108);

@@ -1,4 +1,4 @@
-﻿﻿using RaGuideDesigner.Models;
+﻿using RaGuideDesigner.Models;
 using System;
 using System.IO;
 using System.Linq;
@@ -11,6 +11,8 @@ namespace RaGuideDesigner.Services
 {
     public class MarkdownImportService
     {
+        private static readonly string[] _collectibleKeywords = { "collectible", "upgrade", "bonus", "artifact", "treasure", "unlock" };
+
         // A utility that takes a raw text block and separates out any admonition notes.
         // It populates a list with the found admonitions and returns the remaining text.
         private string ProcessBlock(string rawBlock, BindingList<Admonition> admonitions)
@@ -85,6 +87,14 @@ namespace RaGuideDesigner.Services
             var sections = Regex.Split(remainingContent, @"\s*(?=<h4>)");
 
             string mainDescriptionBlock = sections[0];
+
+            var imageMatch = Regex.Match(mainDescriptionBlock, @"\s*!\[.*?\]\((.*?)\)");
+            if (imageMatch.Success)
+            {
+                ach.ImageUrl = imageMatch.Groups[1].Value.Trim();
+                mainDescriptionBlock = mainDescriptionBlock.Remove(imageMatch.Index, imageMatch.Length);
+            }
+
             var videoMatch = Regex.Match(mainDescriptionBlock, @"\s*\[▶️ Watch Video Walkthrough\]\((.*?)\)");
             if (videoMatch.Success)
             {
@@ -219,6 +229,10 @@ namespace RaGuideDesigner.Services
                     };
                     var categoryPoints = int.Parse(categoryHeaderMatch.Groups[4].Value);
 
+                    // Set IsCollectible based on title keywords upon import for backward compatibility.
+                    string lowerTitle = category.Title.ToLowerInvariant();
+                    category.IsCollectible = _collectibleKeywords.Any(keyword => lowerTitle.Contains(keyword));
+
                     var headerEndIndex = section.IndexOf("</h1>") + "</h1>".Length;
 
                     var tableHeaderRegex = new Regex(@"###\s+.*?\s+Achievement List");
@@ -258,7 +272,7 @@ namespace RaGuideDesigner.Services
 
                         bool isProgression = category.Title.Equals("Progression", StringComparison.OrdinalIgnoreCase);
 
-                        if (category.IsCollectibleType && rawCellContent.Contains("<u><b>"))
+                        if (category.IsCollectible && rawCellContent.Contains("<u><b>"))
                         {
                             ach.ParseGuidanceAsCollectible();
                         }

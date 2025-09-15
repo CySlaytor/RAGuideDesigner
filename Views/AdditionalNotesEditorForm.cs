@@ -1,5 +1,6 @@
 ﻿using RaGuideDesigner.Services;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -10,16 +11,15 @@ using System.Windows.Forms;
 
 namespace RaGuideDesigner.Views
 {
-    // This form is a pop-up editor specifically for the "Additional Notes" section
-    // of an achievement category, which can contain more complex formatting like sub-headers and blockquotes.
+    // A pop-up editor for the "Additional Notes" section of an achievement category,
+    // which supports more complex formatting like sub-headers and blockquotes.
     public partial class AdditionalNotesEditorForm : Form
     {
-        // A little trick to prevent the RichTextBox from flickering while we apply a bunch of formatting.
+        // Used to prevent the RichTextBox from flickering during format updates.
         [DllImport("user32.dll")]
         private static extern IntPtr SendMessage(IntPtr hWnd, int msg, bool wParam, int lParam);
         private const int WM_SETREDRAW = 0x0B;
 
-        // The main property to get the edited content back from the form.
         public string NotesContent { get; set; } = "";
 
         private const string AdditionalNotesHeader = "## Additional Notes";
@@ -28,24 +28,21 @@ namespace RaGuideDesigner.Views
         private readonly Font _header2Font;
         private readonly Font _header3Font;
         private readonly Font _normalFont;
-        // Using a helper RichTextBox is a simple way to process RTF snippets without affecting the main one.
+        // A helper RichTextBox for processing RTF snippets without affecting the main display.
         private readonly RichTextBox _helperRtb = new RichTextBox();
 
         private bool _isDirty = false;
         private bool _isProgrammaticChange = false;
 
-        // These static variables help remember the form's size and position during a session,
-        // which is a nice little user experience touch.
+        // Static variables to remember the form's size and position between sessions.
         private static bool _isFirstLoad = true;
         private static FormWindowState _lastWindowState = FormWindowState.Normal;
         private static Rectangle _lastBounds;
 
-        // --- ADDED FOR SPELL CHECK ---
-        private System.Windows.Forms.Timer _spellCheckTimer;
-        private List<ToolStripMenuItem> _suggestionItems = new List<ToolStripMenuItem>();
+        private readonly System.Windows.Forms.Timer _spellCheckTimer;
+        private readonly List<ToolStripMenuItem> _suggestionItems = new List<ToolStripMenuItem>();
         private string _misspelledWord = string.Empty;
         private int _misspelledWordPosition = -1;
-        // --- END OF ADDITION ---
 
         public AdditionalNotesEditorForm()
         {
@@ -58,12 +55,10 @@ namespace RaGuideDesigner.Views
             this.rtxtNotes.TextChanged += new System.EventHandler(this.rtxtNotes_TextChanged);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdditionalNotesEditorForm_FormClosing);
 
-            // --- ADDED FOR SPELL CHECK ---
             _spellCheckTimer = new System.Windows.Forms.Timer();
             _spellCheckTimer.Interval = 1500;
             _spellCheckTimer.Tick += SpellCheckTimer_Tick;
             EnableSpellCheck(rtxtNotes);
-            // --- END OF ADDITION ---
         }
 
         private void AdditionalNotesEditorForm_Load(object? sender, EventArgs e)

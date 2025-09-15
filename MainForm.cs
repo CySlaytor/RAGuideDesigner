@@ -2,14 +2,14 @@
 using RaGuideDesigner.Models;
 using RaGuideDesigner.Services;
 using RaGuideDesigner.Views;
+using RAGuideDesigner.Properties;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Windows.Forms;
-using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.IO;
-using RAGuideDesigner.Properties;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace RaGuideDesigner
 {
@@ -487,6 +487,23 @@ namespace RaGuideDesigner
                 aboutForm.ShowDialog(this);
             }
         }
+
+        private void tutorialToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var ps = new System.Diagnostics.ProcessStartInfo("https://cyslaytor.github.io/RAGuideDesigner/")
+                {
+                    UseShellExecute = true,
+                    Verb = "open"
+                };
+                System.Diagnostics.Process.Start(ps);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Could not open the tutorial link.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         #endregion
 
         #region UI and Data Logic
@@ -590,7 +607,7 @@ namespace RaGuideDesigner
                     case Achievement ach:
                         var parentNode = lastSelectedNode.Parent;
                         var parentCategory = parentNode?.Tag as AchievementCategory;
-                        if (parentCategory != null && parentCategory.IsCollectibleType)
+                        if (parentCategory != null && parentCategory.IsCollectible)
                         {
                             ShowEditor(_collectibleEditor, ach, parentCategory);
                         }
@@ -774,6 +791,17 @@ namespace RaGuideDesigner
             addLeaderboardToolStripMenuItem.Visible = clickedItem is string s2 && s2 == "LeaderboardGuideRoot";
             addCreditToolStripMenuItem.Visible = clickedItem is string s3 && s3 == "CreditsRoot";
 
+            if (clickedItem is AchievementCategory category)
+            {
+                markAsCollectibleToolStripMenuItem.Visible = true;
+                markAsCollectibleToolStripMenuItem.Checked = category.IsCollectible;
+                markAsCollectibleToolStripMenuItem.Enabled = !category.Title.Equals("Progression", StringComparison.OrdinalIgnoreCase);
+            }
+            else
+            {
+                markAsCollectibleToolStripMenuItem.Visible = false;
+            }
+
             var firstItem = selectedItems.FirstOrDefault();
             if (firstItem == null) return;
 
@@ -783,12 +811,13 @@ namespace RaGuideDesigner
 
             deleteToolStripMenuItem.Visible = canMoveOrDelete;
             duplicateToolStripMenuItem.Visible = canDuplicate;
-            moveUpToolStripMenuItem.Visible = canMoveOrDelete && !(firstItem is Credit);
-            moveDownToolStripMenuItem.Visible = canMoveOrDelete && !(firstItem is Credit);
+            moveUpToolStripMenuItem.Visible = canMoveOrDelete;
+            moveDownToolStripMenuItem.Visible = canMoveOrDelete;
 
             toolStripSeparator4.Visible = addAchievementCategoryToolStripMenuItem.Visible || addAchievementToolStripMenuItem.Visible || addLeaderboardToolStripMenuItem.Visible || addCreditToolStripMenuItem.Visible;
-            toolStripSeparator3.Visible = duplicateToolStripMenuItem.Visible || moveUpToolStripMenuItem.Visible || moveDownToolStripMenuItem.Visible;
+            toolStripSeparator3.Visible = duplicateToolStripMenuItem.Visible || moveUpToolStripMenuItem.Visible || moveDownToolStripMenuItem.Visible || markAsCollectibleToolStripMenuItem.Visible;
         }
+
 
         private void cmTree_Opening(object sender, CancelEventArgs e)
         {
@@ -1072,10 +1101,41 @@ namespace RaGuideDesigner
                             newTargetIndex--;
                         }
                         commands.Add(new MoveListItemCommand<AchievementCategory>(_currentProject.AchievementCategories, _currentProject.AchievementCategories, cat, newTargetIndex, originalIndex));
-                        targetIndex++;
                     }
                 }
             }
+            else if (firstDraggedItem is Credit)
+            {
+                var credits = draggedNodes.Select(n => n.Tag).OfType<Credit>().ToList();
+                if (!credits.Any()) return;
+                var list = _currentProject.Credits;
+                int targetIndex = -1;
+
+                if (targetNode.Tag is Credit targetCredit)
+                {
+                    targetIndex = list.IndexOf(targetCredit);
+                }
+                else if (targetNode.Tag is string s && s == "CreditsRoot")
+                {
+                    targetIndex = list.Count;
+                }
+
+                if (targetIndex != -1)
+                {
+                    var sortedCredits = credits.OrderByDescending(list.IndexOf).ToList();
+                    foreach (var credit in sortedCredits)
+                    {
+                        int originalIndex = list.IndexOf(credit);
+                        int newTargetIndex = targetIndex;
+                        if (originalIndex != -1 && originalIndex < newTargetIndex)
+                        {
+                            newTargetIndex--;
+                        }
+                        commands.Add(new MoveListItemCommand<Credit>(list, list, credit, newTargetIndex, originalIndex));
+                    }
+                }
+            }
+
 
             if (commands.Any())
             {
@@ -1118,6 +1178,18 @@ namespace RaGuideDesigner
                     if (currentIndex > 0)
                     {
                         commands.Add(new MoveListItemCommand<AchievementCategory>(_currentProject.AchievementCategories, _currentProject.AchievementCategories, cat, currentIndex - 1, currentIndex));
+                    }
+                }
+            }
+            else if (firstItem is Credit)
+            {
+                var creditsToMove = movableNodes.Select(n => n.Tag).OfType<Credit>().ToList();
+                foreach (var credit in creditsToMove)
+                {
+                    int currentIndex = _currentProject.Credits.IndexOf(credit);
+                    if (currentIndex > 0)
+                    {
+                        commands.Add(new MoveListItemCommand<Credit>(_currentProject.Credits, _currentProject.Credits, credit, currentIndex - 1, currentIndex));
                     }
                 }
             }
@@ -1167,6 +1239,18 @@ namespace RaGuideDesigner
                     if (currentIndex != -1 && currentIndex < _currentProject.AchievementCategories.Count - 1)
                     {
                         commands.Add(new MoveListItemCommand<AchievementCategory>(_currentProject.AchievementCategories, _currentProject.AchievementCategories, cat, currentIndex + 1, currentIndex));
+                    }
+                }
+            }
+            else if (firstItem is Credit)
+            {
+                var creditsToMove = movableNodes.Select(n => n.Tag).OfType<Credit>().ToList();
+                foreach (var credit in creditsToMove)
+                {
+                    int currentIndex = _currentProject.Credits.IndexOf(credit);
+                    if (currentIndex != -1 && currentIndex < _currentProject.Credits.Count - 1)
+                    {
+                        commands.Add(new MoveListItemCommand<Credit>(_currentProject.Credits, _currentProject.Credits, credit, currentIndex + 1, currentIndex));
                     }
                 }
             }
@@ -1220,6 +1304,8 @@ namespace RaGuideDesigner
                 case RemoveListItemCommand<Credit> cmd: affectedModels.Add(HandleRemove(cmd.Item, isUndo, cmd.OriginalIndex)); break;
                 case MoveListItemCommand<Achievement> cmd: affectedModels.Add(HandleMove(cmd, isUndo)); break;
                 case MoveListItemCommand<AchievementCategory> cmd: affectedModels.Add(HandleMove(cmd, isUndo)); break;
+                case MoveListItemCommand<Leaderboard> cmd: affectedModels.Add(HandleMove(cmd, isUndo)); break;
+                case MoveListItemCommand<Credit> cmd: affectedModels.Add(HandleMove(cmd, isUndo)); break;
                 case EditPropertyCommand cmd when cmd.IsMajorChange: affectedModels.Add(HandleEdit(cmd.TargetObject)); break;
             }
             return affectedModels;
@@ -1387,7 +1473,20 @@ namespace RaGuideDesigner
                     return _treeViewManagerService.FindNodeByModel(tvGuideStructure.Nodes, "AchievementGuideRoot");
                 }
             }
-
+            if (itemOrList is BindingList<Leaderboard> lbList)
+            {
+                if (lbList == _currentProject.Leaderboards)
+                {
+                    return _treeViewManagerService.FindNodeByModel(tvGuideStructure.Nodes, "LeaderboardGuideRoot");
+                }
+            }
+            if (itemOrList is BindingList<Credit> creditList)
+            {
+                if (creditList == _currentProject.Credits)
+                {
+                    return _treeViewManagerService.FindNodeByModel(tvGuideStructure.Nodes, "CreditsRoot");
+                }
+            }
             return null;
         }
         #endregion
@@ -1395,6 +1494,16 @@ namespace RaGuideDesigner
         private void MainForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void markAsCollectibleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_rightClickedNode?.Tag is AchievementCategory category)
+            {
+                var command = new EditPropertyCommand(category, nameof(AchievementCategory.IsCollectible), category.IsCollectible, !category.IsCollectible);
+                _undoRedoService.Execute(command);
+                UpdateEditorPanel();
+            }
         }
     }
 }

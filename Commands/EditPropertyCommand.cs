@@ -27,8 +27,8 @@ namespace RaGuideDesigner.Commands
                 throw new ArgumentException($"Property '{propertyName}' not found on object of type '{_targetObject.GetType().Name}'.");
             }
 
-            // "Major" changes are ones that should cause the tree view node to update its text.
-            IsMajorChange = propertyName is "Title" or "Icon" or "Username";
+            // "Major" changes are ones that should cause the tree view node to update its text or require a UI refresh.
+            IsMajorChange = propertyName is "Title" or "Icon" or "Username" or "IsCollectible";
         }
 
         public void Execute() => _propertyInfo?.SetValue(_targetObject, _newValue);

@@ -1,8 +1,8 @@
-﻿using System.ComponentModel;
+﻿using Newtonsoft.Json;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json;
 
 namespace RaGuideDesigner.Models
 {
@@ -32,8 +32,8 @@ namespace RaGuideDesigner.Models
         public string MasteryIconUrl { get; set; } = "";
         public string IntroText { get; set; } = "This guide provides comprehensive details...";
         public string LeaderboardIntroText { get; set; } = "This section provides a detailed breakdown...";
-        public string MeasuredIndicatorExamples { get; set; } = ""; // New property
-        public string TriggeredIndicatorExamples { get; set; } = ""; // New property
+        public string MeasuredIndicatorExamples { get; set; } = "";
+        public string TriggeredIndicatorExamples { get; set; } = "";
 
         public BindingList<ResourceLink> Guides { get; set; } = new();
         public BindingList<ResourceLink> Playthroughs { get; set; } = new();
@@ -54,22 +54,10 @@ namespace RaGuideDesigner.Models
         public string Icon { get; set; } = "🏆";
         public string Description { get; set; } = "";
         public string AdditionalNotes { get; set; } = "";
+        public bool IsCollectible { get; set; } = false;
         public BindingList<Admonition> Admonitions { get; set; } = new();
         public BindingList<Achievement> Achievements { get; set; } = new();
         public string DisplayText => $"{Icon} {Title}";
-
-        private static readonly string[] _collectibleKeywords = { "collectible", "upgrade", "bonus", "artifact", "treasure", "unlock" };
-
-        [JsonIgnore]
-        public bool IsCollectibleType
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(Title)) return false;
-                string lowerTitle = Title.ToLowerInvariant();
-                return _collectibleKeywords.Any(keyword => lowerTitle.Contains(keyword));
-            }
-        }
     }
 
     public class CollectibleItem
@@ -100,10 +88,11 @@ namespace RaGuideDesigner.Models
         public string DisplayText => Title;
         public BindingList<Admonition> Admonitions { get; set; } = new();
 
+        public string ImageUrl { get; set; } = "";
         public string VideoWalkthroughUrl { get; set; } = "";
         public BindingList<string> FailConditions { get; set; } = new();
         public string TriggerIndicator { get; set; } = "";
-        public string MeasuredIndicator { get; set; } = "tracks how many items are acquired during gameplay and updates once a mission starts.";
+        public string MeasuredIndicator { get; set; } = "";
         public string MiscNote { get; set; } = "";
         public string DevNote { get; set; } = "";
 
@@ -252,17 +241,10 @@ namespace RaGuideDesigner.Models
                 sb.Append(itemsSb.ToString().Trim());
             }
 
-            if (sb.Length > 0)
+            if (sb.Length > 0 && !string.IsNullOrWhiteSpace(MeasuredIndicator))
             {
                 sb.Append("<br><br>");
-                if (!string.IsNullOrWhiteSpace(MeasuredIndicator))
-                {
-                    sb.Append($"- A [Measured Indicator](#RA_Measure) {MeasuredIndicator.Replace("\n", "<br>")}");
-                }
-                else
-                {
-                    sb.Append($"- ~~A [Measured Indicator](#RA_Measure)~~");
-                }
+                sb.Append($"- A [Measured Indicator](#RA_Measure) {MeasuredIndicator.Replace("\n", "<br>")}");
             }
 
             return sb.ToString();

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -28,7 +27,7 @@ namespace RaGuideDesigner.Services
 
             try
             {
-                // --- FIX: Use AppContext.BaseDirectory to be compatible with single-file publishing ---
+                // Use AppContext.BaseDirectory to be compatible with single-file publishing
                 string? assemblyPath = AppContext.BaseDirectory;
                 if (string.IsNullOrEmpty(assemblyPath))
                 {

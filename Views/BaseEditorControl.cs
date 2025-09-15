@@ -25,8 +25,8 @@ namespace RaGuideDesigner.Views
             { "Tip", "TIP" }, { "Note", "NOTE" }
         };
 
-        private System.Windows.Forms.Timer _spellCheckTimer;
-        private List<ToolStripMenuItem> _suggestionItems = new List<ToolStripMenuItem>();
+        private readonly System.Windows.Forms.Timer _spellCheckTimer;
+        private readonly List<ToolStripMenuItem> _suggestionItems = new List<ToolStripMenuItem>();
         private string _misspelledWord = string.Empty;
         private int _misspelledWordPosition = -1;
 

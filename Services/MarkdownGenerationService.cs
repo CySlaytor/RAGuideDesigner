@@ -390,15 +390,24 @@ namespace RaGuideDesigner.Services
         // adjusts its output for simple "Progression" achievements to keep them clean.
         private string BuildAchievementGuidanceCell(Achievement ach, AchievementCategory parentCategory)
         {
-            if (parentCategory.IsCollectibleType)
+            if (parentCategory.IsCollectible)
             {
-                return ach.SerializeCollectibleGuidance();
+                string guidance = ach.SerializeCollectibleGuidance();
+                // The serializer no longer adds the placeholder, so the generation service must.
+                if (string.IsNullOrWhiteSpace(ach.MeasuredIndicator))
+                {
+                    if (guidance.Length > 0)
+                    {
+                        guidance += "<br><br>- ~~A [Measured Indicator](#RA_Measure)~~";
+                    }
+                }
+                return guidance;
             }
 
             var mainParts = new List<string>();
             bool isProgression = parentCategory.Title.Equals("Progression", StringComparison.OrdinalIgnoreCase);
 
-            // --- Part 1: Main Guidance & Video ---
+            // --- Part 1: Main Guidance, Image, & Video ---
             var guidancePart = new StringBuilder();
             if (!string.IsNullOrWhiteSpace(ach.GuidanceAndInsights))
             {
@@ -417,6 +426,11 @@ namespace RaGuideDesigner.Services
                     string formattedGuidance = ach.GuidanceAndInsights.Replace("\n", "<br>");
                     guidancePart.Append(formattedGuidance);
                 }
+            }
+            if (!isProgression && !string.IsNullOrWhiteSpace(ach.ImageUrl))
+            {
+                if (guidancePart.Length > 0) guidancePart.Append("<br>");
+                guidancePart.Append($"![Achievement Hint Image]({ach.ImageUrl})");
             }
             if (!isProgression && !string.IsNullOrWhiteSpace(ach.VideoWalkthroughUrl))
             {

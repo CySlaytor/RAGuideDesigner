@@ -35,9 +35,6 @@ namespace RaGuideDesigner.Views
             WireUpEventHandlers();
         }
 
-        public void ClearCaches() { }
-        public void RemoveFromCache(Leaderboard lb) { }
-
         // Binds a Leaderboard object to the editor's controls.
         public void SetData(Leaderboard? leaderboard)
         {

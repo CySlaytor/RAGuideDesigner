@@ -17,527 +17,570 @@
 
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.cmbAchPoints = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblAchId = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtAchTitle = new RaGuideDesigner.Views.UndoRedoRichTextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.pbAchBadge = new System.Windows.Forms.PictureBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPageGuidance = new System.Windows.Forms.TabPage();
-            this.groupBoxOptional = new System.Windows.Forms.GroupBox();
-            this.txtVideoUrl = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.rtxtGuidance = new RaGuideDesigner.Views.UndoRedoRichTextBox();
-            this.tabPageAdvanced = new System.Windows.Forms.TabPage();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.failConditionsSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.lstFailConditions = new System.Windows.Forms.ListBox();
-            this.txtNewFailCondition = new System.Windows.Forms.TextBox();
-            this.btnRemoveFail = new System.Windows.Forms.Button();
-            this.btnAddFail = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.trackingSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtTriggerIndicator = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtMeasuredIndicator = new System.Windows.Forms.TextBox();
-            this.tabPageNotes = new System.Windows.Forms.TabPage();
-            this.notesSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.txtMiscNote = new System.Windows.Forms.TextBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.txtDevNote = new System.Windows.Forms.TextBox();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbAchBadge)).BeginInit();
-            this.tabControl1.SuspendLayout();
-            this.tabPageGuidance.SuspendLayout();
-            this.groupBoxOptional.SuspendLayout();
-            this.tabPageAdvanced.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.failConditionsSplitContainer)).BeginInit();
-            this.failConditionsSplitContainer.Panel1.SuspendLayout();
-            this.failConditionsSplitContainer.Panel2.SuspendLayout();
-            this.failConditionsSplitContainer.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackingSplitContainer)).BeginInit();
-            this.trackingSplitContainer.Panel1.SuspendLayout();
-            this.trackingSplitContainer.Panel2.SuspendLayout();
-            this.trackingSplitContainer.SuspendLayout();
-            this.tabPageNotes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.notesSplitContainer)).BeginInit();
-            this.notesSplitContainer.Panel1.SuspendLayout();
-            this.notesSplitContainer.Panel2.SuspendLayout();
-            this.notesSplitContainer.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            panel1 = new Panel();
+            cmbAchPoints = new ComboBox();
+            label1 = new Label();
+            lblAchId = new Label();
+            label6 = new Label();
+            txtAchTitle = new UndoRedoRichTextBox();
+            label4 = new Label();
+            pbAchBadge = new PictureBox();
+            tabControl1 = new TabControl();
+            tabPageGuidance = new TabPage();
+            groupBoxOptional = new GroupBox();
+            lblVideoHelp = new Label();
+            lblImageHelp = new Label();
+            txtImageUrl = new TextBox();
+            label8 = new Label();
+            txtVideoUrl = new TextBox();
+            label2 = new Label();
+            rtxtGuidance = new UndoRedoRichTextBox();
+            tabPageAdvanced = new TabPage();
+            splitContainer1 = new SplitContainer();
+            groupBox1 = new GroupBox();
+            failConditionsSplitContainer = new SplitContainer();
+            lstFailConditions = new ListBox();
+            txtNewFailCondition = new TextBox();
+            btnRemoveFail = new Button();
+            btnAddFail = new Button();
+            groupBox2 = new GroupBox();
+            trackingSplitContainer = new SplitContainer();
+            label3 = new Label();
+            txtTriggerIndicator = new TextBox();
+            label5 = new Label();
+            txtMeasuredIndicator = new TextBox();
+            tabPageNotes = new TabPage();
+            notesSplitContainer = new SplitContainer();
+            groupBox3 = new GroupBox();
+            txtMiscNote = new TextBox();
+            groupBox4 = new GroupBox();
+            txtDevNote = new TextBox();
+            toolTip1 = new ToolTip(components);
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbAchBadge).BeginInit();
+            tabControl1.SuspendLayout();
+            tabPageGuidance.SuspendLayout();
+            groupBoxOptional.SuspendLayout();
+            tabPageAdvanced.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)failConditionsSplitContainer).BeginInit();
+            failConditionsSplitContainer.Panel1.SuspendLayout();
+            failConditionsSplitContainer.Panel2.SuspendLayout();
+            failConditionsSplitContainer.SuspendLayout();
+            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)trackingSplitContainer).BeginInit();
+            trackingSplitContainer.Panel1.SuspendLayout();
+            trackingSplitContainer.Panel2.SuspendLayout();
+            trackingSplitContainer.SuspendLayout();
+            tabPageNotes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)notesSplitContainer).BeginInit();
+            notesSplitContainer.Panel1.SuspendLayout();
+            notesSplitContainer.Panel2.SuspendLayout();
+            notesSplitContainer.SuspendLayout();
+            groupBox3.SuspendLayout();
+            groupBox4.SuspendLayout();
+            SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.cmbAchPoints);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.lblAchId);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.txtAchTitle);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.pbAchBadge);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(10, 10);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(638, 89);
-            this.panel1.TabIndex = 3;
+            panel1.Controls.Add(cmbAchPoints);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(lblAchId);
+            panel1.Controls.Add(label6);
+            panel1.Controls.Add(txtAchTitle);
+            panel1.Controls.Add(label4);
+            panel1.Controls.Add(pbAchBadge);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(10, 10);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(638, 89);
+            panel1.TabIndex = 3;
             // 
             // cmbAchPoints
             // 
-            this.cmbAchPoints.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbAchPoints.FormattingEnabled = true;
-            this.cmbAchPoints.Location = new System.Drawing.Point(459, 8);
-            this.cmbAchPoints.Name = "cmbAchPoints";
-            this.cmbAchPoints.Size = new System.Drawing.Size(71, 23);
-            this.cmbAchPoints.TabIndex = 6;
+            cmbAchPoints.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbAchPoints.FormattingEnabled = true;
+            cmbAchPoints.Location = new Point(459, 8);
+            cmbAchPoints.Name = "cmbAchPoints";
+            cmbAchPoints.Size = new Size(71, 23);
+            cmbAchPoints.TabIndex = 6;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(408, 11);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 15);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Points:";
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label1.Location = new Point(408, 11);
+            label1.Name = "label1";
+            label1.Size = new Size(44, 15);
+            label1.TabIndex = 5;
+            label1.Text = "Points:";
             // 
             // lblAchId
             // 
-            this.lblAchId.AutoSize = true;
-            this.lblAchId.Location = new System.Drawing.Point(111, 41);
-            this.lblAchId.Name = "lblAchId";
-            this.lblAchId.Size = new System.Drawing.Size(13, 15);
-            this.lblAchId.TabIndex = 4;
-            this.lblAchId.Text = "0";
+            lblAchId.AutoSize = true;
+            lblAchId.Location = new Point(111, 41);
+            lblAchId.Name = "lblAchId";
+            lblAchId.Size = new Size(13, 15);
+            lblAchId.TabIndex = 4;
+            lblAchId.Text = "0";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label6.Location = new System.Drawing.Point(82, 41);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(23, 15);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "ID:";
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label6.Location = new Point(82, 41);
+            label6.Name = "label6";
+            label6.Size = new Size(23, 15);
+            label6.TabIndex = 3;
+            label6.Text = "ID:";
             // 
             // txtAchTitle
             // 
-            this.txtAchTitle.Location = new System.Drawing.Point(111, 8);
-            this.txtAchTitle.Multiline = false;
-            this.txtAchTitle.Name = "txtAchTitle";
-            this.txtAchTitle.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.txtAchTitle.Size = new System.Drawing.Size(288, 23);
-            this.txtAchTitle.TabIndex = 2;
-            this.txtAchTitle.Text = "";
+            txtAchTitle.Location = new Point(111, 8);
+            txtAchTitle.Multiline = false;
+            txtAchTitle.Name = "txtAchTitle";
+            txtAchTitle.ScrollBars = RichTextBoxScrollBars.None;
+            txtAchTitle.Size = new Size(288, 23);
+            txtAchTitle.TabIndex = 2;
+            txtAchTitle.Text = "";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(72, 11);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 15);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Title:";
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label4.Location = new Point(72, 11);
+            label4.Name = "label4";
+            label4.Size = new Size(35, 15);
+            label4.TabIndex = 1;
+            label4.Text = "Title:";
             // 
             // pbAchBadge
             // 
-            this.pbAchBadge.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbAchBadge.Location = new System.Drawing.Point(4, 4);
-            this.pbAchBadge.Name = "pbAchBadge";
-            this.pbAchBadge.Size = new System.Drawing.Size(64, 64);
-            this.pbAchBadge.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbAchBadge.TabIndex = 0;
-            this.pbAchBadge.TabStop = false;
+            pbAchBadge.BorderStyle = BorderStyle.FixedSingle;
+            pbAchBadge.Location = new Point(4, 4);
+            pbAchBadge.Name = "pbAchBadge";
+            pbAchBadge.Size = new Size(64, 64);
+            pbAchBadge.SizeMode = PictureBoxSizeMode.Zoom;
+            pbAchBadge.TabIndex = 0;
+            pbAchBadge.TabStop = false;
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPageGuidance);
-            this.tabControl1.Controls.Add(this.tabPageAdvanced);
-            this.tabControl1.Controls.Add(this.tabPageNotes);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(10, 99);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(638, 365);
-            this.tabControl1.TabIndex = 6;
+            tabControl1.Controls.Add(tabPageGuidance);
+            tabControl1.Controls.Add(tabPageAdvanced);
+            tabControl1.Controls.Add(tabPageNotes);
+            tabControl1.Dock = DockStyle.Fill;
+            tabControl1.Location = new Point(10, 99);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(638, 365);
+            tabControl1.TabIndex = 6;
             // 
             // tabPageGuidance
             // 
-            this.tabPageGuidance.Controls.Add(this.groupBoxOptional);
-            this.tabPageGuidance.Controls.Add(this.rtxtGuidance);
-            this.tabPageGuidance.Location = new System.Drawing.Point(4, 24);
-            this.tabPageGuidance.Name = "tabPageGuidance";
-            this.tabPageGuidance.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGuidance.Size = new System.Drawing.Size(630, 337);
-            this.tabPageGuidance.TabIndex = 0;
-            this.tabPageGuidance.Text = "Guidance & Insights";
-            this.tabPageGuidance.UseVisualStyleBackColor = true;
+            tabPageGuidance.Controls.Add(groupBoxOptional);
+            tabPageGuidance.Controls.Add(rtxtGuidance);
+            tabPageGuidance.Location = new Point(4, 24);
+            tabPageGuidance.Name = "tabPageGuidance";
+            tabPageGuidance.Padding = new Padding(3);
+            tabPageGuidance.Size = new Size(630, 337);
+            tabPageGuidance.TabIndex = 0;
+            tabPageGuidance.Text = "Guidance & Insights";
+            tabPageGuidance.UseVisualStyleBackColor = true;
             // 
             // groupBoxOptional
             // 
-            this.groupBoxOptional.Controls.Add(this.txtVideoUrl);
-            this.groupBoxOptional.Controls.Add(this.label2);
-            this.groupBoxOptional.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBoxOptional.Location = new System.Drawing.Point(3, 281);
-            this.groupBoxOptional.Name = "groupBoxOptional";
-            this.groupBoxOptional.Size = new System.Drawing.Size(624, 53);
-            this.groupBoxOptional.TabIndex = 1;
-            this.groupBoxOptional.TabStop = false;
-            this.groupBoxOptional.Text = "Optional Elements";
+            groupBoxOptional.Controls.Add(lblVideoHelp);
+            groupBoxOptional.Controls.Add(lblImageHelp);
+            groupBoxOptional.Controls.Add(txtImageUrl);
+            groupBoxOptional.Controls.Add(label8);
+            groupBoxOptional.Controls.Add(txtVideoUrl);
+            groupBoxOptional.Controls.Add(label2);
+            groupBoxOptional.Dock = DockStyle.Bottom;
+            groupBoxOptional.Location = new Point(3, 252);
+            groupBoxOptional.Name = "groupBoxOptional";
+            groupBoxOptional.Size = new Size(624, 82);
+            groupBoxOptional.TabIndex = 1;
+            groupBoxOptional.TabStop = false;
+            groupBoxOptional.Text = "Optional Elements";
+            // 
+            // lblVideoHelp
+            // 
+            lblVideoHelp.AutoSize = true;
+            lblVideoHelp.Cursor = Cursors.Help;
+            lblVideoHelp.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblVideoHelp.Location = new Point(166, 52);
+            lblVideoHelp.Name = "lblVideoHelp";
+            lblVideoHelp.Size = new Size(20, 15);
+            lblVideoHelp.TabIndex = 5;
+            lblVideoHelp.Text = "[?]";
+            // 
+            // lblImageHelp
+            // 
+            lblImageHelp.AutoSize = true;
+            lblImageHelp.Cursor = Cursors.Help;
+            lblImageHelp.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblImageHelp.Location = new Point(86, 23);
+            lblImageHelp.Name = "lblImageHelp";
+            lblImageHelp.Size = new Size(20, 15);
+            lblImageHelp.TabIndex = 4;
+            lblImageHelp.Text = "[?]";
+            // 
+            // txtImageUrl
+            // 
+            txtImageUrl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtImageUrl.Location = new Point(197, 20);
+            txtImageUrl.Name = "txtImageUrl";
+            txtImageUrl.Size = new Size(421, 23);
+            txtImageUrl.TabIndex = 3;
+            txtImageUrl.Leave += txtImageUrl_Leave;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(6, 23);
+            label8.Name = "label8";
+            label8.Size = new Size(82, 15);
+            label8.TabIndex = 2;
+            label8.Text = "🖼️ Image URL:";
             // 
             // txtVideoUrl
             // 
-            this.txtVideoUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtVideoUrl.Location = new System.Drawing.Point(173, 20);
-            this.txtVideoUrl.Name = "txtVideoUrl";
-            this.txtVideoUrl.Size = new System.Drawing.Size(445, 23);
-            this.txtVideoUrl.TabIndex = 1;
-            this.txtVideoUrl.Leave += new System.EventHandler(this.txtVideoUrl_Leave);
+            txtVideoUrl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtVideoUrl.Location = new Point(197, 49);
+            txtVideoUrl.Name = "txtVideoUrl";
+            txtVideoUrl.Size = new Size(421, 23);
+            txtVideoUrl.TabIndex = 1;
+            txtVideoUrl.Leave += txtVideoUrl_Leave;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 23);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(161, 15);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "▶️ Watch Video Walkthrough:";
+            label2.AutoSize = true;
+            label2.Location = new Point(6, 52);
+            label2.Name = "label2";
+            label2.Size = new Size(162, 15);
+            label2.TabIndex = 0;
+            label2.Text = "▶️ Watch Video Walkthrough:";
             // 
             // rtxtGuidance
             // 
-            this.rtxtGuidance.AcceptsTab = true;
-            this.rtxtGuidance.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtxtGuidance.ContextMenuStrip = this.ctxMenuRichText;
-            this.rtxtGuidance.Location = new System.Drawing.Point(3, 3);
-            this.rtxtGuidance.Name = "rtxtGuidance";
-            this.rtxtGuidance.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.rtxtGuidance.Size = new System.Drawing.Size(624, 272);
-            this.rtxtGuidance.TabIndex = 0;
-            this.rtxtGuidance.Text = "";
-            this.rtxtGuidance.Leave += new System.EventHandler(this.rtxtGuidance_Leave);
+            rtxtGuidance.AcceptsTab = true;
+            rtxtGuidance.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            rtxtGuidance.ContextMenuStrip = ctxMenuRichText;
+            rtxtGuidance.Location = new Point(3, 3);
+            rtxtGuidance.Name = "rtxtGuidance";
+            rtxtGuidance.ScrollBars = RichTextBoxScrollBars.Vertical;
+            rtxtGuidance.Size = new Size(624, 243);
+            rtxtGuidance.TabIndex = 0;
+            rtxtGuidance.Text = "";
+            rtxtGuidance.Leave += rtxtGuidance_Leave;
             // 
             // tabPageAdvanced
             // 
-            this.tabPageAdvanced.Controls.Add(this.splitContainer1);
-            this.tabPageAdvanced.Location = new System.Drawing.Point(4, 24);
-            this.tabPageAdvanced.Name = "tabPageAdvanced";
-            this.tabPageAdvanced.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAdvanced.Size = new System.Drawing.Size(630, 337);
-            this.tabPageAdvanced.TabIndex = 1;
-            this.tabPageAdvanced.Text = "Fail Conditions & Tracking";
-            this.tabPageAdvanced.UseVisualStyleBackColor = true;
+            tabPageAdvanced.Controls.Add(splitContainer1);
+            tabPageAdvanced.Location = new Point(4, 24);
+            tabPageAdvanced.Name = "tabPageAdvanced";
+            tabPageAdvanced.Padding = new Padding(3);
+            tabPageAdvanced.Size = new Size(630, 337);
+            tabPageAdvanced.TabIndex = 1;
+            tabPageAdvanced.Text = "Fail Conditions & Tracking";
+            tabPageAdvanced.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer1.Name = "splitContainer1";
+            splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.Location = new Point(3, 3);
+            splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
-            this.splitContainer1.Panel1MinSize = 250;
+            splitContainer1.Panel1.Controls.Add(groupBox1);
+            splitContainer1.Panel1MinSize = 250;
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer1.Panel2MinSize = 250;
-            this.splitContainer1.Size = new System.Drawing.Size(624, 331);
-            this.splitContainer1.SplitterDistance = 340;
-            this.splitContainer1.TabIndex = 0;
+            splitContainer1.Panel2.Controls.Add(groupBox2);
+            splitContainer1.Panel2MinSize = 250;
+            splitContainer1.Size = new Size(624, 331);
+            splitContainer1.SplitterDistance = 340;
+            splitContainer1.TabIndex = 0;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.failConditionsSplitContainer);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(340, 331);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Fail Conditions";
+            groupBox1.Controls.Add(failConditionsSplitContainer);
+            groupBox1.Dock = DockStyle.Fill;
+            groupBox1.Location = new Point(0, 0);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(340, 331);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Fail Conditions";
             // 
             // failConditionsSplitContainer
             // 
-            this.failConditionsSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.failConditionsSplitContainer.Location = new System.Drawing.Point(3, 19);
-            this.failConditionsSplitContainer.Name = "failConditionsSplitContainer";
-            this.failConditionsSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            failConditionsSplitContainer.Dock = DockStyle.Fill;
+            failConditionsSplitContainer.Location = new Point(3, 19);
+            failConditionsSplitContainer.Name = "failConditionsSplitContainer";
+            failConditionsSplitContainer.Orientation = Orientation.Horizontal;
             // 
             // failConditionsSplitContainer.Panel1
             // 
-            this.failConditionsSplitContainer.Panel1.Controls.Add(this.lstFailConditions);
-            this.failConditionsSplitContainer.Panel1MinSize = 100;
+            failConditionsSplitContainer.Panel1.Controls.Add(lstFailConditions);
+            failConditionsSplitContainer.Panel1MinSize = 100;
             // 
             // failConditionsSplitContainer.Panel2
             // 
-            this.failConditionsSplitContainer.Panel2.Controls.Add(this.txtNewFailCondition);
-            this.failConditionsSplitContainer.Panel2.Controls.Add(this.btnRemoveFail);
-            this.failConditionsSplitContainer.Panel2.Controls.Add(this.btnAddFail);
-            this.failConditionsSplitContainer.Panel2MinSize = 100;
-            this.failConditionsSplitContainer.Size = new System.Drawing.Size(334, 309);
-            this.failConditionsSplitContainer.SplitterDistance = 150;
-            this.failConditionsSplitContainer.TabIndex = 4;
+            failConditionsSplitContainer.Panel2.Controls.Add(txtNewFailCondition);
+            failConditionsSplitContainer.Panel2.Controls.Add(btnRemoveFail);
+            failConditionsSplitContainer.Panel2.Controls.Add(btnAddFail);
+            failConditionsSplitContainer.Panel2MinSize = 100;
+            failConditionsSplitContainer.Size = new Size(334, 309);
+            failConditionsSplitContainer.SplitterDistance = 150;
+            failConditionsSplitContainer.TabIndex = 4;
             // 
             // lstFailConditions
             // 
-            this.lstFailConditions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstFailConditions.FormattingEnabled = true;
-            this.lstFailConditions.ItemHeight = 15;
-            this.lstFailConditions.Location = new System.Drawing.Point(0, 0);
-            this.lstFailConditions.Name = "lstFailConditions";
-            this.lstFailConditions.Size = new System.Drawing.Size(334, 150);
-            this.lstFailConditions.TabIndex = 0;
+            lstFailConditions.Dock = DockStyle.Fill;
+            lstFailConditions.FormattingEnabled = true;
+            lstFailConditions.ItemHeight = 15;
+            lstFailConditions.Location = new Point(0, 0);
+            lstFailConditions.Name = "lstFailConditions";
+            lstFailConditions.Size = new Size(334, 150);
+            lstFailConditions.TabIndex = 0;
+            lstFailConditions.SelectedIndexChanged += lstFailConditions_SelectedIndexChanged;
+            lstFailConditions.DoubleClick += lstFailConditions_DoubleClick;
             // 
             // txtNewFailCondition
             // 
-            this.txtNewFailCondition.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNewFailCondition.Location = new System.Drawing.Point(0, 3);
-            this.txtNewFailCondition.Multiline = true;
-            this.txtNewFailCondition.Name = "txtNewFailCondition";
-            this.txtNewFailCondition.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtNewFailCondition.Size = new System.Drawing.Size(334, 119);
-            this.txtNewFailCondition.TabIndex = 1;
+            txtNewFailCondition.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtNewFailCondition.Location = new Point(0, 3);
+            txtNewFailCondition.Multiline = true;
+            txtNewFailCondition.Name = "txtNewFailCondition";
+            txtNewFailCondition.ScrollBars = ScrollBars.Vertical;
+            txtNewFailCondition.Size = new Size(334, 119);
+            txtNewFailCondition.TabIndex = 1;
             // 
             // btnRemoveFail
             // 
-            this.btnRemoveFail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemoveFail.Location = new System.Drawing.Point(256, 128);
-            this.btnRemoveFail.Name = "btnRemoveFail";
-            this.btnRemoveFail.Size = new System.Drawing.Size(75, 23);
-            this.btnRemoveFail.TabIndex = 3;
-            this.btnRemoveFail.Text = "Remove";
-            this.btnRemoveFail.UseVisualStyleBackColor = true;
-            this.btnRemoveFail.Click += new System.EventHandler(this.btnRemoveFail_Click);
+            btnRemoveFail.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnRemoveFail.Location = new Point(256, 128);
+            btnRemoveFail.Name = "btnRemoveFail";
+            btnRemoveFail.Size = new Size(75, 23);
+            btnRemoveFail.TabIndex = 3;
+            btnRemoveFail.Text = "Remove";
+            btnRemoveFail.UseVisualStyleBackColor = true;
+            btnRemoveFail.Click += btnRemoveFail_Click;
             // 
             // btnAddFail
             // 
-            this.btnAddFail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddFail.Location = new System.Drawing.Point(175, 128);
-            this.btnAddFail.Name = "btnAddFail";
-            this.btnAddFail.Size = new System.Drawing.Size(75, 23);
-            this.btnAddFail.TabIndex = 2;
-            this.btnAddFail.Text = "Add";
-            this.btnAddFail.UseVisualStyleBackColor = true;
-            this.btnAddFail.Click += new System.EventHandler(this.btnAddFail_Click);
+            btnAddFail.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnAddFail.Location = new Point(175, 128);
+            btnAddFail.Name = "btnAddFail";
+            btnAddFail.Size = new Size(75, 23);
+            btnAddFail.TabIndex = 2;
+            btnAddFail.Text = "Add";
+            btnAddFail.UseVisualStyleBackColor = true;
+            btnAddFail.Click += btnAddFail_Click;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.trackingSplitContainer);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(0, 0);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(280, 331);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Achievement Tracking";
+            groupBox2.Controls.Add(trackingSplitContainer);
+            groupBox2.Dock = DockStyle.Fill;
+            groupBox2.Location = new Point(0, 0);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(280, 331);
+            groupBox2.TabIndex = 0;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Achievement Tracking";
             // 
             // trackingSplitContainer
             // 
-            this.trackingSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackingSplitContainer.Location = new System.Drawing.Point(3, 19);
-            this.trackingSplitContainer.Name = "trackingSplitContainer";
-            this.trackingSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            trackingSplitContainer.Dock = DockStyle.Fill;
+            trackingSplitContainer.Location = new Point(3, 19);
+            trackingSplitContainer.Name = "trackingSplitContainer";
+            trackingSplitContainer.Orientation = Orientation.Horizontal;
             // 
             // trackingSplitContainer.Panel1
             // 
-            this.trackingSplitContainer.Panel1.Controls.Add(this.label3);
-            this.trackingSplitContainer.Panel1.Controls.Add(this.txtTriggerIndicator);
-            this.trackingSplitContainer.Panel1MinSize = 100;
+            trackingSplitContainer.Panel1.Controls.Add(label3);
+            trackingSplitContainer.Panel1.Controls.Add(txtTriggerIndicator);
+            trackingSplitContainer.Panel1MinSize = 100;
             // 
             // trackingSplitContainer.Panel2
             // 
-            this.trackingSplitContainer.Panel2.Controls.Add(this.label5);
-            this.trackingSplitContainer.Panel2.Controls.Add(this.txtMeasuredIndicator);
-            this.trackingSplitContainer.Panel2MinSize = 100;
-            this.trackingSplitContainer.Size = new System.Drawing.Size(274, 309);
-            this.trackingSplitContainer.SplitterDistance = 150;
-            this.trackingSplitContainer.TabIndex = 4;
+            trackingSplitContainer.Panel2.Controls.Add(label5);
+            trackingSplitContainer.Panel2.Controls.Add(txtMeasuredIndicator);
+            trackingSplitContainer.Panel2MinSize = 100;
+            trackingSplitContainer.Size = new Size(274, 309);
+            trackingSplitContainer.SplitterDistance = 150;
+            trackingSplitContainer.TabIndex = 4;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 4);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(95, 15);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Trigger Indicator:";
+            label3.AutoSize = true;
+            label3.Location = new Point(3, 4);
+            label3.Name = "label3";
+            label3.Size = new Size(97, 15);
+            label3.TabIndex = 0;
+            label3.Text = "Trigger Indicator:";
             // 
             // txtTriggerIndicator
             // 
-            this.txtTriggerIndicator.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTriggerIndicator.Location = new System.Drawing.Point(3, 22);
-            this.txtTriggerIndicator.Multiline = true;
-            this.txtTriggerIndicator.Name = "txtTriggerIndicator";
-            this.txtTriggerIndicator.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtTriggerIndicator.Size = new System.Drawing.Size(268, 125);
-            this.txtTriggerIndicator.TabIndex = 1;
-            this.txtTriggerIndicator.Leave += new System.EventHandler(this.txtTriggerIndicator_Leave);
+            txtTriggerIndicator.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtTriggerIndicator.Location = new Point(3, 22);
+            txtTriggerIndicator.Multiline = true;
+            txtTriggerIndicator.Name = "txtTriggerIndicator";
+            txtTriggerIndicator.ScrollBars = ScrollBars.Vertical;
+            txtTriggerIndicator.Size = new Size(268, 125);
+            txtTriggerIndicator.TabIndex = 1;
+            txtTriggerIndicator.Leave += txtTriggerIndicator_Leave;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 4);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(116, 15);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Measured Indicator:";
+            label5.AutoSize = true;
+            label5.Location = new Point(3, 4);
+            label5.Name = "label5";
+            label5.Size = new Size(112, 15);
+            label5.TabIndex = 2;
+            label5.Text = "Measured Indicator:";
             // 
             // txtMeasuredIndicator
             // 
-            this.txtMeasuredIndicator.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMeasuredIndicator.Location = new System.Drawing.Point(3, 22);
-            this.txtMeasuredIndicator.Multiline = true;
-            this.txtMeasuredIndicator.Name = "txtMeasuredIndicator";
-            this.txtMeasuredIndicator.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMeasuredIndicator.Size = new System.Drawing.Size(268, 130);
-            this.txtMeasuredIndicator.TabIndex = 3;
-            this.txtMeasuredIndicator.Leave += new System.EventHandler(this.txtMeasuredIndicator_Leave);
+            txtMeasuredIndicator.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtMeasuredIndicator.Location = new Point(3, 22);
+            txtMeasuredIndicator.Multiline = true;
+            txtMeasuredIndicator.Name = "txtMeasuredIndicator";
+            txtMeasuredIndicator.ScrollBars = ScrollBars.Vertical;
+            txtMeasuredIndicator.Size = new Size(268, 130);
+            txtMeasuredIndicator.TabIndex = 3;
+            txtMeasuredIndicator.Leave += txtMeasuredIndicator_Leave;
             // 
             // tabPageNotes
             // 
-            this.tabPageNotes.Controls.Add(this.notesSplitContainer);
-            this.tabPageNotes.Location = new System.Drawing.Point(4, 24);
-            this.tabPageNotes.Name = "tabPageNotes";
-            this.tabPageNotes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageNotes.Size = new System.Drawing.Size(630, 337);
-            this.tabPageNotes.TabIndex = 2;
-            this.tabPageNotes.Text = "Misc / Dev Notes";
-            this.tabPageNotes.UseVisualStyleBackColor = true;
+            tabPageNotes.Controls.Add(notesSplitContainer);
+            tabPageNotes.Location = new Point(4, 24);
+            tabPageNotes.Name = "tabPageNotes";
+            tabPageNotes.Padding = new Padding(3);
+            tabPageNotes.Size = new Size(630, 337);
+            tabPageNotes.TabIndex = 2;
+            tabPageNotes.Text = "Misc / Dev Notes";
+            tabPageNotes.UseVisualStyleBackColor = true;
             // 
             // notesSplitContainer
             // 
-            this.notesSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.notesSplitContainer.Location = new System.Drawing.Point(3, 3);
-            this.notesSplitContainer.Name = "notesSplitContainer";
-            this.notesSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            notesSplitContainer.Dock = DockStyle.Fill;
+            notesSplitContainer.Location = new Point(3, 3);
+            notesSplitContainer.Name = "notesSplitContainer";
+            notesSplitContainer.Orientation = Orientation.Horizontal;
             // 
             // notesSplitContainer.Panel1
             // 
-            this.notesSplitContainer.Panel1.Controls.Add(this.groupBox3);
-            this.notesSplitContainer.Panel1MinSize = 120;
+            notesSplitContainer.Panel1.Controls.Add(groupBox3);
+            notesSplitContainer.Panel1MinSize = 120;
             // 
             // notesSplitContainer.Panel2
             // 
-            this.notesSplitContainer.Panel2.Controls.Add(this.groupBox4);
-            this.notesSplitContainer.Panel2MinSize = 120;
-            this.notesSplitContainer.Size = new System.Drawing.Size(624, 331);
-            this.notesSplitContainer.SplitterDistance = 160;
-            this.notesSplitContainer.TabIndex = 0;
+            notesSplitContainer.Panel2.Controls.Add(groupBox4);
+            notesSplitContainer.Panel2MinSize = 120;
+            notesSplitContainer.Size = new Size(624, 331);
+            notesSplitContainer.SplitterDistance = 160;
+            notesSplitContainer.TabIndex = 0;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.txtMiscNote);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(0, 0);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox3.Size = new System.Drawing.Size(624, 160);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Misc Note";
+            groupBox3.Controls.Add(txtMiscNote);
+            groupBox3.Dock = DockStyle.Fill;
+            groupBox3.Location = new Point(0, 0);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Padding = new Padding(10);
+            groupBox3.Size = new Size(624, 160);
+            groupBox3.TabIndex = 0;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Misc Note";
             // 
             // txtMiscNote
             // 
-            this.txtMiscNote.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMiscNote.Location = new System.Drawing.Point(10, 26);
-            this.txtMiscNote.Multiline = true;
-            this.txtMiscNote.Name = "txtMiscNote";
-            this.txtMiscNote.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMiscNote.Size = new System.Drawing.Size(604, 124);
-            this.txtMiscNote.TabIndex = 0;
-            this.txtMiscNote.Leave += new System.EventHandler(this.txtMiscNote_Leave);
+            txtMiscNote.Dock = DockStyle.Fill;
+            txtMiscNote.Location = new Point(10, 26);
+            txtMiscNote.Multiline = true;
+            txtMiscNote.Name = "txtMiscNote";
+            txtMiscNote.ScrollBars = ScrollBars.Vertical;
+            txtMiscNote.Size = new Size(604, 124);
+            txtMiscNote.TabIndex = 0;
+            txtMiscNote.Leave += txtMiscNote_Leave;
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.txtDevNote);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox4.Location = new System.Drawing.Point(0, 0);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox4.Size = new System.Drawing.Size(624, 167);
-            this.groupBox4.TabIndex = 0;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Dev Note";
+            groupBox4.Controls.Add(txtDevNote);
+            groupBox4.Dock = DockStyle.Fill;
+            groupBox4.Location = new Point(0, 0);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Padding = new Padding(10);
+            groupBox4.Size = new Size(624, 167);
+            groupBox4.TabIndex = 0;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Dev Note";
             // 
             // txtDevNote
             // 
-            this.txtDevNote.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtDevNote.Location = new System.Drawing.Point(10, 26);
-            this.txtDevNote.Multiline = true;
-            this.txtDevNote.Name = "txtDevNote";
-            this.txtDevNote.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDevNote.Size = new System.Drawing.Size(604, 131);
-            this.txtDevNote.TabIndex = 0;
-            this.txtDevNote.Leave += new System.EventHandler(this.txtDevNote_Leave);
+            txtDevNote.Dock = DockStyle.Fill;
+            txtDevNote.Location = new Point(10, 26);
+            txtDevNote.Multiline = true;
+            txtDevNote.Name = "txtDevNote";
+            txtDevNote.ScrollBars = ScrollBars.Vertical;
+            txtDevNote.Size = new Size(604, 131);
+            txtDevNote.TabIndex = 0;
+            txtDevNote.Leave += txtDevNote_Leave;
             // 
             // AchievementEditor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.panel1);
-            this.Name = "AchievementEditor";
-            this.Padding = new System.Windows.Forms.Padding(10);
-            this.Size = new System.Drawing.Size(658, 474);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbAchBadge)).EndInit();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPageGuidance.ResumeLayout(false);
-            this.groupBoxOptional.ResumeLayout(false);
-            this.groupBoxOptional.PerformLayout();
-            this.tabPageAdvanced.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.failConditionsSplitContainer.Panel1.ResumeLayout(false);
-            this.failConditionsSplitContainer.Panel2.ResumeLayout(false);
-            this.failConditionsSplitContainer.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.failConditionsSplitContainer)).EndInit();
-            this.failConditionsSplitContainer.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.trackingSplitContainer.Panel1.ResumeLayout(false);
-            this.trackingSplitContainer.Panel1.PerformLayout();
-            this.trackingSplitContainer.Panel2.ResumeLayout(false);
-            this.trackingSplitContainer.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackingSplitContainer)).EndInit();
-            this.trackingSplitContainer.ResumeLayout(false);
-            this.tabPageNotes.ResumeLayout(false);
-            this.notesSplitContainer.Panel1.ResumeLayout(false);
-            this.notesSplitContainer.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.notesSplitContainer)).EndInit();
-            this.notesSplitContainer.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(tabControl1);
+            Controls.Add(panel1);
+            Name = "AchievementEditor";
+            Padding = new Padding(10);
+            Size = new Size(658, 474);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbAchBadge).EndInit();
+            tabControl1.ResumeLayout(false);
+            tabPageGuidance.ResumeLayout(false);
+            groupBoxOptional.ResumeLayout(false);
+            groupBoxOptional.PerformLayout();
+            tabPageAdvanced.ResumeLayout(false);
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
+            failConditionsSplitContainer.Panel1.ResumeLayout(false);
+            failConditionsSplitContainer.Panel2.ResumeLayout(false);
+            failConditionsSplitContainer.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)failConditionsSplitContainer).EndInit();
+            failConditionsSplitContainer.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
+            trackingSplitContainer.Panel1.ResumeLayout(false);
+            trackingSplitContainer.Panel1.PerformLayout();
+            trackingSplitContainer.Panel2.ResumeLayout(false);
+            trackingSplitContainer.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)trackingSplitContainer).EndInit();
+            trackingSplitContainer.ResumeLayout(false);
+            tabPageNotes.ResumeLayout(false);
+            notesSplitContainer.Panel1.ResumeLayout(false);
+            notesSplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)notesSplitContainer).EndInit();
+            notesSplitContainer.ResumeLayout(false);
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
+            ResumeLayout(false);
 
         }
         #endregion
@@ -575,5 +618,10 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.TextBox txtMiscNote;
         private System.Windows.Forms.TextBox txtDevNote;
+        private System.Windows.Forms.TextBox txtImageUrl;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label lblVideoHelp;
+        private System.Windows.Forms.Label lblImageHelp;
     }
 }

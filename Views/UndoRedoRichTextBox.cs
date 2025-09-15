@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using RaGuideDesigner.Views;
+using System.Windows.Forms;
 
 namespace RaGuideDesigner.Views
 {

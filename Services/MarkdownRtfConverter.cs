@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Text;
 
 namespace RaGuideDesigner.Services
 {

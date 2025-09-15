@@ -37,6 +37,8 @@
             toolStripSeparator6 = new ToolStripSeparator();
             spellCheckToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
+            tutorialToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator7 = new ToolStripSeparator();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             splitContainer1 = new SplitContainer();
             tvGuideStructure = new RaGuideDesigner.Views.BufferedTreeView();
@@ -50,6 +52,7 @@
             addCreditToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
             duplicateToolStripMenuItem = new ToolStripMenuItem();
+            markAsCollectibleToolStripMenuItem = new ToolStripMenuItem();
             moveUpToolStripMenuItem = new ToolStripMenuItem();
             moveDownToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator3 = new ToolStripSeparator();
@@ -190,15 +193,27 @@
             // 
             // helpToolStripMenuItem
             // 
-            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { aboutToolStripMenuItem });
+            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { tutorialToolStripMenuItem, toolStripSeparator7, aboutToolStripMenuItem });
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             helpToolStripMenuItem.Size = new Size(44, 20);
             helpToolStripMenuItem.Text = "&Help";
             // 
+            // tutorialToolStripMenuItem
+            // 
+            tutorialToolStripMenuItem.Name = "tutorialToolStripMenuItem";
+            tutorialToolStripMenuItem.Size = new Size(153, 22);
+            tutorialToolStripMenuItem.Text = "View Tutorial...";
+            tutorialToolStripMenuItem.Click += tutorialToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator7
+            // 
+            toolStripSeparator7.Name = "toolStripSeparator7";
+            toolStripSeparator7.Size = new Size(150, 6);
+            // 
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(116, 22);
+            aboutToolStripMenuItem.Size = new Size(153, 22);
             aboutToolStripMenuItem.Text = "&About...";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
@@ -242,9 +257,9 @@
             // 
             // cmTree
             // 
-            cmTree.Items.AddRange(new ToolStripItem[] { expandAllToolStripMenuItem, collapseAllToolStripMenuItem, toolStripSeparator5, addAchievementCategoryToolStripMenuItem, addAchievementToolStripMenuItem, addLeaderboardToolStripMenuItem, addCreditToolStripMenuItem, toolStripSeparator4, duplicateToolStripMenuItem, moveUpToolStripMenuItem, moveDownToolStripMenuItem, toolStripSeparator3, deleteToolStripMenuItem });
+            cmTree.Items.AddRange(new ToolStripItem[] { expandAllToolStripMenuItem, collapseAllToolStripMenuItem, toolStripSeparator5, addAchievementCategoryToolStripMenuItem, addAchievementToolStripMenuItem, addLeaderboardToolStripMenuItem, addCreditToolStripMenuItem, toolStripSeparator4, duplicateToolStripMenuItem, markAsCollectibleToolStripMenuItem, moveUpToolStripMenuItem, moveDownToolStripMenuItem, toolStripSeparator3, deleteToolStripMenuItem });
             cmTree.Name = "cmTree";
-            cmTree.Size = new Size(221, 242);
+            cmTree.Size = new Size(221, 264);
             cmTree.Opening += cmTree_Opening;
             // 
             // expandAllToolStripMenuItem
@@ -306,6 +321,14 @@
             duplicateToolStripMenuItem.Text = "Duplicate";
             duplicateToolStripMenuItem.Click += duplicateToolStripMenuItem_Click;
             // 
+            // markAsCollectibleToolStripMenuItem
+            // 
+            markAsCollectibleToolStripMenuItem.CheckOnClick = true;
+            markAsCollectibleToolStripMenuItem.Name = "markAsCollectibleToolStripMenuItem";
+            markAsCollectibleToolStripMenuItem.Size = new Size(220, 22);
+            markAsCollectibleToolStripMenuItem.Text = "Mark as Collectible Category";
+            markAsCollectibleToolStripMenuItem.Click += markAsCollectibleToolStripMenuItem_Click;
+            // 
             // moveUpToolStripMenuItem
             // 
             moveUpToolStripMenuItem.Name = "moveUpToolStripMenuItem";
@@ -364,7 +387,6 @@
             cmTree.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
-
         }
 
         #endregion
@@ -405,5 +427,8 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem spellCheckToolStripMenuItem;
+        private ToolStripMenuItem markAsCollectibleToolStripMenuItem;
+        private ToolStripMenuItem tutorialToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator7;
     }
 }

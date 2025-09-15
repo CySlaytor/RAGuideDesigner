@@ -7,7 +7,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Microsoft.VisualBasic;
 
 namespace RaGuideDesigner.Views
 {
@@ -28,10 +27,8 @@ namespace RaGuideDesigner.Views
             EnableSpellCheck(rtxtItemDescription);
         }
 
-        public void ClearCaches() { }
-
-        // This method saves any pending changes from the active editor panel to the model.
-        // It's carefully designed to handle multi-selection, where the panels are blank,
+        // Saves any pending changes from the active editor panel to the model.
+        // This is designed to handle multi-selection (where panels are blank)
         // to avoid accidentally overwriting data.
         public override void CommitChanges()
         {
@@ -89,7 +86,7 @@ namespace RaGuideDesigner.Views
             }
         }
 
-        // A special method to wrap text changes with another command that reserializes
+        // Wraps text changes with another command that reserializes
         // the achievement's main `GuidanceAndInsights` property.
         private void ExecuteUndoableTextChange(ICommand primaryCommand)
         {
@@ -112,7 +109,7 @@ namespace RaGuideDesigner.Views
             _undoRedoService.Execute(composite);
         }
 
-        // This is called when the structure of the collectible tree changes (e.g., add, delete, move).
+        // Called when the structure of the collectible tree changes (e.g., add, delete, move).
         // It reserializes the guidance string and rebuilds the TreeView to reflect the new structure.
         private void CommitStructuralChange()
         {
@@ -252,7 +249,7 @@ namespace RaGuideDesigner.Views
 
         #region Multi-select, Context Menu, Drag-Drop, and Keyboard Logic
 
-        // This is a custom mouse click handler to implement Ctrl-click and Shift-click multi-selection.
+        // Handles custom mouse clicks for Ctrl-click and Shift-click multi-selection.
         private void tvCollectibles_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             // Commit any pending changes from the *previous* selection state BEFORE processing the new click.

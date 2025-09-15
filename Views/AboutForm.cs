@@ -21,6 +21,10 @@ namespace RaGuideDesigner.Views
 
             lblCySlaytorDesc.Text = "This tool was developed to streamline the creation of high-quality, standardized wiki guides for the RetroAchievements community.";
             lblASolidSnackDesc.Text = "Provided the comprehensive guide template, design specifications, and feature requirements that form the foundation of this application.";
+
+            // Set the URLs as LinkData for the LinkClicked event
+            linkCySlaytor.Links[0].LinkData = "https://retroachievements.org/user/CySlaytor";
+            linkASolidSnack.Links[0].LinkData = "https://retroachievements.org/user/ASolidSnack";
         }
 
         private void btnOk_Click(object sender, EventArgs e)
