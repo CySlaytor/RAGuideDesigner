@@ -55,6 +55,7 @@ namespace RaGuideDesigner.Models
         public string Description { get; set; } = "";
         public string AdditionalNotes { get; set; } = "";
         public bool IsCollectible { get; set; } = false;
+        public bool IsSimple { get; set; } = false;
         public BindingList<Admonition> Admonitions { get; set; } = new();
         public BindingList<Achievement> Achievements { get; set; } = new();
         public string DisplayText => $"{Icon} {Title}";

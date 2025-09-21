@@ -251,18 +251,18 @@ namespace RaGuideDesigner.Views
             if (_dataContext is not WikiGuide guide) return;
 
             var measuredKeywords = new Dictionary<string, string>
-            {
-                { "kill", "Kills" },
-                { "destr", "Objects Destroyed" },
-                { "collect", "Items Collected" },
-                { "gem", "Gems" },
-                { "ring", "Rings" },
-                { "crate", "Crates Smashed" },
-                { "camera", "Cameras Disabled" },
-                { "accura", "Accuracy" },
-                { "point", "Points" },
-                { "score", "Score" }
-            };
+    {
+        { "kill", "Kills" },
+        { "destr", "Objects Destroyed" },
+        { "collect", "Items Collected" },
+        { "gem", "Gems" },
+        { "ring", "Rings" },
+        { "crate", "Crates Smashed" },
+        { "camera", "Cameras Disabled" },
+        { "accura", "Accuracy" },
+        { "point", "Points" },
+        { "score", "Score" }
+    };
 
             var foundMeasuredTypes = new HashSet<string>();
             var generatedMeasuredExamples = new List<string>();
@@ -326,8 +326,10 @@ namespace RaGuideDesigner.Views
 
             var commands = new List<ICommand>();
 
-            string newMeasured = string.Join("\n", generatedMeasuredExamples.Take(3).Select(ex => $"- {ex}"));
-            string newTriggered = string.Join("\n", foundTriggerExamples.Take(3).Select(ex => $"- {ex}"));
+            // The "- " prefix is removed here. The model should only contain the clean text.
+            // The export service is responsible for adding the prefix back.
+            string newMeasured = string.Join("\n", generatedMeasuredExamples.Take(3));
+            string newTriggered = string.Join("\n", foundTriggerExamples.Take(3));
 
             if (guide.MeasuredIndicatorExamples != newMeasured)
             {
@@ -346,6 +348,11 @@ namespace RaGuideDesigner.Views
                 SetRichTextContent(rtxtTriggerExamples, guide.TriggeredIndicatorExamples);
                 _isProgrammaticChange = false;
             }
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

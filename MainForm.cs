@@ -57,6 +57,14 @@ namespace RaGuideDesigner
                 SpellCheckService.Instance.Initialize();
             }
 
+            // --- RECENT FILES: Initialize settings if they don't exist ---
+            if (Settings.Default.RecentFiles == null)
+            {
+                Settings.Default.RecentFiles = new System.Collections.Specialized.StringCollection();
+            }
+            UpdateRecentFilesMenu();
+            // --- END RECENT FILES ---
+
             _currentProject = new WikiGuide();
 
             _projectService = new ProjectService();
@@ -212,22 +220,38 @@ namespace RaGuideDesigner
                 ofd.Filter = "RA Guide Project (*.raguide)|*.raguide|All files (*.*)|*.*";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    _headerEditor.ClearCaches();
-                    var loadedProject = _projectService.Load(ofd.FileName);
-                    if (loadedProject != null)
-                    {
-                        _currentProject = loadedProject;
-                        _currentProjectPath = ofd.FileName;
-                        _undoRedoService.Clear();
-                        _isDirty = false;
-                        UpdateWindowTitle();
-                        PopulateTreeView();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Failed to load project file.", "Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    LoadProject(ofd.FileName);
                 }
+            }
+        }
+
+        private void LoadProject(string filePath)
+        {
+            if (!File.Exists(filePath))
+            {
+                var result = MessageBox.Show($"The file '{Path.GetFileName(filePath)}' could not be found.\n\nWould you like to remove it from the recent projects list?", "File Not Found", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (result == DialogResult.Yes)
+                {
+                    RemoveRecentFile(filePath);
+                }
+                return;
+            }
+
+            _headerEditor.ClearCaches();
+            var loadedProject = _projectService.Load(filePath);
+            if (loadedProject != null)
+            {
+                _currentProject = loadedProject;
+                _currentProjectPath = filePath;
+                _undoRedoService.Clear();
+                _isDirty = false;
+                UpdateWindowTitle();
+                PopulateTreeView();
+                AddRecentFile(filePath);
+            }
+            else
+            {
+                MessageBox.Show("Failed to load project file.", "Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -243,6 +267,7 @@ namespace RaGuideDesigner
                 _projectService.Save(_currentProject, _currentProjectPath);
                 _isDirty = false;
                 UpdateWindowTitle();
+                AddRecentFile(_currentProjectPath);
             }
         }
 
@@ -256,6 +281,68 @@ namespace RaGuideDesigner
                 {
                     _currentProjectPath = sfd.FileName;
                     saveProjectToolStripMenuItem_Click(sender, e);
+                }
+            }
+        }
+
+        private void AddRecentFile(string path)
+        {
+            var recentFiles = Settings.Default.RecentFiles;
+
+            recentFiles.Remove(path);
+            recentFiles.Insert(0, path);
+
+            while (recentFiles.Count > 10)
+            {
+                recentFiles.RemoveAt(10);
+            }
+
+            Settings.Default.Save();
+            UpdateRecentFilesMenu();
+        }
+
+        private void RemoveRecentFile(string path)
+        {
+            Settings.Default.RecentFiles.Remove(path);
+            Settings.Default.Save();
+            UpdateRecentFilesMenu();
+        }
+
+        private void UpdateRecentFilesMenu()
+        {
+            recentProjectsToolStripMenuItem.DropDownItems.Clear();
+            var recentFiles = Settings.Default.RecentFiles;
+
+            if (recentFiles != null && recentFiles.Count > 0)
+            {
+                recentProjectsToolStripMenuItem.Enabled = true;
+                foreach (string path in recentFiles)
+                {
+                    // This check fixes the potential null conversion warning
+                    if (path == null) continue;
+
+                    var menuItem = new ToolStripMenuItem(Path.GetFileName(path))
+                    {
+                        Tag = path
+                    };
+                    menuItem.Click += RecentFile_Click;
+                    recentProjectsToolStripMenuItem.DropDownItems.Add(menuItem);
+                }
+            }
+            else
+            {
+                recentProjectsToolStripMenuItem.Enabled = false;
+            }
+        }
+
+        private void RecentFile_Click(object? sender, EventArgs e)
+        {
+            if (sender is ToolStripMenuItem menuItem && menuItem.Tag is string path)
+            {
+                CommitPendingEditorChanges();
+                if (PromptToSaveChanges())
+                {
+                    LoadProject(path);
                 }
             }
         }
@@ -730,6 +817,7 @@ namespace RaGuideDesigner
             tvGuideStructure.SelectedNode = e.Node;
             _isProgrammaticChange = false;
             tvGuideStructure_AfterSelect(sender, new TreeViewEventArgs(e.Node));
+            tvGuideStructure.Focus();
         }
 
         private void ClearAndSelectNode(TreeNode? node)
@@ -775,6 +863,53 @@ namespace RaGuideDesigner
                     MoveSelectedItemsDown();
                 }
             }
+            else if (e.Shift && (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down))
+            {
+                e.SuppressKeyPress = true;
+                TreeNode? lastSelected = _selectedNodes.LastOrDefault();
+                if (lastSelected == null) return;
+
+                TreeNode? nextNode = (e.KeyCode == Keys.Up) ? lastSelected.PrevVisibleNode : lastSelected.NextVisibleNode;
+                if (nextNode != null)
+                {
+                    // If the next node is already selected, and we are moving away from it, deselect the last node.
+                    if (_selectedNodes.Contains(nextNode))
+                    {
+                        _selectedNodes.Remove(lastSelected);
+                    }
+                    else
+                    {
+                        _selectedNodes.Add(nextNode);
+                    }
+                    tvGuideStructure.SelectedNode = nextNode;
+                    UpdateSelectionAppearance();
+                    UpdateEditorPanel();
+                }
+            }
+            else if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
+            {
+                e.SuppressKeyPress = true; // Prevent default TreeView behavior
+                TreeNode? currentNode = tvGuideStructure.SelectedNode;
+                if (currentNode == null) return;
+
+                TreeNode? nextNode = (e.KeyCode == Keys.Up) ? currentNode.PrevVisibleNode : currentNode.NextVisibleNode;
+
+                if (nextNode != null)
+                {
+                    CommitPendingEditorChanges(); // Save any changes from the current editor
+
+                    // Use our custom selection logic
+                    ClearAndSelectNode(nextNode);
+                    UpdateSelectionAppearance();
+
+                    // Update the TreeView's own selection and the editor panel
+                    _isProgrammaticChange = true;
+                    tvGuideStructure.SelectedNode = nextNode;
+                    _isProgrammaticChange = false;
+
+                    UpdateEditorPanel();
+                }
+            }
         }
 
         private enum MenuType { ExpandCollapse, EditItems }
@@ -810,10 +945,14 @@ namespace RaGuideDesigner
                 markAsCollectibleToolStripMenuItem.Visible = true;
                 markAsCollectibleToolStripMenuItem.Checked = category.IsCollectible;
                 markAsCollectibleToolStripMenuItem.Enabled = !category.Title.Equals("Progression", StringComparison.OrdinalIgnoreCase);
+                markAsSimpleToolStripMenuItem.Visible = true;
+                markAsSimpleToolStripMenuItem.Checked = category.IsSimple;
+                markAsSimpleToolStripMenuItem.Enabled = !category.Title.Equals("Progression", StringComparison.OrdinalIgnoreCase) && !category.IsCollectible;
             }
             else
             {
                 markAsCollectibleToolStripMenuItem.Visible = false;
+                markAsSimpleToolStripMenuItem.Visible = false;
             }
 
             var firstItem = selectedItems.FirstOrDefault();
@@ -1517,6 +1656,15 @@ namespace RaGuideDesigner
                 var command = new EditPropertyCommand(category, nameof(AchievementCategory.IsCollectible), category.IsCollectible, !category.IsCollectible);
                 _undoRedoService.Execute(command);
                 UpdateEditorPanel();
+            }
+        }
+
+        private void markAsSimpleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_rightClickedNode?.Tag is AchievementCategory category)
+            {
+                var command = new EditPropertyCommand(category, nameof(AchievementCategory.IsSimple), category.IsSimple, !category.IsSimple);
+                _undoRedoService.Execute(command);
             }
         }
     }

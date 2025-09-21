@@ -385,15 +385,11 @@ namespace RaGuideDesigner.Services
             return sb.ToString();
         }
 
-        // Dynamically builds the content for an achievement's "Guidance & Insights" table cell.
-        // It has special logic for collectible types vs. standard achievements, and it also
-        // adjusts its output for simple "Progression" achievements to keep them clean.
         private string BuildAchievementGuidanceCell(Achievement ach, AchievementCategory parentCategory)
         {
             if (parentCategory.IsCollectible)
             {
                 string guidance = ach.SerializeCollectibleGuidance();
-                // The serializer no longer adds the placeholder, so the generation service must.
                 if (string.IsNullOrWhiteSpace(ach.MeasuredIndicator))
                 {
                     if (guidance.Length > 0)
@@ -413,7 +409,6 @@ namespace RaGuideDesigner.Services
             {
                 if (isProgression)
                 {
-                    // Split the guidance by lines, format each as a list item, then join with <br>
                     var guidanceLines = ach.GuidanceAndInsights.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
                     if (guidanceLines.Any())
                     {
@@ -443,37 +438,67 @@ namespace RaGuideDesigner.Services
             if (!isProgression)
             {
                 var advancedPart = new StringBuilder();
-                if (ach.FailConditions.Any())
+                bool hasFailConditions = ach.FailConditions.Any();
+                bool hasTrackingInfo = !string.IsNullOrWhiteSpace(ach.TriggerIndicator) || !string.IsNullOrWhiteSpace(ach.MeasuredIndicator);
+
+                if (parentCategory.IsSimple)
                 {
-                    advancedPart.Append("<h4>Fail Conditions</h4>");
-                    var conditions = ach.FailConditions.Select(c => $"- {c.Replace("\n", "<br>")}").ToList();
-                    advancedPart.Append(string.Join(" <br> ", conditions));
+                    if (hasFailConditions)
+                    {
+                        advancedPart.Append("<h4>Fail Conditions</h4>");
+                        var conditions = ach.FailConditions.Select(c => $"- {c.Replace("\n", "<br>")}").ToList();
+                        advancedPart.Append(string.Join(" <br> ", conditions));
+                    }
+                    if (hasTrackingInfo)
+                    {
+                        if (advancedPart.Length > 0) advancedPart.Append(" ");
+                        var trackingLines = new List<string>();
+                        if (!string.IsNullOrWhiteSpace(ach.TriggerIndicator))
+                        {
+                            trackingLines.Add($"- A [Trigger Indicator](#RA_Trigger) {ach.TriggerIndicator.Replace("\n", "<br>")}");
+                        }
+                        if (!string.IsNullOrWhiteSpace(ach.MeasuredIndicator))
+                        {
+                            trackingLines.Add($"- A [Measured Indicator](#RA_Measure) {ach.MeasuredIndicator.Replace("\n", "<br>")}");
+                        }
+                        advancedPart.Append($"<h4>Achievement Tracking</h4> {string.Join(" <br> ", trackingLines)}");
+                    }
                 }
                 else
                 {
-                    advancedPart.Append("<h4>~~Fail Conditions~~</h4>");
+                    if (hasFailConditions)
+                    {
+                        advancedPart.Append("<h4>Fail Conditions</h4>");
+                        var conditions = ach.FailConditions.Select(c => $"- {c.Replace("\n", "<br>")}").ToList();
+                        advancedPart.Append(string.Join(" <br> ", conditions));
+                    }
+                    else
+                    {
+                        advancedPart.Append("<h4>~~Fail Conditions~~</h4>");
+                    }
+                    advancedPart.Append(" ");
+                    if (hasTrackingInfo)
+                    {
+                        var trackingLines = new List<string>();
+                        if (!string.IsNullOrWhiteSpace(ach.TriggerIndicator))
+                        {
+                            trackingLines.Add($"- A [Trigger Indicator](#RA_Trigger) {ach.TriggerIndicator.Replace("\n", "<br>")}");
+                        }
+                        if (!string.IsNullOrWhiteSpace(ach.MeasuredIndicator))
+                        {
+                            trackingLines.Add($"- A [Measured Indicator](#RA_Measure) {ach.MeasuredIndicator.Replace("\n", "<br>")}");
+                        }
+                        advancedPart.Append($"<h4>Achievement Tracking</h4> {string.Join(" <br> ", trackingLines)}");
+                    }
+                    else
+                    {
+                        advancedPart.Append("<h4>~~Achievement Tracking~~</h4>");
+                    }
                 }
-
-                advancedPart.Append(" ");
-                var trackingLines = new List<string>();
-                if (!string.IsNullOrWhiteSpace(ach.TriggerIndicator))
+                if (advancedPart.Length > 0)
                 {
-                    trackingLines.Add($"- A [Trigger Indicator](#RA_Trigger) {ach.TriggerIndicator.Replace("\n", "<br>")}");
+                    mainParts.Add(advancedPart.ToString());
                 }
-                if (!string.IsNullOrWhiteSpace(ach.MeasuredIndicator))
-                {
-                    trackingLines.Add($"- A [Measured Indicator](#RA_Measured) {ach.MeasuredIndicator.Replace("\n", "<br>")}");
-                }
-
-                if (trackingLines.Any())
-                {
-                    advancedPart.Append($"<h4>Achievement Tracking</h4> {string.Join(" <br> ", trackingLines)}");
-                }
-                else
-                {
-                    advancedPart.Append("<h4>~~Achievement Tracking~~</h4>");
-                }
-                mainParts.Add(advancedPart.ToString());
             }
 
             // --- Part 3: Admonitions ---
@@ -498,6 +523,25 @@ namespace RaGuideDesigner.Services
             // --- Assembly of Main Content ---
             var cellBuilder = new StringBuilder(string.Join("<br><br>", mainParts));
 
+            // =================================================================
+            // START OF NEW/MODIFIED LOGIC FOR WIN CONDITION
+            // =================================================================
+            bool isWinCondition = ach.Type.Equals("win", StringComparison.OrdinalIgnoreCase) ||
+                                  ach.Type.Equals("win_condition", StringComparison.OrdinalIgnoreCase);
+
+            if (isWinCondition)
+            {
+                // Add the separator only if there is existing content in the cell
+                if (cellBuilder.Length > 0)
+                {
+                    cellBuilder.Append("<br><br>");
+                }
+                cellBuilder.Append("- This achievement counts as the *win* condition for beating the game.");
+            }
+            // =================================================================
+            // END OF NEW/MODIFIED LOGIC
+            // =================================================================
+
             // --- Part 4: Notes (with custom append logic) ---
             var notesPart = new StringBuilder();
             if (!string.IsNullOrWhiteSpace(ach.MiscNote))
@@ -517,7 +561,8 @@ namespace RaGuideDesigner.Services
                                                  || ach.FailConditions.Any()
                                                  || !string.IsNullOrWhiteSpace(ach.TriggerIndicator)
                                                  || !string.IsNullOrWhiteSpace(ach.MeasuredIndicator)
-                                                 || ach.Admonitions.Any();
+                                                 || ach.Admonitions.Any()
+                                                 || isWinCondition; // Also consider the win condition text as "real content"
 
                 if (cellBuilder.Length > 0)
                 {
@@ -530,10 +575,8 @@ namespace RaGuideDesigner.Services
                         cellBuilder.Append("<br>"); // Use a small separator if there was only empty header text.
                     }
                 }
-
                 cellBuilder.Append(notesPart.ToString());
             }
-
             return cellBuilder.ToString();
         }
 

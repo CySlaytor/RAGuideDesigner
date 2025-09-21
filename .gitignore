@@ -24,6 +24,7 @@ bld/
 [Oo]bj/
 publish/
 publish_framework_dependent_singlefile/
+site/
 
 # Visual Studio Team Explorer/Services
 .vs/

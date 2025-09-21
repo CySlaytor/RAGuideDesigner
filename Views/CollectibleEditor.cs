@@ -38,9 +38,6 @@ namespace RaGuideDesigner.Views
 
             if (_isProgrammaticChange || _currentAchievement == null) return;
 
-            var lastSelectedNode = _selectedNodes.LastOrDefault();
-            if (lastSelectedNode == null) return;
-
             var commands = new List<ICommand>();
 
             // General Achievement Properties
@@ -54,31 +51,36 @@ namespace RaGuideDesigner.Views
             }
 
             // Selected Item Properties
-            if (lastSelectedNode.Tag is CollectibleGroup group)
+            var lastSelectedNode = _selectedNodes.LastOrDefault();
+            if (lastSelectedNode != null) // This null check is the fix
             {
-                if (group.Title != txtGroupTitle.Text)
+                if (lastSelectedNode.Tag is CollectibleGroup group)
                 {
-                    commands.Add(new EditPropertyCommand(group, nameof(CollectibleGroup.Title), group.Title, txtGroupTitle.Text));
+                    if (group.Title != txtGroupTitle.Text)
+                    {
+                        commands.Add(new EditPropertyCommand(group, nameof(CollectibleGroup.Title), group.Title, txtGroupTitle.Text));
+                    }
+                }
+                else if (lastSelectedNode.Tag is CollectibleItem item)
+                {
+                    string newDescription = MarkdownRtfConverter.ToMarkdown(rtxtItemDescription.Rtf ?? string.Empty);
+                    if (item.Description != newDescription)
+                    {
+                        commands.Add(new EditPropertyCommand(item, nameof(CollectibleItem.Description), item.Description ?? "", newDescription));
+                    }
+
+                    if (item.UrlText != txtItemUrlText.Text)
+                    {
+                        commands.Add(new EditPropertyCommand(item, nameof(CollectibleItem.UrlText), item.UrlText, txtItemUrlText.Text));
+                    }
+
+                    if (item.Url != txtItemUrl.Text)
+                    {
+                        commands.Add(new EditPropertyCommand(item, nameof(CollectibleItem.Url), item.Url, txtItemUrl.Text));
+                    }
                 }
             }
-            else if (lastSelectedNode.Tag is CollectibleItem item)
-            {
-                string newDescription = MarkdownRtfConverter.ToMarkdown(rtxtItemDescription.Rtf ?? string.Empty);
-                if (item.Description != newDescription)
-                {
-                    commands.Add(new EditPropertyCommand(item, nameof(CollectibleItem.Description), item.Description ?? "", newDescription));
-                }
 
-                if (item.UrlText != txtItemUrlText.Text)
-                {
-                    commands.Add(new EditPropertyCommand(item, nameof(CollectibleItem.UrlText), item.UrlText, txtItemUrlText.Text));
-                }
-
-                if (item.Url != txtItemUrl.Text)
-                {
-                    commands.Add(new EditPropertyCommand(item, nameof(CollectibleItem.Url), item.Url, txtItemUrl.Text));
-                }
-            }
 
             if (commands.Any())
             {

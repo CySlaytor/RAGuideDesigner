@@ -99,16 +99,34 @@ namespace RaGuideDesigner.Views
             }
         }
 
+        // In BaseEditorControl.cs
+
         protected void SetRichTextContent(RichTextBox rtb, string newMarkdownContent)
         {
             string newRtf = MarkdownRtfConverter.ToRtf(newMarkdownContent ?? string.Empty);
             if (rtb.Rtf != newRtf)
             {
-                rtb.Rtf = newRtf;
-                rtb.ClearUndo();
+                // Use type-pattern matching. The 'urrtb' variable will only be assigned and non-null
+                // inside this 'if' block if the cast is successful.
+                if (rtb is UndoRedoRichTextBox urrtb && SpellCheckService.Instance.IsInitialized)
+                {
+                    // We are inside the 'if', so the compiler now knows 'urrtb' is safe to use.
+                    urrtb.TextChanged -= Rtb_TextChanged_SpellCheck;
+
+                    rtb.Rtf = newRtf;
+                    rtb.ClearUndo();
+
+                    urrtb.TextChanged += Rtb_TextChanged_SpellCheck;
+                }
+                else
+                {
+                    // Fallback for standard RichTextBoxes or when spell check is disabled.
+                    rtb.Rtf = newRtf;
+                    rtb.ClearUndo();
+                }
             }
 
-            // This ensures content is always checked, bypassing the now-disabled TextChanged handler.
+            // This final check remains to ensure the text is highlighted correctly after being set.
             if (SpellCheckService.Instance.IsInitialized)
             {
                 SpellCheckService.Instance.CheckSpelling(rtb);

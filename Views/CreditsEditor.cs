@@ -17,7 +17,8 @@ namespace RaGuideDesigner.Views
         {
             { "🟉 Achievement Set Developer", new List<string> { "Badge Design", "RA-Guide Author", "Collaborator" } },
             { "🟉 Code Reviewer", new List<string>() },
-            { "🟉 Contributor", new List<string> { "Tester", "Writer", "Badge Design", "RA-Guide Design" } }
+            // --- CHANGE #1: Added "RA-Guide Author" to the Contributor role ---
+            { "🟉 Contributor", new List<string> { "Tester", "Writer", "RA-Guide Author", "Badge Design", "RA-Guide Design" } }
         };
 
         private bool _isUpdatingRoles = false; // Flag to prevent event feedback loops
@@ -63,6 +64,19 @@ namespace RaGuideDesigner.Views
 
             // Parse the combined role string from the model to set the UI controls.
             ParseAndSetRoles(credit.Role);
+
+            // --- CHANGE #2: Special UI logic for the ASolidSnack user ---
+            if (credit.Username.Equals("ASolidSnack", StringComparison.OrdinalIgnoreCase))
+            {
+                // Find the index of the "RA-Guide Design" item in the checklist.
+                int raGuideDesignIndex = clbSubRoles.Items.IndexOf("RA-Guide Design");
+                if (raGuideDesignIndex != -1)
+                {
+                    // Ensure it is checked. The ItemCheck event handler will prevent it from being unchecked.
+                    clbSubRoles.SetItemChecked(raGuideDesignIndex, true);
+                }
+            }
+            // --- END OF CHANGE #2 ---
 
             this.Visible = true;
             _isProgrammaticChange = false;
@@ -196,7 +210,19 @@ namespace RaGuideDesigner.Views
 
         private void clbSubRoles_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            if (_isProgrammaticChange || _isUpdatingRoles) return;
+            if (_isProgrammaticChange || _isUpdatingRoles || _currentCredit == null) return;
+
+            // Prevent changing the "RA-Guide Design" checkbox for ASolidSnack ---
+            if (_currentCredit.Username.Equals("ASolidSnack", StringComparison.OrdinalIgnoreCase))
+            {
+                string itemText = clbSubRoles.Items[e.Index].ToString() ?? "";
+                if (itemText == "RA-Guide Design")
+                {
+                    // Force the checkbox to remain checked, effectively disabling user changes.
+                    e.NewValue = CheckState.Checked;
+                    return;
+                }
+            }
 
             // The ItemCheck event fires before the CheckedItems collection is actually updated.
             // We use BeginInvoke to slightly delay the call, ensuring we read the correct state.

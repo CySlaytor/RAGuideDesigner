@@ -25,6 +25,8 @@
             loadProjectToolStripMenuItem = new ToolStripMenuItem();
             saveProjectToolStripMenuItem = new ToolStripMenuItem();
             saveProjectAsToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparatorRecent = new ToolStripSeparator();
+            recentProjectsToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
             importFromRAJSONToolStripMenuItem = new ToolStripMenuItem();
             importFromMarkdownToolStripMenuItem = new ToolStripMenuItem();
@@ -53,6 +55,7 @@
             toolStripSeparator4 = new ToolStripSeparator();
             duplicateToolStripMenuItem = new ToolStripMenuItem();
             markAsCollectibleToolStripMenuItem = new ToolStripMenuItem();
+            markAsSimpleToolStripMenuItem = new ToolStripMenuItem();
             moveUpToolStripMenuItem = new ToolStripMenuItem();
             moveDownToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator3 = new ToolStripSeparator();
@@ -77,7 +80,7 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newGuideToolStripMenuItem, loadProjectToolStripMenuItem, saveProjectToolStripMenuItem, saveProjectAsToolStripMenuItem, toolStripSeparator1, importFromRAJSONToolStripMenuItem, importFromMarkdownToolStripMenuItem, generateMarkdownToolStripMenuItem, toolStripSeparator2, exitToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newGuideToolStripMenuItem, loadProjectToolStripMenuItem, saveProjectToolStripMenuItem, saveProjectAsToolStripMenuItem, toolStripSeparatorRecent, recentProjectsToolStripMenuItem, toolStripSeparator1, importFromRAJSONToolStripMenuItem, importFromMarkdownToolStripMenuItem, generateMarkdownToolStripMenuItem, toolStripSeparator2, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(37, 20);
             fileToolStripMenuItem.Text = "&File";
@@ -112,6 +115,17 @@
             saveProjectAsToolStripMenuItem.Size = new Size(282, 22);
             saveProjectAsToolStripMenuItem.Text = "Save Project &As...";
             saveProjectAsToolStripMenuItem.Click += saveProjectAsToolStripMenuItem_Click;
+            // 
+            // toolStripSeparatorRecent
+            // 
+            toolStripSeparatorRecent.Name = "toolStripSeparatorRecent";
+            toolStripSeparatorRecent.Size = new Size(279, 6);
+            // 
+            // recentProjectsToolStripMenuItem
+            // 
+            recentProjectsToolStripMenuItem.Name = "recentProjectsToolStripMenuItem";
+            recentProjectsToolStripMenuItem.Size = new Size(282, 22);
+            recentProjectsToolStripMenuItem.Text = "Recent Projects";
             // 
             // toolStripSeparator1
             // 
@@ -257,9 +271,9 @@
             // 
             // cmTree
             // 
-            cmTree.Items.AddRange(new ToolStripItem[] { expandAllToolStripMenuItem, collapseAllToolStripMenuItem, toolStripSeparator5, addAchievementCategoryToolStripMenuItem, addAchievementToolStripMenuItem, addLeaderboardToolStripMenuItem, addCreditToolStripMenuItem, toolStripSeparator4, duplicateToolStripMenuItem, markAsCollectibleToolStripMenuItem, moveUpToolStripMenuItem, moveDownToolStripMenuItem, toolStripSeparator3, deleteToolStripMenuItem });
+            cmTree.Items.AddRange(new ToolStripItem[] { expandAllToolStripMenuItem, collapseAllToolStripMenuItem, toolStripSeparator5, addAchievementCategoryToolStripMenuItem, addAchievementToolStripMenuItem, addLeaderboardToolStripMenuItem, addCreditToolStripMenuItem, toolStripSeparator4, duplicateToolStripMenuItem, markAsCollectibleToolStripMenuItem, markAsSimpleToolStripMenuItem, moveUpToolStripMenuItem, moveDownToolStripMenuItem, toolStripSeparator3, deleteToolStripMenuItem });
             cmTree.Name = "cmTree";
-            cmTree.Size = new Size(221, 264);
+            cmTree.Size = new Size(221, 286);
             cmTree.Opening += cmTree_Opening;
             // 
             // expandAllToolStripMenuItem
@@ -329,6 +343,14 @@
             markAsCollectibleToolStripMenuItem.Text = "Mark as Collectible Category";
             markAsCollectibleToolStripMenuItem.Click += markAsCollectibleToolStripMenuItem_Click;
             // 
+            // markAsSimpleToolStripMenuItem
+            // 
+            markAsSimpleToolStripMenuItem.CheckOnClick = true;
+            markAsSimpleToolStripMenuItem.Name = "markAsSimpleToolStripMenuItem";
+            markAsSimpleToolStripMenuItem.Size = new Size(220, 22);
+            markAsSimpleToolStripMenuItem.Text = "Hide Empty Fields";
+            markAsSimpleToolStripMenuItem.Click += markAsSimpleToolStripMenuItem_Click;
+            // 
             // moveUpToolStripMenuItem
             // 
             moveUpToolStripMenuItem.Name = "moveUpToolStripMenuItem";
@@ -378,6 +400,7 @@
             MinimumSize = new Size(1280, 720);
             Name = "MainForm";
             Text = "RA Wiki Guide Generator";
+            Load += MainForm_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);
@@ -430,5 +453,8 @@
         private ToolStripMenuItem markAsCollectibleToolStripMenuItem;
         private ToolStripMenuItem tutorialToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator7;
+        private ToolStripMenuItem markAsSimpleToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparatorRecent;
+        private ToolStripMenuItem recentProjectsToolStripMenuItem;
     }
 }

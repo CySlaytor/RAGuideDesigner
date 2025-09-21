@@ -13,8 +13,6 @@ namespace RaGuideDesigner.Services
     {
         private static readonly string[] _collectibleKeywords = { "collectible", "upgrade", "bonus", "artifact", "treasure", "unlock" };
 
-        // A utility that takes a raw text block and separates out any admonition notes.
-        // It populates a list with the found admonitions and returns the remaining text.
         private string ProcessBlock(string rawBlock, BindingList<Admonition> admonitions)
         {
             if (string.IsNullOrWhiteSpace(rawBlock))
@@ -43,14 +41,10 @@ namespace RaGuideDesigner.Services
             return sb.ToString().Trim();
         }
 
-        // Deconstructs the markdown from a single achievement's guidance cell back into structured data.
-        // This is a multi-step process that pulls out notes, admonitions, and then splits the remaining
-        // content by headers (like "Fail Conditions") to populate the achievement's properties.
         private void ParseAchievementGuidance(Achievement ach, string rawContent)
         {
             string content = rawContent.Replace("<br>", "\n").Trim();
 
-            // 1. Extract and remove Misc/Dev Notes first.
             var noteRegex = new Regex(@"\s*<sub>\s*\*\*(\w+)\s*note\s*[-—⁃]?\s*\*\*\s*\*(.*?)\*\s*</sub>", RegexOptions.Singleline | RegexOptions.IgnoreCase);
             var noteMatches = noteRegex.Matches(content);
             foreach (Match match in noteMatches.Cast<Match>().Reverse())
@@ -69,7 +63,6 @@ namespace RaGuideDesigner.Services
                 content = content.Remove(match.Index, match.Length);
             }
 
-            // 2. Extract Admonitions and remove them.
             var contentBuilder = new StringBuilder(content);
             var admonitionMatches = Regex.Matches(content, @"\s*> \[!(.*?)\]\s*\n((?:> .*\s*\n?)*)", RegexOptions.Singleline);
             foreach (Match match in admonitionMatches.Cast<Match>().Reverse())
@@ -83,7 +76,6 @@ namespace RaGuideDesigner.Services
             if (ach.Admonitions.Any()) ach.Admonitions.Reverse();
             string remainingContent = contentBuilder.ToString().Trim();
 
-            // 3. Split what's left into logical sections based on the <h4> headers.
             var sections = Regex.Split(remainingContent, @"\s*(?=<h4>)");
 
             string mainDescriptionBlock = sections[0];
@@ -106,7 +98,6 @@ namespace RaGuideDesigner.Services
                 ach.GuidanceAndInsights = mainDescriptionBlock.Trim();
             }
 
-            // 4. Process the remaining sections (Fail Conditions, Tracking).
             foreach (var section in sections.Skip(1))
             {
                 if (section.StartsWith("<h4>Fail Conditions</h4>"))
@@ -146,9 +137,6 @@ namespace RaGuideDesigner.Services
             return ParseFromString(content);
         }
 
-        // Reads a complete Markdown guide and parses it into a structured WikiGuide object.
-        // It uses a series of regular expressions to identify and extract each major section
-        // (header, resources, categories, leaderboards, credits, etc.) from the raw text.
         public WikiGuide ParseFromString(string content)
         {
             var guide = new WikiGuide();
@@ -229,10 +217,6 @@ namespace RaGuideDesigner.Services
                     };
                     var categoryPoints = int.Parse(categoryHeaderMatch.Groups[4].Value);
 
-                    // Set IsCollectible based on title keywords upon import for backward compatibility.
-                    string lowerTitle = category.Title.ToLowerInvariant();
-                    category.IsCollectible = _collectibleKeywords.Any(keyword => lowerTitle.Contains(keyword));
-
                     var headerEndIndex = section.IndexOf("</h1>") + "</h1>".Length;
 
                     var tableHeaderRegex = new Regex(@"###\s+.*?\s+Achievement List");
@@ -258,6 +242,11 @@ namespace RaGuideDesigner.Services
 
                     var achievementRowRegex = new Regex(@"\| <h3 id=(\d+?)>(\*\*.*?\*\*|.*?)<\/h3>.*?!\s*\[.*?\]\((.*?)\s*"".*?""\)\s*\|\s*(.*?)\s*\|(?=\r?\n\s*\| <h3|\r?\n\s*🔗|$)", RegexOptions.Singleline);
                     var matches = achievementRowRegex.Matches(section);
+
+                    var tempAchievements = new List<(Achievement ach, string rawContent)>();
+                    bool containsStrikethrough = false;
+                    bool containsCollectibleFormatting = false;
+
                     foreach (Match achRowMatch in matches)
                     {
                         var ach = new Achievement
@@ -268,29 +257,48 @@ namespace RaGuideDesigner.Services
                         };
 
                         string rawCellContent = achRowMatch.Groups[4].Value.Trim();
-                        ach.GuidanceAndInsights = rawCellContent;
 
-                        bool isProgression = category.Title.Equals("Progression", StringComparison.OrdinalIgnoreCase);
+                        var winConditionRegex = new Regex(@"(<br>){2,}- This achievement counts as the \*win\* condition for beating the game\.?");
+                        var winMatch = winConditionRegex.Match(rawCellContent);
+                        if (winMatch.Success)
+                        {
+                            ach.Type = "win_condition";
+                            rawCellContent = rawCellContent.Remove(winMatch.Index, winMatch.Length).Trim();
+                        }
 
-                        if (category.IsCollectible && rawCellContent.Contains("<u><b>"))
+                        if (rawCellContent.Contains("<h4>~~")) containsStrikethrough = true;
+                        if (rawCellContent.Contains("<u><b>")) containsCollectibleFormatting = true;
+
+                        tempAchievements.Add((ach, rawCellContent));
+                    }
+
+                    string lowerTitle = category.Title.ToLowerInvariant();
+                    category.IsCollectible = _collectibleKeywords.Any(keyword => lowerTitle.Contains(keyword)) || containsCollectibleFormatting;
+
+                    bool isProgression = category.Title.Equals("Progression", StringComparison.OrdinalIgnoreCase);
+                    if (!isProgression && !category.IsCollectible && !containsStrikethrough && tempAchievements.Any())
+                    {
+                        category.IsSimple = true;
+                    }
+
+                    foreach (var (ach, rawContent) in tempAchievements)
+                    {
+                        ach.GuidanceAndInsights = rawContent;
+
+                        if (category.IsCollectible && rawContent.Contains("<u><b>"))
                         {
                             ach.ParseGuidanceAsCollectible();
                         }
                         else if (isProgression)
                         {
-                            string cleanedContent = rawCellContent.Replace("<br>", "\n").Trim();
-                            if (cleanedContent.StartsWith("- "))
-                            {
-                                cleanedContent = cleanedContent.Substring(2).Trim();
-                            }
+                            string cleanedContent = rawContent.Replace("<br>", "\n").Trim();
+                            cleanedContent = string.Join("\n", cleanedContent.Split('\n').Select(l => l.Trim().StartsWith("-") ? l.Trim().Substring(1).Trim() : l.Trim()));
                             ach.GuidanceAndInsights = cleanedContent;
                         }
                         else
                         {
-                            ParseAchievementGuidance(ach, rawCellContent);
+                            ParseAchievementGuidance(ach, rawContent);
                         }
-
-
                         category.Achievements.Add(ach);
                     }
 
@@ -308,7 +316,6 @@ namespace RaGuideDesigner.Services
                 }
                 else if (section.Contains("<h1 id=LeaderboardGuide>"))
                 {
-                    // Parse intro text
                     var introMatch = Regex.Match(section, @"</h1>\s*(.*?)\s*### Leaderboard List", RegexOptions.Singleline);
                     if (introMatch.Success)
                     {
@@ -325,7 +332,6 @@ namespace RaGuideDesigner.Services
 
                         string rawCellContent = match.Groups[2].Value.Replace("<br>", "\n").Trim();
 
-                        // Parse notes first and remove them from the content
                         var noteRegex = new Regex(@"\s*<sub>\s*\*\*(\w+)\s*note\s*[-—⁃]?\s*\*\*\s*\*(.*?)\*\s*</sub>", RegexOptions.Singleline | RegexOptions.IgnoreCase);
                         var noteMatches = noteRegex.Matches(rawCellContent);
                         foreach (Match noteMatch in noteMatches.Cast<Match>().Reverse())
@@ -358,8 +364,6 @@ namespace RaGuideDesigner.Services
                 }
                 else if (section.Contains("<h1 id=Credits>"))
                 {
-                    // This new regex is more flexible. It captures the entire second cell's content,
-                    // which we then parse for role and details, instead of trying to match both in one go.
                     var creditRowsRegex = new Regex(@"\| <h4>\[(.*?)\]\(.*?\)</h4>.*?src=""([^""]*)"".*?\|(.*?)?(?=\r?\n\| <h4>|\r?\n<h1|$)", RegexOptions.Singleline);
                     foreach (Match match in creditRowsRegex.Matches(section))
                     {
@@ -367,12 +371,10 @@ namespace RaGuideDesigner.Services
                         string rawRole = "";
                         string rawDetailsBlock = "";
 
-                        // Manually parse the role and the details from the raw cell content.
                         var roleMatch = Regex.Match(rawCellContent, @"<b>\s*(.*?)\s*</b>");
                         if (roleMatch.Success)
                         {
                             rawRole = roleMatch.Groups[1].Value.Trim();
-                            // Check for details *after* the bolded role
                             int detailsStartIndex = roleMatch.Index + roleMatch.Length;
                             if (detailsStartIndex < rawCellContent.Length)
                             {
@@ -405,7 +407,6 @@ namespace RaGuideDesigner.Services
                             details = details.Substring(0, details.Length - 1).Trim();
                         }
 
-                        // Clean the role string by removing markdown formatting before saving it.
                         var cleanedRole = rawRole.Replace("*", "").Replace("\\|", "|");
 
                         guide.Credits.Add(new Credit { Username = match.Groups[1].Value.Trim(), AvatarUrl = match.Groups[2].Value.Trim(), Role = cleanedRole, ContributionDetails = details });
@@ -415,17 +416,33 @@ namespace RaGuideDesigner.Services
                 {
                     string footnoteContent = section;
 
-                    var measuredExamplesMatch = Regex.Match(footnoteContent, @"<h4 id=RA_Measure>.*?</h4>.*?Examples\s*:\s*\n((?:>\s*.*?\n)*)", RegexOptions.Singleline);
-                    if (measuredExamplesMatch.Success)
+                    string GetExamplesFor(string indicatorId)
                     {
-                        guide.MeasuredIndicatorExamples = ExtractBlockquoteListLines(measuredExamplesMatch.Groups[1].Value);
+                        var headerPattern = $"<h4 id={indicatorId}>";
+                        int startIndex = footnoteContent.IndexOf(headerPattern);
+                        if (startIndex == -1) return "";
+
+                        int endIndex = footnoteContent.IndexOf("<h4", startIndex + headerPattern.Length);
+                        if (endIndex == -1)
+                        {
+                            endIndex = footnoteContent.Length;
+                        }
+
+                        string indicatorBlock = footnoteContent.Substring(startIndex, endIndex - startIndex);
+
+                        // --- The new, more reliable parsing logic ---
+                        var examplesMatch = Regex.Match(indicatorBlock, @">\s*\*\*?Examples\*\*?:\s*([\s\S]*)", RegexOptions.Singleline);
+                        if (examplesMatch.Success)
+                        {
+                            // We now pass the entire block after "Examples:" to the cleaner function.
+                            return ExtractBlockquoteListLines(examplesMatch.Groups[1].Value);
+                        }
+
+                        return "";
                     }
 
-                    var triggerExamplesMatch = Regex.Match(footnoteContent, @"<h4 id=RA_Trigger>.*?</h4>.*?Examples\s*:\s*\n((?:>\s*.*?\n)*)", RegexOptions.Singleline);
-                    if (triggerExamplesMatch.Success)
-                    {
-                        guide.TriggeredIndicatorExamples = ExtractBlockquoteListLines(triggerExamplesMatch.Groups[1].Value);
-                    }
+                    guide.MeasuredIndicatorExamples = GetExamplesFor("RA_Measure");
+                    guide.TriggeredIndicatorExamples = GetExamplesFor("RA_Trigger");
                 }
             }
 
@@ -447,21 +464,20 @@ namespace RaGuideDesigner.Services
 
         private string ExtractBlockquoteListLines(string block)
         {
-            var lines = block.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            // First, remove any <br> tags to normalize line breaks
+            string normalizedBlock = Regex.Replace(block, @"<br\s*/?>", "\n", RegexOptions.IgnoreCase);
+
+            var lines = normalizedBlock.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
             var cleanedLines = lines.Select(l => {
-                var trimmed = l.Trim();
-                if (trimmed.StartsWith("> -"))
-                {
-                    trimmed = trimmed.Substring(3).Trim();
-                }
-                else if (trimmed.StartsWith(">"))
-                {
-                    trimmed = trimmed.Substring(1).Trim();
-                }
-                // Strip markdown italics
-                return Regex.Replace(trimmed, @"\*(.*?)\*", "$1");
+                var cleaned = l.Trim()
+                               .TrimStart('>')
+                               .Trim()
+                               .TrimStart('-')
+                               .Trim();
+                return Regex.Replace(cleaned, @"^\*(.*?)\*$", "$1").Trim();
             });
-            return string.Join("\n", cleanedLines);
+            // Filter out any lines that might have become empty after trimming
+            return string.Join("\n", cleanedLines.Where(l => !string.IsNullOrWhiteSpace(l)));
         }
 
         private static List<string> GetListItems(string sectionContent)
