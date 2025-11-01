@@ -36,7 +36,7 @@ namespace RaGuideDesigner.Services
             sb.AppendLine($"# **Retro Achievements Guide** <br> 🔶 ***{guide.GameTitle}*** <sub><sup> ({platformShortName}) </sup></sub>");
             sb.AppendLine();
             sb.AppendLine("<p align=\"center\">");
-            sb.AppendLine($"  <img width=\"600\" height=\"280\" src=\"{guide.BannerImageUrl}\"");
+            sb.AppendLine($"  <img width=\"600\" height=\"280\" src=\"{guide.BannerImageUrl}\">");
             sb.AppendLine("</p>");
             sb.AppendLine();
             sb.AppendLine("---");
@@ -63,7 +63,7 @@ namespace RaGuideDesigner.Services
             sb.AppendLine("    💎 Achievement Guide");
             sb.AppendLine("</h1>");
             sb.AppendLine();
-            sb.AppendLine($"<img align=\"left\" width=\"96\" height=\"96\" src=\"{guide.MasteryIconUrl}\" alt=\"_GAME_TITLE_HERE_ - RetroAchievements Mastery Icon\">");
+            sb.AppendLine($"<img align=\"left\" width=\"96\" height=\"96\" src=\"{guide.MasteryIconUrl}\" alt=\"{guide.GameTitle} - RetroAchievements Mastery Icon\">");
             sb.AppendLine();
             int totalAchievements = guide.AchievementCategories.Sum(c => c.Achievements.Count);
             int totalPoints = guide.AchievementCategories.Sum(c => c.Achievements.Sum(a => a.Points));
@@ -523,9 +523,6 @@ namespace RaGuideDesigner.Services
             // --- Assembly of Main Content ---
             var cellBuilder = new StringBuilder(string.Join("<br><br>", mainParts));
 
-            // =================================================================
-            // START OF NEW/MODIFIED LOGIC FOR WIN CONDITION
-            // =================================================================
             bool isWinCondition = ach.Type.Equals("win", StringComparison.OrdinalIgnoreCase) ||
                                   ach.Type.Equals("win_condition", StringComparison.OrdinalIgnoreCase);
 
@@ -538,9 +535,6 @@ namespace RaGuideDesigner.Services
                 }
                 cellBuilder.Append("- This achievement counts as the *win* condition for beating the game.");
             }
-            // =================================================================
-            // END OF NEW/MODIFIED LOGIC
-            // =================================================================
 
             // --- Part 4: Notes (with custom append logic) ---
             var notesPart = new StringBuilder();

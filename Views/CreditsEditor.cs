@@ -4,6 +4,7 @@ using RaGuideDesigner.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RaGuideDesigner.Views
@@ -17,7 +18,7 @@ namespace RaGuideDesigner.Views
         {
             { "🟉 Achievement Set Developer", new List<string> { "Badge Design", "RA-Guide Author", "Collaborator" } },
             { "🟉 Code Reviewer", new List<string>() },
-            // --- CHANGE #1: Added "RA-Guide Author" to the Contributor role ---
+            { "🟉 Code Contributor", new List<string> { "Tester", "Writer", "RA-Guide Author", "Badge Design" } },
             { "🟉 Contributor", new List<string> { "Tester", "Writer", "RA-Guide Author", "Badge Design", "RA-Guide Design" } }
         };
 
@@ -36,7 +37,7 @@ namespace RaGuideDesigner.Views
             WireUpEventHandlers();
         }
 
-        public void SetData(Credit? credit)
+        public async void SetData(Credit? credit)
         {
             if (_currentCredit != null)
             {
@@ -59,13 +60,12 @@ namespace RaGuideDesigner.Views
 
             txtCreditUsername.Text = credit.Username;
             txtCreditAvatarUrl.Text = credit.AvatarUrl;
-            LoadImage(credit.AvatarUrl);
+            await LoadImage(credit.AvatarUrl);
             SetRichTextContent(rtxtDetails, credit.ContributionDetails);
 
             // Parse the combined role string from the model to set the UI controls.
             ParseAndSetRoles(credit.Role);
 
-            // --- CHANGE #2: Special UI logic for the ASolidSnack user ---
             if (credit.Username.Equals("ASolidSnack", StringComparison.OrdinalIgnoreCase))
             {
                 // Find the index of the "RA-Guide Design" item in the checklist.
@@ -76,7 +76,6 @@ namespace RaGuideDesigner.Views
                     clbSubRoles.SetItemChecked(raGuideDesignIndex, true);
                 }
             }
-            // --- END OF CHANGE #2 ---
 
             this.Visible = true;
             _isProgrammaticChange = false;
@@ -175,20 +174,15 @@ namespace RaGuideDesigner.Views
             }
         }
 
-        private void LoadImage(string url)
+        private async Task LoadImage(string url)
         {
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(url)) pbCreditAvatar.LoadAsync(url);
-                else pbCreditAvatar.Image = null;
-            }
-            catch { pbCreditAvatar.Image = null; }
+            await ImageCacheService.Instance.LoadImageAsync(pbCreditAvatar, url);
         }
 
-        private void txtCreditAvatarUrl_TextChanged(object sender, System.EventArgs e)
+        private async void txtCreditAvatarUrl_TextChanged(object sender, System.EventArgs e)
         {
             if (_isProgrammaticChange) return;
-            LoadImage(txtCreditAvatarUrl.Text);
+            await LoadImage(txtCreditAvatarUrl.Text);
         }
 
         private void rtxtDetails_Leave(object sender, System.EventArgs e)

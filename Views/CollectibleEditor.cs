@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RaGuideDesigner.Views
@@ -166,7 +167,7 @@ namespace RaGuideDesigner.Views
 
         #region Data and UI Sync
         // Binds an achievement to the editor, first parsing its guidance text into the tree structure.
-        public void SetData(Achievement? achievement, object? parentData)
+        public async void SetData(Achievement? achievement, object? parentData)
         {
             if (_currentAchievement != null && _currentAchievement != achievement)
             {
@@ -191,7 +192,7 @@ namespace RaGuideDesigner.Views
             txtAchTitle.Text = achievement.Title;
             lblAchId.Text = achievement.Id.ToString();
             cmbAchPoints.SelectedItem = achievement.Points;
-            LoadImage(achievement.BadgeUrl);
+            await LoadImage(achievement.BadgeUrl);
 
             SetRichTextContent(rtxtIntro, achievement.CollectibleIntro);
             PopulateTreeView(achievement.CollectibleGroups);
@@ -242,10 +243,9 @@ namespace RaGuideDesigner.Views
             }
         }
 
-        private void LoadImage(string url)
+        private async Task LoadImage(string url)
         {
-            try { if (!string.IsNullOrWhiteSpace(url)) pbAchBadge.LoadAsync(url); else pbAchBadge.Image = null; }
-            catch { pbAchBadge.Image = null; }
+            await ImageCacheService.Instance.LoadImageAsync(pbAchBadge, url);
         }
         #endregion
 

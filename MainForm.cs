@@ -355,7 +355,7 @@ namespace RaGuideDesigner
             if (_currentProject.AchievementCategories.SelectMany(c => c.Achievements).Any())
             {
                 var result = MessageBox.Show(
-                    "You have an active project. Would you like to merge the achievement points from the JSON file into your current project?\n\nChoosing 'No' will discard your current project and import a new one from the JSON file.",
+                    "You have an active project. Would you like to merge achievement data (titles, points, badges) from the JSON file into your current project?\n\nChoosing 'No' will discard your current project and import a new one from the JSON file.",
                     "Merge or Overwrite?",
                     MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Question);
@@ -405,7 +405,7 @@ namespace RaGuideDesigner
                                 if (mismatchResult == DialogResult.No) return;
                             }
                             MergeAchievementData(jsonData);
-                            MessageBox.Show("Achievement points and badge URLs have been successfully merged into the current project.", "Merge Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Achievement titles, points, and badge URLs have been successfully merged into the current project.", "Merge Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     catch (Exception ex)
@@ -416,7 +416,7 @@ namespace RaGuideDesigner
             }
         }
 
-        // Handles merging achievement data (like points) from a JSON file into the current project.
+        // Handles merging achievement data (like titles and points) from a JSON file into the current project.
         private void MergeAchievementData(WikiGuide sourceGuide)
         {
             var commands = new List<ICommand>();
@@ -428,6 +428,10 @@ namespace RaGuideDesigner
             {
                 if (sourceAchievements.TryGetValue(achievement.Id, out var sourceAch))
                 {
+                    if (!string.Equals(achievement.Title, sourceAch.Title, StringComparison.Ordinal))
+                    {
+                        commands.Add(new EditPropertyCommand(achievement, nameof(Achievement.Title), achievement.Title, sourceAch.Title));
+                    }
                     if (achievement.Points != sourceAch.Points)
                     {
                         commands.Add(new EditPropertyCommand(achievement, nameof(Achievement.Points), achievement.Points, sourceAch.Points));

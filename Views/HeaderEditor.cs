@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RaGuideDesigner.Views
@@ -44,7 +45,7 @@ namespace RaGuideDesigner.Views
         }
 
         // Binds the main WikiGuide object to the header editor controls.
-        public void SetData(WikiGuide? guide)
+        public async void SetData(WikiGuide? guide)
         {
             _isProgrammaticChange = true;
             _dataContext = guide;
@@ -79,8 +80,8 @@ namespace RaGuideDesigner.Views
             SetRichTextContent(rtxtTriggerExamples, guide.TriggeredIndicatorExamples);
 
 
-            LoadImage(pbMasteryIcon, guide.MasteryIconUrl);
-            LoadBannerImage(guide.BannerImageUrl);
+            await LoadImage(pbMasteryIcon, guide.MasteryIconUrl);
+            await LoadBannerImage(guide.BannerImageUrl);
 
             UpdateStatistics(guide);
 
@@ -100,49 +101,28 @@ namespace RaGuideDesigner.Views
             lblCreditsValue.Text = guide.Credits.Count.ToString();
         }
 
-        private void LoadImage(PictureBox pb, string url)
+        private async Task LoadImage(PictureBox pb, string url)
         {
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(url)) pb.LoadAsync(url);
-                else pb.Image = null;
-            }
-            catch { pb.Image = null; }
+            await ImageCacheService.Instance.LoadImageAsync(pb, url);
         }
 
         // A dedicated method to load the banner and manage the hint label's visibility.
-        private void LoadBannerImage(string url)
+        private async Task LoadBannerImage(string url)
         {
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(url))
-                {
-                    pbBanner.LoadAsync(url);
-                    lblBannerHint.Visible = false; // Hide hint when image is loading/present
-                }
-                else
-                {
-                    pbBanner.Image = null;
-                    lblBannerHint.Visible = true;  // Show hint if no URL
-                }
-            }
-            catch
-            {
-                pbBanner.Image = null;
-                lblBannerHint.Visible = true; // Show hint on error
-            }
+            await ImageCacheService.Instance.LoadImageAsync(pbBanner, url);
+            lblBannerHint.Visible = pbBanner.Image == null;
         }
 
-        private void txtBannerUrl_TextChanged(object sender, System.EventArgs e)
+        private async void txtBannerUrl_TextChanged(object sender, System.EventArgs e)
         {
             if (_isProgrammaticChange) return;
-            LoadBannerImage(txtBannerUrl.Text);
+            await LoadBannerImage(txtBannerUrl.Text);
         }
 
-        private void txtMasteryIconUrl_TextChanged(object sender, System.EventArgs e)
+        private async void txtMasteryIconUrl_TextChanged(object sender, System.EventArgs e)
         {
             if (_isProgrammaticChange) return;
-            LoadImage(pbMasteryIcon, txtMasteryIconUrl.Text);
+            await LoadImage(pbMasteryIcon, txtMasteryIconUrl.Text);
         }
 
         private void rtxtIntro_Leave(object sender, System.EventArgs e)

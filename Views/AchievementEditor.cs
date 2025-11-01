@@ -32,7 +32,7 @@ namespace RaGuideDesigner.Views
         // Binds an Achievement object to the editor's controls.
         // It also contains logic to dynamically change the UI based on whether the
         // achievement belongs to a "Progression" category, hiding unnecessary tabs.
-        public void SetData(Achievement? achievement, object? parentData)
+        public async void SetData(Achievement? achievement, object? parentData)
         {
             if (_currentAchievement != null)
             {
@@ -92,7 +92,7 @@ namespace RaGuideDesigner.Views
                 cmbAchPoints.SelectedIndex = -1;
             }
 
-            LoadImage(achievement.BadgeUrl);
+            await LoadImage(achievement.BadgeUrl);
 
             SetRichTextContent(rtxtGuidance, achievement.GuidanceAndInsights);
             txtImageUrl.Text = achievement.ImageUrl;
@@ -115,14 +115,9 @@ namespace RaGuideDesigner.Views
             HandleRichTextLeave(rtxtGuidance, _currentAchievement, nameof(Achievement.GuidanceAndInsights));
         }
 
-        private void LoadImage(string url)
+        private async Task LoadImage(string url)
         {
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(url)) pbAchBadge.LoadAsync(url);
-                else pbAchBadge.Image = null;
-            }
-            catch { pbAchBadge.Image = null; }
+            await ImageCacheService.Instance.LoadImageAsync(pbAchBadge, url);
         }
 
         private void rtxtGuidance_Leave(object sender, EventArgs e)

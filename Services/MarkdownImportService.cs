@@ -21,7 +21,8 @@ namespace RaGuideDesigner.Services
             }
 
             string processedBlock = Regex.Replace(rawBlock, @"<br\s*/?>", "\n", RegexOptions.IgnoreCase);
-            var admonitionMatches = Regex.Matches(processedBlock, @"> \[!(.*?)\]\s*\n((?:> .*\s*\n?)*)", RegexOptions.Singleline);
+            // This regex now correctly handles multiple admonitions by ensuring a content line does not start a new admonition.
+            var admonitionMatches = Regex.Matches(processedBlock, @"^[ \t]*> \[!(.*?)\]\s*\r?\n?((?:^[ \t]*> (?!\[!).*\s*\r?\n?)*)", RegexOptions.Multiline);
             var sb = new StringBuilder(processedBlock);
             foreach (Match match in admonitionMatches.Cast<Match>().Reverse())
             {
@@ -64,7 +65,8 @@ namespace RaGuideDesigner.Services
             }
 
             var contentBuilder = new StringBuilder(content);
-            var admonitionMatches = Regex.Matches(content, @"\s*> \[!(.*?)\]\s*\n((?:> .*\s*\n?)*)", RegexOptions.Singleline);
+            // This regex now correctly handles multiple admonitions by ensuring a content line does not start a new admonition.
+            var admonitionMatches = Regex.Matches(content, @"^[ \t]*> \[!(.*?)\]\s*\r?\n?((?:^[ \t]*> (?!\[!).*\s*\r?\n?)*)", RegexOptions.Multiline);
             foreach (Match match in admonitionMatches.Cast<Match>().Reverse())
             {
                 contentBuilder.Remove(match.Index, match.Length);
@@ -407,6 +409,8 @@ namespace RaGuideDesigner.Services
                             details = details.Substring(0, details.Length - 1).Trim();
                         }
 
+                        // The role from markdown is formatted like "🟉 *Role* \| *Sub-role*".
+                        // This cleans it up to the format the model and editor expect: "🟉 Role | Sub-role".
                         var cleanedRole = rawRole.Replace("*", "").Replace("\\|", "|");
 
                         guide.Credits.Add(new Credit { Username = match.Groups[1].Value.Trim(), AvatarUrl = match.Groups[2].Value.Trim(), Role = cleanedRole, ContributionDetails = details });

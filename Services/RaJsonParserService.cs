@@ -14,21 +14,9 @@ namespace RaGuideDesigner.Services
         public WikiGuide Parse(string filePath)
         {
             var jsonContent = File.ReadAllText(filePath);
-            RaJsonRoot? raData = null;
 
-            // Check if the JSON is an array or an object at the root.
-            if (jsonContent.Trim().StartsWith("["))
-            {
-                // It's an array, deserialize into a list and take the first element.
-                var raDataList = JsonConvert.DeserializeObject<List<RaJsonRoot>>(jsonContent);
-                raData = raDataList?.FirstOrDefault();
-            }
-            else
-            {
-                // It's an object, deserialize directly.
-                raData = JsonConvert.DeserializeObject<RaJsonRoot>(jsonContent);
-            }
-
+            // Fix: Deserialize directly into the new structure.
+            var raData = JsonConvert.DeserializeObject<RaJsonRoot>(jsonContent);
 
             if (raData == null) throw new InvalidDataException("The provided JSON file could not be parsed or was empty.");
 
@@ -37,18 +25,27 @@ namespace RaGuideDesigner.Services
             var guide = new WikiGuide
             {
                 GameTitle = raData.Title ?? "Unknown Title",
-                MasteryIconUrl = $"https://media.retroachievements.org{raData.ImageIcon}",
+                MasteryIconUrl = raData.ImageIconUrl ?? "", // Fix: Use ImageIconUrl directly as it's a full URL.
                 // Clear the default lists that the constructor might have added.
                 AchievementCategories = new(),
                 Leaderboards = new()
             };
 
+            // Fix: Achievements and Leaderboards are now nested inside a "Set".
+            // We'll look for the "core" set, or just take the first one if it's not specified.
+            var coreSet = raData.Sets?.FirstOrDefault(s => s.Type == "core") ?? raData.Sets?.FirstOrDefault();
+            if (coreSet == null)
+            {
+                return guide; // Return guide with title/icon if no sets are found
+            }
+
+
             var progressionCategory = new AchievementCategory { Title = "Progression", Icon = "🏆" };
             var challengesCategory = new AchievementCategory { Title = "Challenges", Icon = "🏆" };
 
-            if (raData.Achievements != null)
+            if (coreSet.Achievements != null)
             {
-                foreach (var ach in raData.Achievements)
+                foreach (var ach in coreSet.Achievements)
                 {
                     var achievement = new Achievement
                     {
@@ -63,8 +60,8 @@ namespace RaGuideDesigner.Services
                         Points = ach.Points
                     };
 
-                    // Sort achievements based on their official RA type.
-                    if (achievement.Type == "progression" || achievement.Type == "win_condition")
+                    // Fix: Sort achievements based on title, as the "Type" field is often null in newer JSON formats.
+                    if (achievement.Title.StartsWith("[Progression", System.StringComparison.OrdinalIgnoreCase))
                     {
                         progressionCategory.Achievements.Add(achievement);
                     }
@@ -79,9 +76,9 @@ namespace RaGuideDesigner.Services
             if (challengesCategory.Achievements.Count > 0) guide.AchievementCategories.Add(challengesCategory);
 
             // Parse new Leaderboards section
-            if (raData.Leaderboards != null)
+            if (coreSet.Leaderboards != null)
             {
-                foreach (var lb in raData.Leaderboards)
+                foreach (var lb in coreSet.Leaderboards)
                 {
                     var leaderboard = new Leaderboard
                     {
@@ -95,14 +92,19 @@ namespace RaGuideDesigner.Services
             return guide;
         }
 
-        // Defines the expected structure for deserializing the RA JSON.
-        // Updated to match the new JSON format (Achievements and Leaderboards at the root).
+        // Fix: Updated classes to match the new JSON structure which nests achievements/leaderboards in a "Sets" array.
         public class RaJsonRoot
         {
             public string? Title { get; set; }
-            public string? ImageIcon { get; set; } // Changed from ImageIconUrl
-            public List<RaAchievement>? Achievements { get; set; } // Moved from RaSet
-            public List<RaLeaderboard>? Leaderboards { get; set; } // New
+            public string? ImageIconUrl { get; set; }
+            public List<RaSet>? Sets { get; set; }
+        }
+
+        public class RaSet
+        {
+            public string? Type { get; set; }
+            public List<RaAchievement>? Achievements { get; set; }
+            public List<RaLeaderboard>? Leaderboards { get; set; }
         }
 
         public class RaAchievement
