@@ -316,10 +316,10 @@ namespace RaGuideDesigner
             if (recentFiles != null && recentFiles.Count > 0)
             {
                 recentProjectsToolStripMenuItem.Enabled = true;
-                foreach (string path in recentFiles)
+                // Changed loop variable to nullable 'string?' to resolve CS8600 warning when iterating a StringCollection.
+                foreach (string? path in recentFiles)
                 {
-                    // This check fixes the potential null conversion warning
-                    if (path == null) continue;
+                    if (string.IsNullOrEmpty(path)) continue;
 
                     var menuItem = new ToolStripMenuItem(Path.GetFileName(path))
                     {

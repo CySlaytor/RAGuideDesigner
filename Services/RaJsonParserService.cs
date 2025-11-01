@@ -15,7 +15,6 @@ namespace RaGuideDesigner.Services
         {
             var jsonContent = File.ReadAllText(filePath);
 
-            // Fix: Deserialize directly into the new structure.
             var raData = JsonConvert.DeserializeObject<RaJsonRoot>(jsonContent);
 
             if (raData == null) throw new InvalidDataException("The provided JSON file could not be parsed or was empty.");
@@ -25,14 +24,12 @@ namespace RaGuideDesigner.Services
             var guide = new WikiGuide
             {
                 GameTitle = raData.Title ?? "Unknown Title",
-                MasteryIconUrl = raData.ImageIconUrl ?? "", // Fix: Use ImageIconUrl directly as it's a full URL.
+                MasteryIconUrl = raData.ImageIconUrl ?? "",
                 // Clear the default lists that the constructor might have added.
                 AchievementCategories = new(),
                 Leaderboards = new()
             };
 
-            // Fix: Achievements and Leaderboards are now nested inside a "Set".
-            // We'll look for the "core" set, or just take the first one if it's not specified.
             var coreSet = raData.Sets?.FirstOrDefault(s => s.Type == "core") ?? raData.Sets?.FirstOrDefault();
             if (coreSet == null)
             {
@@ -52,6 +49,8 @@ namespace RaGuideDesigner.Services
                         Id = ach.ID,
                         Title = ach.Title ?? "Untitled Achievement",
                         Description = ach.Description ?? string.Empty,
+                        // Populate GuidanceAndInsights with the achievement's description on import.
+                        GuidanceAndInsights = ach.Description ?? string.Empty,
                         // Prioritize the direct BadgeURL if it exists, otherwise construct it.
                         BadgeUrl = !string.IsNullOrWhiteSpace(ach.BadgeURL)
                                    ? ach.BadgeURL
@@ -60,7 +59,6 @@ namespace RaGuideDesigner.Services
                         Points = ach.Points
                     };
 
-                    // Fix: Sort achievements based on title, as the "Type" field is often null in newer JSON formats.
                     if (achievement.Title.StartsWith("[Progression", System.StringComparison.OrdinalIgnoreCase))
                     {
                         progressionCategory.Achievements.Add(achievement);
@@ -92,7 +90,6 @@ namespace RaGuideDesigner.Services
             return guide;
         }
 
-        // Fix: Updated classes to match the new JSON structure which nests achievements/leaderboards in a "Sets" array.
         public class RaJsonRoot
         {
             public string? Title { get; set; }

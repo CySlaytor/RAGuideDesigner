@@ -11,7 +11,8 @@ namespace RaGuideDesigner.Services
         {
             // Full Name -> Short Name
             // Nintendo
-            { "Game Boy", "GB" }, { "Game Boy Color", "GBC" }, { "Game Boy Advance", "GBA" }, { "NES/Famicom", "NES" }, { "SNES/Super Famicom", "SNES" }, { "Nintendo 64", "N64" }, { "GameCube", "GC" }, { "Nintendo DS", "NDS" }, { "Nintendo DSi", "DSi" }, { "Pokemon Mini", "Pokemon Mini" }, { "Virtual Boy", "VB" },
+            // Added Nintendo Wii to the platform list.
+            { "Game Boy", "GB" }, { "Game Boy Color", "GBC" }, { "Game Boy Advance", "GBA" }, { "NES/Famicom", "NES" }, { "SNES/Super Famicom", "SNES" }, { "Nintendo 64", "N64" }, { "GameCube", "GC" }, { "Nintendo Wii", "Wii" }, { "Nintendo DS", "NDS" }, { "Nintendo DSi", "DSi" }, { "Pokemon Mini", "Pokemon Mini" }, { "Virtual Boy", "VB" },
             // Sony
             { "PlayStation", "PS1" }, { "PlayStation 2", "PS2" }, { "PlayStation Portable", "PSP" },
             // Sega
@@ -35,9 +36,10 @@ namespace RaGuideDesigner.Services
         // complete with group headers and indented items.
         public static List<string> GetGroupedPlatforms()
         {
+            // Added Nintendo Wii to the grouped list.
             return new List<string>
             {
-                "Nintendo", "  Game Boy", "  Game Boy Color", "  Game Boy Advance", "  NES/Famicom", "  SNES/Super Famicom", "  Nintendo 64", "  GameCube", "  Nintendo DS", "  Nintendo DSi", "  Pokemon Mini", "  Virtual Boy",
+                "Nintendo", "  Game Boy", "  Game Boy Color", "  Game Boy Advance", "  NES/Famicom", "  SNES/Super Famicom", "  Nintendo 64", "  GameCube", "  Nintendo Wii", "  Nintendo DS", "  Nintendo DSi", "  Pokemon Mini", "  Virtual Boy",
                 "Sony", "  PlayStation", "  PlayStation 2", "  PlayStation Portable",
                 "Sega", "  SG-1000", "  Master System", "  Game Gear", "  Genesis/Mega Drive", "  Sega CD", "  32X", "  Saturn", "  Dreamcast",
                 "Atari", "  Atari 2600", "  Atari 7800", "  Atari Jaguar", "  Atari Jaguar CD", "  Atari Lynx",
