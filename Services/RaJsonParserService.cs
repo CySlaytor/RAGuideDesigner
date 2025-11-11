@@ -49,9 +49,7 @@ namespace RaGuideDesigner.Services
                         Id = ach.ID,
                         Title = ach.Title ?? "Untitled Achievement",
                         Description = ach.Description ?? string.Empty,
-                        // Populate GuidanceAndInsights with the achievement's description on import.
                         GuidanceAndInsights = ach.Description ?? string.Empty,
-                        // Prioritize the direct BadgeURL if it exists, otherwise construct it.
                         BadgeUrl = !string.IsNullOrWhiteSpace(ach.BadgeURL)
                                    ? ach.BadgeURL
                                    : $"https://media.retroachievements.org/Badge/{ach.BadgeName ?? "000000"}.png",
@@ -59,7 +57,7 @@ namespace RaGuideDesigner.Services
                         Points = ach.Points
                     };
 
-                    if (achievement.Title.StartsWith("[Progression", System.StringComparison.OrdinalIgnoreCase))
+                    if (achievement.Type.Equals("progression", StringComparison.OrdinalIgnoreCase))
                     {
                         progressionCategory.Achievements.Add(achievement);
                     }
