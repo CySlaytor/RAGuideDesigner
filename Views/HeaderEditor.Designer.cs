@@ -54,8 +54,9 @@
             groupBox2 = new GroupBox();
             rtxtTriggerExamples = new UndoRedoRichTextBox();
             label5 = new Label();
-            panel2 = new Panel();
-            btnGenerateFootnotes = new Button();
+            pnlFootnoteTemplate = new Panel();
+            cmbFootnoteTemplates = new ComboBox();
+            lblFootnoteTemplate = new Label();
             ((System.ComponentModel.ISupportInitialize)pbMasteryIcon).BeginInit();
             pnlBannerFrame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbBanner).BeginInit();
@@ -74,7 +75,7 @@
             tableLayoutPanel1.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
-            panel2.SuspendLayout();
+            pnlFootnoteTemplate.SuspendLayout();
             SuspendLayout();
             // 
             // pbMasteryIcon
@@ -475,7 +476,7 @@
             // tabPageFootnotes
             // 
             tabPageFootnotes.Controls.Add(tableLayoutPanel1);
-            tabPageFootnotes.Controls.Add(panel2);
+            tabPageFootnotes.Controls.Add(pnlFootnoteTemplate);
             tabPageFootnotes.Location = new Point(4, 24);
             tabPageFootnotes.Name = "tabPageFootnotes";
             tabPageFootnotes.Padding = new Padding(3);
@@ -492,7 +493,7 @@
             tableLayoutPanel1.Controls.Add(groupBox1, 0, 0);
             tableLayoutPanel1.Controls.Add(groupBox2, 1, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(3, 3);
+            tableLayoutPanel1.Location = new Point(3, 46);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
@@ -566,25 +567,34 @@
             label5.Text = "An indicator displayed by the RetroAchievements overlay, typically used to show when a challenge is active. If this indicator disappears, it often signals a failure.";
             label5.Click += label5_Click;
             // 
-            // panel2
+            // pnlFootnoteTemplate
             // 
-            panel2.Controls.Add(btnGenerateFootnotes);
-            panel2.Dock = DockStyle.Bottom;
-            panel2.Location = new Point(3, 232);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(710, 43);
-            panel2.TabIndex = 0;
+            pnlFootnoteTemplate.Controls.Add(cmbFootnoteTemplates);
+            pnlFootnoteTemplate.Controls.Add(lblFootnoteTemplate);
+            pnlFootnoteTemplate.Dock = DockStyle.Top;
+            pnlFootnoteTemplate.Location = new Point(3, 3);
+            pnlFootnoteTemplate.Name = "pnlFootnoteTemplate";
+            pnlFootnoteTemplate.Size = new Size(710, 43);
+            pnlFootnoteTemplate.TabIndex = 2;
             // 
-            // btnGenerateFootnotes
+            // cmbFootnoteTemplates
             // 
-            btnGenerateFootnotes.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnGenerateFootnotes.Location = new Point(525, 8);
-            btnGenerateFootnotes.Name = "btnGenerateFootnotes";
-            btnGenerateFootnotes.Size = new Size(177, 27);
-            btnGenerateFootnotes.TabIndex = 0;
-            btnGenerateFootnotes.Text = "Generate Footnotes...";
-            btnGenerateFootnotes.UseVisualStyleBackColor = true;
-            btnGenerateFootnotes.Click += btnGenerateFootnotes_Click;
+            cmbFootnoteTemplates.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            cmbFootnoteTemplates.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbFootnoteTemplates.FormattingEnabled = true;
+            cmbFootnoteTemplates.Location = new Point(130, 10);
+            cmbFootnoteTemplates.Name = "cmbFootnoteTemplates";
+            cmbFootnoteTemplates.Size = new Size(572, 23);
+            cmbFootnoteTemplates.TabIndex = 1;
+            // 
+            // lblFootnoteTemplate
+            // 
+            lblFootnoteTemplate.AutoSize = true;
+            lblFootnoteTemplate.Location = new Point(8, 13);
+            lblFootnoteTemplate.Name = "lblFootnoteTemplate";
+            lblFootnoteTemplate.Size = new Size(116, 15);
+            lblFootnoteTemplate.TabIndex = 0;
+            lblFootnoteTemplate.Text = "Example Templates:";
             // 
             // HeaderEditor
             // 
@@ -617,9 +627,9 @@
             tableLayoutPanel1.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
-            panel2.ResumeLayout(false);
+            pnlFootnoteTemplate.ResumeLayout(false);
+            pnlFootnoteTemplate.PerformLayout();
             ResumeLayout(false);
-
         }
         #endregion
         private System.Windows.Forms.PictureBox pbMasteryIcon;
@@ -654,8 +664,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label lblCreditsValue;
         private System.Windows.Forms.TabPage tabPageFootnotes;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnGenerateFootnotes;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -664,5 +672,8 @@
         private UndoRedoRichTextBox rtxtTriggerExamples;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblBannerHint;
+        private Panel pnlFootnoteTemplate;
+        private ComboBox cmbFootnoteTemplates;
+        private Label lblFootnoteTemplate;
     }
 }

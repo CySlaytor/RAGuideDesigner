@@ -13,6 +13,17 @@ namespace RaGuideDesigner.Views
 {
     public partial class HeaderEditor : BaseEditorControl
     {
+        // Added a class to hold footnote templates and a list to store them.
+        private class FootnoteTemplate
+        {
+            public string Name { get; set; } = "";
+            public string MeasuredExamples { get; set; } = "";
+            public string TriggeredExamples { get; set; } = "";
+            public override string ToString() => Name;
+        }
+
+        private readonly List<FootnoteTemplate> _footnoteTemplates = new List<FootnoteTemplate>();
+
         public HeaderEditor(UndoRedoService undoRedoService) : base(undoRedoService)
         {
             InitializeComponent();
@@ -32,6 +43,11 @@ namespace RaGuideDesigner.Views
             cmbPlatform.SelectedIndexChanged += cmbPlatform_SelectedIndexChanged;
 
             PopulatePlatformComboBox();
+
+            // Populate and configure the new footnote templates ComboBox.
+            PopulateFootnoteTemplates();
+            cmbFootnoteTemplates.DisplayMember = "Name";
+            cmbFootnoteTemplates.SelectedIndexChanged += CmbFootnoteTemplates_SelectedIndexChanged;
         }
 
         public void ClearCaches()
@@ -224,100 +240,81 @@ namespace RaGuideDesigner.Views
 
         #endregion
 
-        // This feature scans all achievements for common keywords in their indicator text
-        // and generates a few diverse examples for the footnotes section.
-        private void btnGenerateFootnotes_Click(object sender, EventArgs e)
+        // This section replaces the old "Generate Footnotes" button logic with a template system.
+        #region Footnote Templates Logic
+        private void PopulateFootnoteTemplates()
         {
-            if (_dataContext is not WikiGuide guide) return;
-
-            var measuredKeywords = new Dictionary<string, string>
-    {
-        { "kill", "Kills" },
-        { "destr", "Objects Destroyed" },
-        { "collect", "Items Collected" },
-        { "gem", "Gems" },
-        { "ring", "Rings" },
-        { "crate", "Crates Smashed" },
-        { "camera", "Cameras Disabled" },
-        { "accura", "Accuracy" },
-        { "point", "Points" },
-        { "score", "Score" }
-    };
-
-            var foundMeasuredTypes = new HashSet<string>();
-            var generatedMeasuredExamples = new List<string>();
-            var foundTriggerExamples = new HashSet<string>();
-            var rand = new Random();
-
-            var allAchievements = guide.AchievementCategories.SelectMany(c => c.Achievements).ToList();
-
-            // Analyze for Measured Indicators to compose examples
-            foreach (var ach in allAchievements.Where(a => !string.IsNullOrWhiteSpace(a.MeasuredIndicator)))
+            _footnoteTemplates.Add(new FootnoteTemplate { Name = "-- Select a Template --" });
+            _footnoteTemplates.Add(new FootnoteTemplate
             {
-                var indicatorText = ach.MeasuredIndicator.ToLowerInvariant();
-                var numbers = Regex.Matches(indicatorText, @"\d+").Cast<Match>().Select(m => int.Parse(m.Value)).ToList();
-
-                foreach (var keyword in measuredKeywords)
-                {
-                    if (indicatorText.Contains(keyword.Key) && !foundMeasuredTypes.Contains(keyword.Value))
-                    {
-                        foundMeasuredTypes.Add(keyword.Value); // Ensure variety
-
-                        if (keyword.Key == "accura")
-                        {
-                            generatedMeasuredExamples.Add($"{keyword.Value} - {rand.Next(40, 95)}%");
-                        }
-                        else if (numbers.Any())
-                        {
-                            int max = numbers.Last();
-                            int current = rand.Next((int)(max * 0.4), (int)(max * 0.9));
-                            generatedMeasuredExamples.Add($"{keyword.Value} - {current}/{max}");
-                        }
-                        else if (keyword.Key == "point" || keyword.Key == "score")
-                        {
-                            generatedMeasuredExamples.Add($"{keyword.Value} - {rand.Next(1000, 25000)}");
-                        }
-                        break;
-                    }
-                }
-            }
-
-            // Analyze for the best Triggered Indicators to use as examples
-            var triggerCandidates = allAchievements
-                .Where(a => !string.IsNullOrWhiteSpace(a.TriggerIndicator))
-                .Select(a => a.TriggerIndicator.Trim())
-                .Distinct()
-                .OrderBy(s => s.Length) // Prefer shorter, more direct examples
-                .ToList();
-
-            foundTriggerExamples.UnionWith(triggerCandidates);
-
-            if (generatedMeasuredExamples.Count == 0 && foundTriggerExamples.Count == 0)
+                Name = "Standard Progress",
+                MeasuredExamples = "Knock downs - 10/64\nSheep left - 5/8\nTime elapsed - 68%/100%",
+                TriggeredExamples = "2 Gorilda babies are knocked down, finish the level.\nA challenge is active, complete the requirement."
+            });
+            _footnoteTemplates.Add(new FootnoteTemplate
             {
-                MessageBox.Show("No relevant indicator text was found in the project to generate examples from.", "Analysis Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Name = "Combat & Accuracy",
+                MeasuredExamples = "Headshots - 7/12\nEnemies left - 11/100\nAccuracy - 47%\nCoins collected - 88%",
+                TriggeredExamples = "Enough headshots acquired, finish the mission.\nAll enemies killed, kill the boss.\nPlayer has not yet taken a hit - for a hitless achievement.\nAll requirements are met, continue the game to unlock..."
+            });
+            _footnoteTemplates.Add(new FootnoteTemplate
+            {
+                Name = "Action & Kills",
+                MeasuredExamples = "Kills - 7/10\nCrates smashed - 11/48\nAccuracy - 47%",
+                TriggeredExamples = "The Hydra vehicle is active, eliminate all remaining hostiles.\nA secondary objective has been triggered, complete it before proceeding.\nH.R.E.F. weapon is equipped, neutralize the remaining enemies."
+            });
+            _footnoteTemplates.Add(new FootnoteTemplate
+            {
+                Name = "Racing & Events",
+                MeasuredExamples = "Race Wins/Milestones - 5/7\nPolice Vehicles Involved - 7/150\nInfractions Recorded - 4/8",
+                TriggeredExamples = "A pursuit is active, complete the requirement.\nA valid Challenge Series is active, finish it.\nComplete the event."
+            });
+            _footnoteTemplates.Add(new FootnoteTemplate
+            {
+                Name = "RPG Style",
+                MeasuredExamples = "Experience - 450/1200\nQuests Completed - 3/10\nGold - 5,280",
+                TriggeredExamples = "Sidequest 'The Lost Artifact' is active.\nYou have entered the 'Dragon's Lair' zone.\nThe 'Legendary Sword' is equipped."
+            });
+            _footnoteTemplates.Add(new FootnoteTemplate
+            {
+                Name = "Platformer Style",
+                MeasuredExamples = "Gems Collected - 88/100\nGolden Statues - 4/5\nLives - 2/3",
+                TriggeredExamples = "A bonus level is active.\nThe invincibility power-up is active.\nYou are in the 'Haunted Castle' world."
+            });
+
+            cmbFootnoteTemplates.DataSource = _footnoteTemplates;
+        }
+
+        private void CmbFootnoteTemplates_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            if (_isProgrammaticChange || cmbFootnoteTemplates.SelectedIndex <= 0 || _dataContext is not WikiGuide guide)
+            {
                 return;
             }
+
+            if (cmbFootnoteTemplates.SelectedItem is not FootnoteTemplate selectedTemplate) return;
 
             if (!string.IsNullOrWhiteSpace(guide.MeasuredIndicatorExamples) || !string.IsNullOrWhiteSpace(guide.TriggeredIndicatorExamples))
             {
                 var result = MessageBox.Show("This will overwrite the current footnote examples. Are you sure you want to continue?", "Confirm Overwrite", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.No) return;
+                if (result == DialogResult.No)
+                {
+                    _isProgrammaticChange = true;
+                    cmbFootnoteTemplates.SelectedIndex = 0;
+                    _isProgrammaticChange = false;
+                    return;
+                }
             }
 
             var commands = new List<ICommand>();
 
-            // The "- " prefix is removed here. The model should only contain the clean text.
-            // The export service is responsible for adding the prefix back.
-            string newMeasured = string.Join("\n", generatedMeasuredExamples.Take(3));
-            string newTriggered = string.Join("\n", foundTriggerExamples.Take(3));
-
-            if (guide.MeasuredIndicatorExamples != newMeasured)
+            if (guide.MeasuredIndicatorExamples != selectedTemplate.MeasuredExamples)
             {
-                commands.Add(new EditPropertyCommand(guide, nameof(WikiGuide.MeasuredIndicatorExamples), guide.MeasuredIndicatorExamples, newMeasured));
+                commands.Add(new EditPropertyCommand(guide, nameof(WikiGuide.MeasuredIndicatorExamples), guide.MeasuredIndicatorExamples ?? "", selectedTemplate.MeasuredExamples));
             }
-            if (guide.TriggeredIndicatorExamples != newTriggered)
+            if (guide.TriggeredIndicatorExamples != selectedTemplate.TriggeredExamples)
             {
-                commands.Add(new EditPropertyCommand(guide, nameof(WikiGuide.TriggeredIndicatorExamples), guide.TriggeredIndicatorExamples, newTriggered));
+                commands.Add(new EditPropertyCommand(guide, nameof(WikiGuide.TriggeredIndicatorExamples), guide.TriggeredIndicatorExamples ?? "", selectedTemplate.TriggeredExamples));
             }
 
             if (commands.Any())
@@ -328,7 +325,13 @@ namespace RaGuideDesigner.Views
                 SetRichTextContent(rtxtTriggerExamples, guide.TriggeredIndicatorExamples);
                 _isProgrammaticChange = false;
             }
+
+            _isProgrammaticChange = true;
+            cmbFootnoteTemplates.SelectedIndex = 0;
+            _isProgrammaticChange = false;
         }
+        #endregion
+
 
         private void label5_Click(object sender, EventArgs e)
         {

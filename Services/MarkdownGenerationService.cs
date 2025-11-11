@@ -407,9 +407,11 @@ namespace RaGuideDesigner.Services
             var guidancePart = new StringBuilder();
             if (!string.IsNullOrWhiteSpace(ach.GuidanceAndInsights))
             {
+                // Replace non-standard vertical tab characters with standard newlines before processing.
+                var normalizedGuidance = ach.GuidanceAndInsights.Replace('\v', '\n');
                 if (isProgression)
                 {
-                    var guidanceLines = ach.GuidanceAndInsights.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    var guidanceLines = normalizedGuidance.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
                     if (guidanceLines.Any())
                     {
                         var formattedGuidance = string.Join("<br>", guidanceLines.Select(line => $"- {line.Trim()}"));
@@ -418,14 +420,20 @@ namespace RaGuideDesigner.Services
                 }
                 else
                 {
-                    string formattedGuidance = ach.GuidanceAndInsights.Replace("\n", "<br>");
+                    // Replaced simple .Replace() with a more robust method of splitting and joining lines.
+                    // This correctly handles all newline variations (\n, \r\n) and prevents formatting issues.
+                    var guidanceLines = normalizedGuidance.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+                    var formattedGuidance = string.Join("<br>", guidanceLines);
                     guidancePart.Append(formattedGuidance);
                 }
             }
             if (!isProgression && !string.IsNullOrWhiteSpace(ach.ImageUrl))
             {
                 if (guidancePart.Length > 0) guidancePart.Append("<br>");
-                guidancePart.Append($"![Achievement Hint Image]({ach.ImageUrl})");
+                // Handle multiple space-separated image URLs by creating a separate markdown image tag for each.
+                var imageUrls = ach.ImageUrl.Split(new[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+                var imageTags = imageUrls.Select(url => $"![Achievement Hint Image]({url})");
+                guidancePart.Append(string.Join(" ", imageTags));
             }
             if (!isProgression && !string.IsNullOrWhiteSpace(ach.VideoWalkthroughUrl))
             {

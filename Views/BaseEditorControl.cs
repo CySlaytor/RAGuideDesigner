@@ -99,9 +99,9 @@ namespace RaGuideDesigner.Views
             }
         }
 
-        // In BaseEditorControl.cs
-
-        protected void SetRichTextContent(RichTextBox rtb, string newMarkdownContent)
+        // Changed parameter 'newMarkdownContent' to be nullable (string?) to resolve CS8604 warning.
+        // The method body already handled nulls correctly with '?? string.Empty'.
+        protected void SetRichTextContent(RichTextBox rtb, string? newMarkdownContent)
         {
             string newRtf = MarkdownRtfConverter.ToRtf(newMarkdownContent ?? string.Empty);
             if (rtb.Rtf != newRtf)
